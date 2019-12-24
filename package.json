@@ -13,9 +13,12 @@
     "react-dom": "16.12.0"
   },
   "devDependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-sass": "^1.0.1",
     "add": "^2.0.6",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
+    "node-sass": "^4.13.0",
     "prettier": "^1.19.1",
     "yarn": "^1.21.1"
   },
