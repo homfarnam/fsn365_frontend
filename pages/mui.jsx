@@ -1,7 +1,5 @@
 import React from 'react'
 import Head from 'next/head'
-import Nav from '../components/nav'
-import Button from '@material-ui/core/Button';
 import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -29,7 +27,6 @@ export default function Mui() {
       <Head>
         <title>Mui</title>
       </Head>
-      <Nav>Home</Nav>
       <div className="container" className={classes.root}>
         <h2>Read headline</h2>
         <p>This is the red since is inside the root</p>
