@@ -12,6 +12,7 @@
     "@material-ui/styles": "^4.7.1",
     "clsx": "latest",
     "fetch": "^1.1.0",
+    "isomorphic-unfetch": "^3.0.0",
     "next": "latest",
     "prop-types": "latest",
     "react": "latest",
