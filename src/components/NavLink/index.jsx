@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import classNames from "classnames";
 import { makeStyles, createStyles, useTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(({ palette }) =>
@@ -15,12 +16,14 @@ const useStyles = makeStyles(({ palette }) =>
 );
 
 export default function NavLink(props) {
-  const { href, children = " " } = props;
+  const { href, children = " ", className = "" } = props;
   const theme = useTheme();
   const classes = useStyles(theme);
   return (
     <Link href={href}>
-      <a className={classes.root}>{children ? children : href}</a>
+      <a className={classNames(classes.root, className)}>
+        {children ? children : href}
+      </a>
     </Link>
   );
 }
