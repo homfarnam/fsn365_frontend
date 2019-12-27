@@ -4,6 +4,14 @@ import FusionTable from "../FusionTable";
 import NavLink from "../NavLink";
 import TimeAgo from "../TimeAgo";
 
+const isHashStyle = {
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  display: "inline-block",
+  maxWidth: "120px"
+};
+
 export default class Transactions extends PureComponent {
   state = {
     loading: false
@@ -94,16 +102,9 @@ const columns = [
     field: "hash",
     title: "Tx Hash",
     render: row => {
-      const style = {
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
-        display: "inline-block",
-        maxWidth: "120px"
-      };
       return (
         <NavLink href={`/tx/${row.hash}`} className="tx-hash is-hash">
-          <span style={style}>{row.hash}</span>
+          <span style={isHashStyle}>{row.hash}</span>
         </NavLink>
       );
     }
@@ -112,16 +113,9 @@ const columns = [
     field: "from",
     title: "From",
     render: row => {
-      const style = {
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
-        display: "inline-block",
-        maxWidth: "120px"
-      };
       return (
         <NavLink href={`/address/${row.from}`} className="tx-from is-hash">
-          <span style={style}>{row.from}</span>
+          <span style={isHashStyle}>{row.from}</span>
         </NavLink>
       );
     }
@@ -130,16 +124,9 @@ const columns = [
     field: "to",
     title: "To",
     render: row => {
-      const style = {
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
-        display: "inline-block",
-        maxWidth: "120px"
-      };
       return (
         <NavLink href={`/address/${row.to}`} className="tx-to is-hash">
-          <span style={style}>{row.to}</span>
+          <span style={isHashStyle}>{row.to}</span>
         </NavLink>
       );
     }
@@ -172,7 +159,7 @@ const columns = [
   },
   {
     field: "type",
-    title: "Type"
+    title: "Tx Type"
   },
   {
     field: "gasUsed",
