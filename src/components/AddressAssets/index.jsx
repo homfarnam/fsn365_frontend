@@ -35,6 +35,7 @@ const columns = [
   {
     field: "name",
     title: "Asset Name",
+    sorting: false,
     render: row => {
       const href = `/assset/${row.id}`;
       return (
@@ -47,6 +48,7 @@ const columns = [
   {
     field: "symbol",
     title: "Asset Symbol",
+    sorting: false,
     render: row => {
       return <span className="asset-symbol">{row.symbol}</span>;
     }
@@ -54,6 +56,7 @@ const columns = [
   {
     field: "verified",
     title: "Is Verified",
+    sorting: false,
     render: row => {
       return (
         <span className="asset-symbol">{row.verified ? "Yes" : "No"}</span>
@@ -63,6 +66,7 @@ const columns = [
   {
     field: "quantity",
     title: "Quantity",
+    sorting: false,
     render: row => {
       return <span className="asset-quantity">{row.quantity.toFixed(2)}</span>;
     }
