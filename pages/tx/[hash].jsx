@@ -35,7 +35,6 @@ export default function TransactionPage(props) {
           <FusionTabs
             value={state.tab}
             onChange={handleTabChange}
-            style={{marginBottom: '1.75rem'}}
           >
             <FusionTab label="Tx Overview" />
             {txHasLog ? <FusionTab label="Tx Log" />: null}

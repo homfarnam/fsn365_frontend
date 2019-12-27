@@ -39,7 +39,6 @@ export default function BlockPage (props) {
           <FusionTabs
             value={state.tab}
             onChange={handleTabChange}
-            style={{marginBottom: '1.75rem'}}
           >
             <FusionTab label="overview"  />
             {hasTx ? <FusionTab label="Txs" />:null}
