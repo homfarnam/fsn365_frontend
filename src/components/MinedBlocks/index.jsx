@@ -122,7 +122,7 @@ const columns = [
     render: row => {
       return (
         row.txCount && (
-          <NavLink href={`/txs?block=${row.height}`} className="bk-txCount">
+          <NavLink href={`/block/${row.height}?tab=tx`} className="bk-txCount">
             {row.txCount}
           </NavLink>
         )
