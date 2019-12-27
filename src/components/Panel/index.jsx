@@ -25,7 +25,7 @@ export default function Panel(props) {
     <Paper variant="outlined" className={classes.root}>
       {/* panel title */}
       {title ? (
-        <Typography component="h2" className={classes.title}>
+        <Typography component="h6" className={classes.title}>
           <span>{title}</span>
         </Typography>
       ) : null}
