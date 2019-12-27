@@ -23,9 +23,9 @@ const useStyles = makeStyles(({ palette }) =>
 export default function KeyValue(props) {
   const theme = useTheme();
   const classes = useStyles(theme);
-  const { label, value, children } = props;
+  const { label, value, children, className = "" } = props;
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} ${className}`}>
       <p>
         <span className={classes.label}>{label}:</span>
         <span className={classes.value}>{value || children}</span>
