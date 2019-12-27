@@ -1,6 +1,9 @@
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/styles";
+import TimeAgo from "../TimeAgo";
+import NavLink from "../NavLink";
+import KeyValue from "../KeyValue";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -18,10 +21,6 @@ const useStyles = makeStyles(({ breakpoints }) =>
     }
   })
 );
-
-import TimeAgo from "../TimeAgo";
-import NavLink from "../NavLink";
-import KeyValue from "../KeyValue";
 
 export default function BlockOverview(props) {
   const { block } = props;
