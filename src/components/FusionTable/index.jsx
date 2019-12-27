@@ -25,10 +25,23 @@ export const defaultCellStyle = {
 };
 
 export default function FusionTable(props) {
-  const { data, columns, title, style = {}, ...others } = props;
+  const { data, columns, title, style = {}, options = {}, ...others } = props;
   const FusionTableStyle = {
     defaultWrapperStyle,
     ...style
+  };
+  const headerStyle = options.headerStyle || {};
+  const cellStyle = options.cellStyle || {};
+  const tableOptions = {
+    ...options,
+    cellStyle: {
+      ...defaultCellStyle,
+      ...cellStyle
+    },
+    headerStyle: {
+      ...defaultHeaderStyle,
+      ...headerStyle
+    }
   };
   return (
     <MarterialTable
@@ -36,6 +49,7 @@ export default function FusionTable(props) {
       data={data}
       title={title}
       style={FusionTableStyle}
+      options={tableOptions}
       {...others}
     />
   );
