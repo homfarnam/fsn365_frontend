@@ -50,7 +50,7 @@ export default class StakingPage extends PureComponent {
           </Panel>
         </Container>
         <Container>{summary.totalMiners ?
-          <NetworkStakingState data={stakeInfo} /> :
+          <Panel><NetworkStakingState data={stakeInfo} /></Panel>:
           <Panel>
             <Typography component="h6" variant="h6">
               Fusion Miners {error ? <span>{error}</span>: <CircularProgress size={20} style={circleStyle} />}

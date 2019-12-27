@@ -4,7 +4,19 @@ import FusionTable from "../FusionTable";
 
 export default function NetworkStakingState(props) {
   const { data } = props;
-  return <FusionTable columns={columns} data={data} title={"Fusion Miners"} />;
+  const style = {
+    border: "none",
+    boxShadow: "none",
+    paddingBottom: "1.75rem"
+  };
+  return (
+    <FusionTable
+      columns={columns}
+      data={data}
+      title={"Fusion Miners"}
+      style={style}
+    />
+  );
 }
 
 const columns = [
@@ -14,13 +26,13 @@ const columns = [
     sorting: false,
     headerStyle: {
       width: "65%",
-      padding: ".625rem .75rem",
+      padding: ".625rem 0",
       verticalAlign: "top",
       borderTop: `1px solid #e7eaf3`
     },
     cellStyle: {
       width: "65%",
-      padding: ".625rem .75rem",
+      padding: ".625rem 0",
       verticalAlign: "top",
       borderTop: `1px solid #e7eaf3`
     },
@@ -35,14 +47,14 @@ const columns = [
     title: "Tickets",
     headerStyle: {
       width: "5%",
-      padding: ".625rem .75rem",
+      padding: ".625rem 0",
       verticalAlign: "top",
       borderTop: `1px solid #e7eaf3`,
       textAlign: "center"
     },
     cellStyle: {
       width: "5%",
-      padding: ".625rem .75rem",
+      padding: ".625rem 0",
       verticalAlign: "top",
       borderTop: `1px solid #e7eaf3`,
       textAlign: "center"
