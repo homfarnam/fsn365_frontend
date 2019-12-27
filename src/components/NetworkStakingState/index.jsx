@@ -1,6 +1,9 @@
 import React from "react";
 import NavLink from "../NavLink";
-import FusionTable from "../FusionTable";
+import FusionTable, {
+  defaultHeaderStyle,
+  defaultCellStyle
+} from "../FusionTable";
 
 export default function NetworkStakingState(props) {
   const { data } = props;
@@ -25,16 +28,12 @@ const columns = [
     title: "Miner",
     sorting: false,
     headerStyle: {
-      width: "65%",
-      padding: ".625rem 0",
-      verticalAlign: "top",
-      borderTop: `1px solid #e7eaf3`
+      ...defaultHeaderStyle,
+      width: "95%"
     },
     cellStyle: {
-      width: "65%",
-      padding: ".625rem 0",
-      verticalAlign: "top",
-      borderTop: `1px solid #e7eaf3`
+      ...defaultCellStyle,
+      width: "95%"
     },
     render: rowData => {
       return (
@@ -46,17 +45,13 @@ const columns = [
     field: "tickets",
     title: "Tickets",
     headerStyle: {
+      ...defaultHeaderStyle,
       width: "5%",
-      padding: ".625rem 0",
-      verticalAlign: "top",
-      borderTop: `1px solid #e7eaf3`,
       textAlign: "center"
     },
     cellStyle: {
+      ...defaultCellStyle,
       width: "5%",
-      padding: ".625rem 0",
-      verticalAlign: "top",
-      borderTop: `1px solid #e7eaf3`,
       textAlign: "center"
     },
     render: rowData => {
