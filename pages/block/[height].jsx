@@ -1,33 +1,57 @@
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 import Router from 'next/router';
-import Link from 'next/link';
 import Head from 'next/head';
+import Panel from '../../src/components/Panel';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import { FusionTab, FusionTabs, FusionTabPanel } from '../../src/components/FusionTabs';
+import FusionTabPanels from '../../src/components/FusionTabs/FusionTabPanels';
+import BlockOverview from '../../src/components/BlockOverview';
+import TxsInBlock from '../../src/components/TxsInBlock';
 
-export default class BlockPage extends PureComponent {
-  render() {
-    const {height} = this.props;
-    const nextHeight = height + 1;
-    const prevHeight = height -1 ;
-    return (
-      <>
-        <Head>
-          <title>block-{height} | FSN explorer</title>
-        </Head>
-        <div>
-          <h4>Block Detail page</h4>
-          <p>
-            <Link href={`/block?height=${prevHeight}`} as={`/block/${prevHeight}`}>
-              <a>Prev</a>
-            </Link>
-            <Link href={`/block?height=${nextHeight}`} as={`/block/${nextHeight}`}>
-              <a>next</a>
-            </Link>
-          </p>
-          {JSON.stringify(this.props)}
-        </div>
-      </>
-    )
-  }
+const tabMap = {
+  'overview': 0,
+  'tx': 1
+};
+
+export default function BlockPage (props) {
+  const { block, tab = "overview" } = props;
+  const [ state, setState ] = useState({
+    tab: tabMap[tab] || 0,
+  });
+  
+  const  handleTabChange = (e, newValue) => {
+    setState({
+      ...state,
+      tab: newValue
+    });
+  };
+
+  const hasTx = block.txCount > 0;
+  return (
+    <>
+      <Head>
+        <title>Block#{block.height} | FSN explorer</title>
+      </Head>
+      <Container>
+        <Typography variant='h6'>Block#{block.height}</Typography>
+        <Panel>
+          <FusionTabs
+            value={state.tab}
+            onChange={handleTabChange}
+            style={{marginBottom: '1.75rem'}}
+          >
+            <FusionTab label="overview"  />
+            {hasTx ? <FusionTab label="Txs" />:null}
+          </FusionTabs>
+          <FusionTabPanels>
+            <FusionTabPanel value={state.tab} index={0}><BlockOverview block={block} /></FusionTabPanel>
+            {hasTx ? <FusionTabPanel value={state.tab} index={1}><TxsInBlock block={block.height} /></FusionTabPanel>:null}
+          </FusionTabPanels>
+        </Panel>
+      </Container>
+    </>
+  )
 }
 
 BlockPage.getInitialProps = async ({query, res}) =>{
@@ -42,8 +66,13 @@ BlockPage.getInitialProps = async ({query, res}) =>{
       Router.push('/blocks')
     }
   } else {
+     const block = await fetch(`http://localhost:8888/api/block/${height}`)
+      .then(res => res.json())
+      .then(res => res.data)
+      .catch(e => {});
     return {
-      height,
+      block,
+      ...query,
       isServer:!!res
     }
   }
