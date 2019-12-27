@@ -34,6 +34,14 @@ export default class MyApp extends App {
           <Link href="/assets"><a>assets</a></Link>
           <Component {...pageProps} />
         </ThemeProvider>
+        <style jsx global>{`
+          body {
+            font-size: .8125rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #1e2022;
+          }
+        `}</style>
       </React.Fragment>
     );
   }
