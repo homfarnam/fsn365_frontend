@@ -26,6 +26,11 @@ const theme = createMuiTheme({
     spacing: {
       table: "0.625rem",
       info: "0.75rem"
+    },
+    weight: {
+      normal: 400,
+      bold: 600,
+      bolder: 700
     }
   }
 });
