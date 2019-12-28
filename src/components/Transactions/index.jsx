@@ -37,7 +37,6 @@ export default class Transactions extends PureComponent {
       params.page = page + 1;
       params.size = pageSize;
       const query = this.toQueryString(params);
-      console.log(query);
       fetch(`http://localhost:8888/api/tx${query}`)
         .then(res => res.json())
         .then(data => {
