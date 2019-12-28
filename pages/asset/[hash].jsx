@@ -24,7 +24,7 @@ export default function AssetPage ({asset}) {
           <KeyValue label="Total Supply" value={asset.total} />
           <KeyValue label="Changeable" value={asset.changeable ? 'Yes': 'No'} />
           <KeyValue label="Issuer">
-            <NavLink href={`/address/${asset.issuer}`}>{asset.issuer}</NavLink>
+  {asset.issuer ==='0xffffffffffffffffffffffffffffffffffffffff' ? <span>{asset.issuer}(Fusion Foundation)</span>: <NavLink href={`/address/${asset.issuer}`}>{asset.issuer}</NavLink>}
           </KeyValue>
           <KeyValue label="Issue Height" value={asset.block} />
           <KeyValue label="Verified">
