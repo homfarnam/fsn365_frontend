@@ -4,40 +4,29 @@ import fetch from "isomorphic-unfetch";
 import FusionTable from "../FusionTable";
 import TimeAgo from "../TimeAgo";
 
-const style = {
-  border: "none",
-  boxShadow: "none",
-  paddingBottom: "1.75rem",
-  minHeight: "200px"
-};
-
 export default class ActiveTickets extends Component {
   state = {
     tickets: []
   };
 
   componentDidMount() {
-    this.fetchMinersTickets();
+    this.fetchTickets();
   }
 
   render() {
     const { tickets = [] } = this.state;
     const tableOptions = {
       search: false,
-      pageSize: 10,
-      toolbar: false
+      pageSize: 5,
+      toolbar: false,
+      pageSizeOptions: [5, 10, 20]
     };
     return (
-      <FusionTable
-        data={tickets}
-        columns={columns}
-        options={tableOptions}
-        style={style}
-      />
+      <FusionTable data={tickets} columns={columns} options={tableOptions} />
     );
   }
 
-  fetchMinersTickets = () => {
+  fetchTickets = () => {
     const miner = this.props.miner;
     fetch(`http://localhost:8888/api/address/${miner}/tickets`)
       .then(res => res.json())
@@ -58,32 +47,26 @@ const columns = [
   {
     field: "startTime",
     title: "Start Time",
-    render: rowData => {
-      return (
-        <span className="tk-start">
-          <TimeAgo time={rowData.startTime * 1000} />
-        </span>
-      );
-    }
+    render: row => (
+      <span className="tk-start">
+        <TimeAgo time={row.startTime * 1000} />
+      </span>
+    )
   },
   {
     field: "expireTime",
     title: "Expire Time",
     sorting: false,
-    render: rowData => {
-      return (
-        <span className="tk-end">
-          <TimeAgo time={rowData.expireTime * 1000} />
-        </span>
-      );
-    }
+    render: row => (
+      <span className="tk-end">
+        <TimeAgo time={row.expireTime * 1000} />
+      </span>
+    )
   },
   {
     field: "value",
     title: "Value",
     sorting: false,
-    render: rowData => {
-      return <span className="tk-value">{rowData.value}</span>;
-    }
+    render: row => <span className="tk-value">{row.value}</span>
   }
 ];
