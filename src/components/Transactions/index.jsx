@@ -89,7 +89,7 @@ const columns = [
     field: "to",
     title: "To",
     render: row => {
-      if ((row.to = "0xffffffffffffffffffffffffffffffffffffffff")) {
+      if (row.to == "0xffffffffffffffffffffffffffffffffffffffff") {
         return <span>{row.to}</span>;
       } else {
         return (
