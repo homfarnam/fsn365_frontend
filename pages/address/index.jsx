@@ -1,144 +1,79 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import Head from 'next/head';
 import Container from '@material-ui/core/Container';
 import fetch from 'isomorphic-unfetch';
 import FusionTable from '../../src/components/FusionTable';
 import NavLink from '../../src/components/NavLink';
 import Panel from '../../src/components/Panel';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
 
-export default class AddressListPage extends Component {
-  state = {
-    loading: false,
-  };
-
-  render () {
-    const tableOptions = {
-      headerStyle: {
-        textAlign: 'center'
-      },
-      cellStyle: {
-        textAlign: 'center'
-      },
-      toolbar:false,
-      pageSize: 10,
-      pageSizeOptions: [10, 20, 50]
-    };
-    const style = {
-      border: "none",
-      boxShadow: "none",
-      paddingBottom: "1.75rem"
-    };
-
-    return (
-      <>
-        <Head>
-          <title>Fusion Addresses | FSN explorer</title>
-        </Head>
-        <Container>
-          <Typography variant='h6'>Fusion Addresses</Typography>
-          <Panel>
-            <FusionTable
-              data = {this.fetchData}
-              columns={columns}
-              options={tableOptions}
-              style={style}
-            />
-          </Panel>
-        </Container>
-      </>
-    )
-  }
-
-  fetchData =  () => new Promise( (resolve) => {
-    const state = this.state;
-    if(state.loading) {
-      return;
-    }
-    this.setState({
-      ...state,
-      loading: true
-    })
-     fetch(`http://localhost:8888/api/address`)
-      .then(res => res.json())
-      .then((data) => {
-        this.setState({
-          loading: false,
-        });
-        resolve({
-          data: data.data,
-          page: data.page - 1 ,
-          totalCount: data.total
-        })
+export default function AddressListPage (props) {
+  return (
+    <>
+      <Head>
+        <title>Fusion Addresses | FSN explorer</title>
+      </Head>
+      <Container>
+        <Typography variant='h6'>Fusion Addresses</Typography>
+        <Panel>
+          <FusionTable
+            data = {fetchData}
+            columns={columns}
+            options={{toolbar:false}}
+          />
+        </Panel>
+      </Container>
+    </>
+  )
+ }
+ const fetchData =  ({page, pageSize}) => new Promise((resolve) => {
+   const query = `?page=${page+1}&size=${pageSize}`;
+    fetch(`http://localhost:8888/api/address${query}`)
+    .then(res => res.json())
+    .then((data) => {
+      resolve({
+        data: data.data,
+        page: data.page - 1 ,
+        totalCount: data.total
       })
-      .catch(e => {
-        this.setState({
-          loading: false
-        })
-        resolve({
-          data: [],
-          page: 1,
-          totalCount: 0
-        })
-      });
-  })
-}
+    })
+    .catch(e => {
+      resolve({
+        data: [],
+        page: 0,
+        totalCount: 0
+      })
+    });
+})
 
-AddressListPage.getInitialProps = async ({query, res, req}) => {
-  return {
-    ...query,
-    isServer: !!res
-  }
-}
 const columns = [
   {
     field: "address",
     title: "Address",
     sorting: false,
-    render: row => {
-      return (
-        <NavLink
-          href={`/address/${row.address}`}
-          className="ads-hash"
-        >
-          {row.address}
-        </NavLink>
-      );
-    }
+    render: row => <NavLink href={`/address/${row.address}`}>{row.address}</NavLink>
   },
   {
     field: "san",
     title: "SAN",
     sorting: false,
-    render: row => {
-      return (
-        <span className="ads-san" title={row.san}>
-          {row.san}
-        </span>
-      );
-    }
   },
   {
     filed: "fsnBalance",
     title: "FSN Balance",
-    render: row  => {
-      return <span className="ads-fsnBalance">{row.fsnBalance}</span>;
-    }
+    render: row  => <span>{row.fsnBalance}</span>
   },
   {
     field: "transactions",
     title: "Transactions",
     sorting: false,
-    render: row => {
-      return <span className="ads-transactions">{row.txCount}</span>;
-    }
+    render: row => <span>{row.txCount}</span>
   },
   {
     field: "stakingRewards",
     title: "Staking Rewards",
-    render: row => {
-      return <span className="ads-rewards">{row.rewards}</span>;
-    }
+    sorting: false,
+    render: row =>  <span >{row.rewards}</span>
   }
 ];
