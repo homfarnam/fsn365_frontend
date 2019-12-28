@@ -30,7 +30,8 @@ export const defaultCellStyle = {
 export default function FusionTable(props) {
   const { data, columns, title, style = {}, options = {}, ...others } = props;
   const FusionTableStyle = {
-    ...defaultTableStyle
+    ...defaultTableStyle,
+    ...style
   };
   const headerStyle = options.headerStyle || {};
   const cellStyle = options.cellStyle || {};
