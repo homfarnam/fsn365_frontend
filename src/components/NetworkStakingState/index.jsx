@@ -3,7 +3,18 @@ import NavLink from "../NavLink";
 import FusionTable from "../FusionTable";
 
 export default function NetworkStakingState({ data }) {
-  return <FusionTable columns={columns} data={data} title={"Fusion Miners"} />;
+  const tableOptions = {
+    pageSizeOptions: [5, 10],
+    pageSize: 5
+  };
+  return (
+    <FusionTable
+      columns={columns}
+      data={data}
+      title={"Fusion Miners"}
+      options={tableOptions}
+    />
+  );
 }
 
 const columns = [
@@ -31,7 +42,6 @@ const columns = [
     cellStyle: {
       width: "45%",
       textAlign: "center"
-    },
-    render: row => row.tickets
+    }
   }
 ];
