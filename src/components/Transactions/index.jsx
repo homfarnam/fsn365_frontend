@@ -10,7 +10,6 @@ export default class Transactions extends PureComponent {
     const options = {
       toolbar: false,
       pageSize: 10,
-      pageSizeOptions: [10, 20, 50],
       ...tableOptions
     };
 
