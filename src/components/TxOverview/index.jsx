@@ -27,7 +27,7 @@ export default function TxOverview(props) {
         <NavLink href={`/address/${tx.from}`}>{tx.from}</NavLink>
       </KeyValue>
       <KeyValue label="to">
-        {tx.type === "Buy Ticket" ? (
+        {tx.to == "0xffffffffffffffffffffffffffffffffffffffff" ? (
           tx.to
         ) : (
           <NavLink href={`/address/${tx.to}`}>{tx.to}</NavLink>
