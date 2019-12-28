@@ -46,7 +46,7 @@ export default function BlockPage (props) {
           </FusionTabs>
           <FusionTabPanels>
             <FusionTabPanel value={state.tab} index={0}><BlockOverview block={block} /></FusionTabPanel>
-            {hasTx ? <FusionTabPanel value={state.tab} index={1}><TxsInBlock block={block.height} /></FusionTabPanel>:null}
+            {hasTx ? <FusionTabPanel value={state.tab} index={1} style={{marginTop: '-1rem'}}><TxsInBlock block={block.height} /></FusionTabPanel>:null}
           </FusionTabPanels>
         </Panel>
       </Container>

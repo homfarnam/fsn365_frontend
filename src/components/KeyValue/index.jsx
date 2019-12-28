@@ -16,6 +16,9 @@ const useStyles = makeStyles(({ palette }) =>
     value: {
       display: "inline-block",
       verticalAlign: "center"
+    },
+    p: {
+      margin: 0
     }
   })
 );
@@ -26,7 +29,7 @@ export default function KeyValue(props) {
   const { label, value, children, className = "" } = props;
   return (
     <div className={`${classes.root} ${className}`}>
-      <p>
+      <p className={classes.p}>
         <span className={classes.label}>{label}:</span>
         <span className={classes.value}>{value || children}</span>
       </p>

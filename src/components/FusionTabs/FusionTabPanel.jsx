@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 
 export default function FusionTabPanel(props) {
-  const { children, value, index, lazy = false, ...others } = props;
+  const { children, value, index, style = {} } = props;
   const isActive = index === value;
   return (
     <Box
       role="fusion-tabpanel"
       component="div"
       hidden={value !== index}
-      {...others}
+      style={style}
     >
       {isActive ? children : null}
     </Box>

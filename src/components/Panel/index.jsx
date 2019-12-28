@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     boxShadow: "0 0.5rem 1.2rem rgba(189,197,209,.2)"
   },
   title: {
+    marginBottom: "1rem",
     "& span": {
       display: "inline-block",
       borderBottom: "1px solid #e7eaf3",
