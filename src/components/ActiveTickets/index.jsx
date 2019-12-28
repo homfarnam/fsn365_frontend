@@ -1,42 +1,36 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import fetch from "isomorphic-unfetch";
 import FusionTable from "../FusionTable";
 import TimeAgo from "../TimeAgo";
 
-export default class ActiveTickets extends Component {
-  state = {
-    tickets: []
+export default function ActiveTickets({ miner }) {
+  const [state, setState] = useState({ tickets: [] });
+  const tableOptions = {
+    search: false,
+    pageSize: 5,
+    toolbar: false,
+    pageSizeOptions: [5, 10, 20]
   };
-
-  componentDidMount() {
-    this.fetchTickets();
-  }
-
-  render() {
-    const { tickets = [] } = this.state;
-    const tableOptions = {
-      search: false,
-      pageSize: 5,
-      toolbar: false,
-      pageSizeOptions: [5, 10, 20]
-    };
-    return (
-      <FusionTable data={tickets} columns={columns} options={tableOptions} />
-    );
-  }
-
-  fetchTickets = () => {
-    const miner = this.props.miner;
+  useEffect(() => {
     fetch(`http://localhost:8888/api/address/${miner}/tickets`)
       .then(res => res.json())
-      .then(data => {
-        this.setState({
-          tickets: data.data
+      .then(res => res.data)
+      .catch(e => [])
+      .then(tickets => {
+        setState({
+          tickets
         });
-      })
-      .catch(e => {});
-  };
+      });
+  }, [miner]);
+
+  return (
+    <FusionTable
+      data={state.tickets}
+      columns={columns}
+      options={tableOptions}
+    />
+  );
 }
 
 ActiveTickets.propTypes = {
