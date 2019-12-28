@@ -1,9 +1,10 @@
 import React from "react";
 import MarterialTable from "material-table";
 
-export const defaultWrapperStyle = {
-  border: `1px solid #e7eaf3`,
-  boxShadow: "0 0.5rem 1.2rem rgba(189,197,209,.2)"
+export const defaultTableStyle = {
+  border: "none",
+  boxShadow: "none",
+  paddingBottom: "1.75rem"
 };
 
 export const defaultHeaderStyle = {
@@ -15,20 +16,21 @@ export const defaultHeaderStyle = {
   fontWeight: "Bold",
   paddingLeft: ".75rem",
   paddingTop: ".625rem",
-  paddingBottom: ".625rem"
+  paddingBottom: ".625rem",
+  textAlign: "center"
 };
 
 export const defaultCellStyle = {
   padding: ".625rem 0",
   verticalAlign: "top",
-  borderTop: `1px solid #e7eaf3`
+  borderTop: `1px solid #e7eaf3`,
+  textAlign: "center"
 };
 
 export default function FusionTable(props) {
   const { data, columns, title, style = {}, options = {}, ...others } = props;
   const FusionTableStyle = {
-    defaultWrapperStyle,
-    ...style
+    ...defaultTableStyle
   };
   const headerStyle = options.headerStyle || {};
   const cellStyle = options.cellStyle || {};
