@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import Transactions from '../src/components/Transactions';
 import Panel from '../src/components/Panel';
 
-
 export default function TxListPage (props) {
   return (
     <>

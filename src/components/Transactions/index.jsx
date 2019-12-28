@@ -5,10 +5,6 @@ import NavLink from "../NavLink";
 import TimeAgo from "../TimeAgo";
 
 export default class Transactions extends PureComponent {
-  state = {
-    loading: false
-  };
-
   render() {
     const { tableOptions = {} } = this.props;
     const options = {
@@ -36,24 +32,16 @@ export default class Transactions extends PureComponent {
     );
   };
 
-  fetchData = () =>
+  fetchData = ({ page, pageSize }) =>
     new Promise(resolve => {
-      const state = this.state;
-      if (state.loading) {
-        return;
-      }
-      this.setState({
-        ...state,
-        loading: true
-      });
       const { params = {} } = this.props;
+      params.page = page + 1;
+      params.size = pageSize;
       const query = this.toQueryString(params);
+      console.log(query);
       fetch(`http://localhost:8888/api/tx${query}`)
         .then(res => res.json())
         .then(data => {
-          this.setState({
-            loading: false
-          });
           resolve({
             data: data.data,
             page: data.page - 1,
@@ -61,9 +49,6 @@ export default class Transactions extends PureComponent {
           });
         })
         .catch(e => {
-          this.setState({
-            loading: false
-          });
           resolve({
             data: [],
             page: 1,
