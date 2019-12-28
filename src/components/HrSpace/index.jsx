@@ -7,12 +7,12 @@ const useStyles = makeStyles(({ palette }) =>
       marginTop: ".75rem",
       marginBottom: ".75rem",
       border: 0,
-      borderTop: "1px solid #e7eaf3"
+      borderTop: `1px solid ${palette.border.main}`
     }
   })
 );
 
 export default function HrSpace() {
   const classes = useStyles();
-  return <hr class={classes.root}></hr>;
+  return <hr className={classes.root}></hr>;
 }

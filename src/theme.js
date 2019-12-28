@@ -31,6 +31,9 @@ const theme = createMuiTheme({
       normal: 400,
       bold: 600,
       bolder: 700
+    },
+    border: {
+      main: "#e7eaf3"
     }
   }
 });
