@@ -17,7 +17,10 @@ export default class BlockListPage extends Component {
         <Container>
           <Typography variant='h6'>Blocks</Typography>
           <Panel>
-            <MinedBlocks miner={miner} />
+            <MinedBlocks
+              miner={miner}
+              tableOptions={{pageSize: 10, pageSizeOptions: [10,20,50]}}
+            />
           </Panel>
         </Container>
       </>

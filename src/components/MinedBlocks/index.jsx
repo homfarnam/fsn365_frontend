@@ -5,38 +5,25 @@ import NavLink from "../NavLink";
 import TimeAgo from "../TimeAgo";
 
 export default class MinedBlocks extends Component {
-  state = {
-    loading: false
-  };
-
   render() {
-    const tableOptions = {
+    const { tableOptions = {} } = this.props;
+    const options = {
       toolbar: false,
       pageSize: 5,
-      pageSizeOptions: [5, 10, 20]
+      pageSizeOptions: [5, 10, 20],
+      ...tableOptions
     };
     return (
-      <FusionTable
-        data={this.fetchData}
-        columns={columns}
-        options={tableOptions}
-      />
+      <FusionTable data={this.fetchData} columns={columns} options={options} />
     );
   }
 
-  fetchData = () =>
+  fetchData = ({ page, pageSize }) =>
     new Promise(resolve => {
       const { miner = "" } = this.props;
-      const state = this.state;
-      if (state.loading) {
-        return;
-      }
-      this.setState({
-        ...state,
-        loading: true
-      });
-      const url = miner ? `?miner=${miner}` : "";
-      fetch(`http://localhost:8888/api/block${url}`)
+      const pageQuery = `?page=${page + 1}&size=${pageSize}`;
+      const minerQuery = miner ? `&miner=${miner}` : "";
+      fetch(`http://localhost:8888/api/block${pageQuery}${minerQuery}`)
         .then(res => res.json())
         .then(data => {
           this.setState({
