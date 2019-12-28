@@ -1,25 +1,9 @@
 import React from "react";
 import NavLink from "../NavLink";
-import FusionTable, {
-  defaultHeaderStyle,
-  defaultCellStyle
-} from "../FusionTable";
+import FusionTable from "../FusionTable";
 
-export default function NetworkStakingState(props) {
-  const { data } = props;
-  const style = {
-    border: "none",
-    boxShadow: "none",
-    paddingBottom: "1.75rem"
-  };
-  return (
-    <FusionTable
-      columns={columns}
-      data={data}
-      title={"Fusion Miners"}
-      style={style}
-    />
-  );
+export default function NetworkStakingState({ data }) {
+  return <FusionTable columns={columns} data={data} title={"Fusion Miners"} />;
 }
 
 const columns = [
@@ -28,34 +12,26 @@ const columns = [
     title: "Miner",
     sorting: false,
     headerStyle: {
-      ...defaultHeaderStyle,
-      width: "95%"
+      width: "55%",
+      textAlign: "center"
     },
     cellStyle: {
-      ...defaultCellStyle,
-      width: "95%"
+      width: "55%",
+      textAlign: "center"
     },
-    render: rowData => {
-      return (
-        <NavLink href={`/staking/${rowData.owner}`}>{rowData.owner}</NavLink>
-      );
-    }
+    render: row => <NavLink href={`/staking/${row.owner}`}>{row.owner}</NavLink>
   },
   {
     field: "tickets",
     title: "Tickets",
     headerStyle: {
-      ...defaultHeaderStyle,
-      width: "5%",
+      width: "45%",
       textAlign: "center"
     },
     cellStyle: {
-      ...defaultCellStyle,
-      width: "5%",
+      width: "45%",
       textAlign: "center"
     },
-    render: rowData => {
-      return rowData.tickets;
-    }
+    render: row => row.tickets
   }
 ];

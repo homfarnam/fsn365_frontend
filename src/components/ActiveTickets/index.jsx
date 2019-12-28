@@ -25,13 +25,7 @@ export default class ActiveTickets extends Component {
     const tableOptions = {
       search: false,
       pageSize: 10,
-      toolbar: false,
-      headerStyle: {
-        textAlign: "center"
-      },
-      cellStyle: {
-        textAlign: "center"
-      }
+      toolbar: false
     };
     return (
       <FusionTable
