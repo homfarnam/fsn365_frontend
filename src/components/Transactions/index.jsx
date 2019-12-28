@@ -4,14 +4,6 @@ import FusionTable from "../FusionTable";
 import NavLink from "../NavLink";
 import TimeAgo from "../TimeAgo";
 
-const isHashStyle = {
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
-  display: "inline-block",
-  maxWidth: "120px"
-};
-
 export default class Transactions extends PureComponent {
   state = {
     loading: false
@@ -81,10 +73,19 @@ export default class Transactions extends PureComponent {
     });
 }
 
+const isHashStyle = {
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  display: "inline-block",
+  maxWidth: "120px"
+};
+
 const columns = [
   {
     field: "hash",
     title: "Tx Hash",
+    sorting: false,
     render: row => (
       <NavLink href={`/tx/${row.hash}`}>
         <span style={isHashStyle}>{row.hash}</span>
@@ -94,6 +95,7 @@ const columns = [
   {
     field: "from",
     title: "From",
+    sorting: false,
     render: row => (
       <NavLink href={`/address/${row.from}`}>
         <span style={isHashStyle}>{row.from}</span>
@@ -112,6 +114,7 @@ const columns = [
   {
     field: "block",
     title: "Block",
+    sorting: false,
     render: row => (
       <NavLink href={`/block/${row.block}`} className="tx-block">
         {row.block}
@@ -121,6 +124,7 @@ const columns = [
   {
     field: "timestamp",
     title: "Age",
+    sorting: false,
     render: row => (
       <span
         style={{
@@ -134,10 +138,12 @@ const columns = [
   },
   {
     field: "type",
-    title: "Tx Type"
+    title: "Tx Type",
+    sorting: false
   },
   {
     field: "gasUsed",
-    title: "Fees"
+    title: "Fees",
+    sorting: false
   }
 ];
