@@ -11,28 +11,15 @@ export default class MinedBlocks extends Component {
 
   render() {
     const tableOptions = {
-      headerStyle: {
-        textAlign: "center"
-      },
-      cellStyle: {
-        textAlign: "center"
-      },
       toolbar: false,
-      pageSize: 10,
-      pageSizeOptions: [10, 20, 50]
+      pageSize: 5,
+      pageSizeOptions: [5, 10, 20]
     };
-    const style = {
-      border: "none",
-      boxShadow: "none",
-      paddingBottom: "1.75rem"
-    };
-
     return (
       <FusionTable
         data={this.fetchData}
         columns={columns}
         options={tableOptions}
-        style={style}
       />
     );
   }
@@ -79,13 +66,11 @@ const columns = [
     field: "height",
     title: "Block",
     sorting: false,
-    render: row => {
-      return (
-        <NavLink href={`/block/${row.height}`} className="bk-height">
-          {row.height}
-        </NavLink>
-      );
-    }
+    render: row => (
+      <NavLink href={`/block/${row.height}`} className="bk-height">
+        {row.height}
+      </NavLink>
+    )
   },
   {
     field: "timestamp",
@@ -107,46 +92,37 @@ const columns = [
     field: "miner",
     title: "Miner",
     sorting: false,
-    render: row => {
-      return (
-        <NavLink href={`/address/${row.miner}`} className="bk-miner is-hash">
-          {row.miner}
-        </NavLink>
-      );
-    }
+    render: row => (
+      <NavLink href={`/address/${row.miner}`} className="bk-miner is-hash">
+        {row.miner}
+      </NavLink>
+    )
   },
   {
     dataField: "txCount",
     title: "Txn",
     sorting: false,
-    render: row => {
-      return (
-        row.txCount && (
-          <NavLink href={`/block/${row.height}?tab=tx`} className="bk-txCount">
-            {row.txCount}
-          </NavLink>
-        )
-      );
-    }
+    render: row =>
+      row.txCount && (
+        <NavLink href={`/block/${row.height}?tab=tx`} className="bk-txCount">
+          {row.txCount}
+        </NavLink>
+      )
   },
   {
     field: "gasUsed",
     title: "Gas Used",
     sorting: false,
-    render: row => {
-      return (
-        <span className="bk-gasUsed">
-          {row.gasUsed}({((row.gasUsed / row.gasLimit) * 100).toFixed(2)}%)
-        </span>
-      );
-    }
+    render: row => (
+      <span className="bk-gasUsed">
+        {row.gasUsed}({((row.gasUsed / row.gasLimit) * 100).toFixed(2)}%)
+      </span>
+    )
   },
   {
     field: "gasLimit",
     title: "Gas Limit",
     sorting: false,
-    render: row => {
-      return <span className="bk-gasLimit">{row.gasLimit}</span>;
-    }
+    render: row => <span className="bk-gasLimit">{row.gasLimit}</span>
   }
 ];
