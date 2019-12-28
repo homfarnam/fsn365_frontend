@@ -35,6 +35,8 @@ export default function FusionTable(props) {
   const headerStyle = options.headerStyle || {};
   const cellStyle = options.cellStyle || {};
   const tableOptions = {
+    pageSizeOptions: [10, 25, 50, 100],
+    pageSize: 10,
     ...options,
     cellStyle: {
       ...defaultCellStyle,
