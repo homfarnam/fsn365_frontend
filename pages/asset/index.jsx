@@ -1,17 +1,17 @@
 import React from 'react';
 import Router from 'next/router';
 
-export default function BlockIndex (props){
+export default function AssetIndex (props){
   return null;
 }
 
-BlockIndex.getInitialProps = ({query, res}) => {
+AssetIndex.getInitialProps = ({query, res}) => {
   if(res) {
     res.writeHead(302, {
-      Location: '/blocks'
+      Location: '/assets'
     });
     res.end();
   } else {
-    Router.push('/block');
+    Router.push('/assets');
   }
 }
