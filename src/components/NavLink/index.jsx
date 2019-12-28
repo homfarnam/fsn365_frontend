@@ -16,11 +16,11 @@ const useStyles = makeStyles(({ palette }) =>
 );
 
 export default function NavLink(props) {
-  const { href, children = " ", className = "" } = props;
+  const { href, children = " ", className = "", ...others } = props;
   const theme = useTheme();
   const classes = useStyles(theme);
   return (
-    <Link href={href}>
+    <Link href={href} {...others}>
       <a className={classNames(classes.root, className)}>
         {children ? children : href}
       </a>

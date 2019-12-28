@@ -72,7 +72,7 @@ const columns = [
     title: "Tx Hash",
     sorting: false,
     render: row => (
-      <NavLink href={`/tx/${row.hash}`}>
+      <NavLink href={`/tx/${row.hash}`} prefetch={false}>
         <span style={isHashStyle}>{row.hash}</span>
       </NavLink>
     )
