@@ -52,7 +52,7 @@ export default function AddressDetailPage(props) {
       {/* address assets, mining, transactions */}
       <Container>
         <Panel>
-          <FusionTabs value={state.tab} onChange={handleTabChange}>
+          <FusionTabs value={state.tab} onChange={handleTabChange} style={{margin:0}}>
             <FusionTab label="Transactions" />
             {hasAssets ?<FusionTab label="Assets"></FusionTab>:null}
             {hasLockedAssets ?<FusionTab label="TimeLocked"></FusionTab>:null}
