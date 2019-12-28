@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Router from 'next/router';
 import Head from 'next/head';
 import Panel from '../../src/components/Panel';
+import fetch from "isomorphic-unfetch"
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { FusionTab, FusionTabs, FusionTabPanel } from '../../src/components/FusionTabs';
