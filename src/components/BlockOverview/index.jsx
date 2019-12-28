@@ -57,7 +57,7 @@ export default function BlockOverview(props) {
       </KeyValue>
       <KeyValue
         label="Block Rewards"
-        value={block.reward}
+        value={block.reward + " FSN"}
         className={classes.field}
       />
       <KeyValue
