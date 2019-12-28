@@ -88,11 +88,17 @@ const columns = [
   {
     field: "to",
     title: "To",
-    render: row => (
-      <NavLink href={`/address/${row.to}`}>
-        <span style={isHashStyle}>{row.to}</span>
-      </NavLink>
-    )
+    render: row => {
+      if ((row.to = "0xffffffffffffffffffffffffffffffffffffffff")) {
+        return <span>{row.to}</span>;
+      } else {
+        return (
+          <NavLink href={`/address/${row.to}`}>
+            <span style={isHashStyle}>{row.to}</span>
+          </NavLink>
+        );
+      }
+    }
   },
   {
     field: "block",
