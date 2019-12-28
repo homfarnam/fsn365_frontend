@@ -1,21 +1,11 @@
 import React, { useState } from "react";
 import PropType from "prop-types";
-import { makeStyles, createStyles, useTheme } from "@material-ui/core/styles";
-import Panel from "../Panel";
 import { FusionTab, FusionTabs, FusionTabPanel } from "../FusionTabs";
 import FusionTabPanels from "../FusionTabs/FusionTabPanels";
 import MinedBlocks from "../MinedBlocks";
 import ActiveTickets from "../ActiveTickets";
 import Typography from "@material-ui/core/Typography";
-
-const useStyles = makeStyles(({ palette }) =>
-  createStyles({
-    tabs: {
-      borderBottom: "1px solid #e7eaf3",
-      textTransform: "capitalize"
-    }
-  })
-);
+import Panel from "../Panel";
 
 const tabMap = {
   block: 0,
