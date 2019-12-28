@@ -1,185 +1,83 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import Container from '@material-ui/core/Container';
-import fetch from 'isomorphic-unfetch';
-import FusionTable from '../src/components/FusionTable';
-import NavLink from '../src/components/NavLink';
-import TimeAgo from '../src/components/TimeAgo';
-import Panel from '../src/components/Panel';
 import Typography from '@material-ui/core/Typography';
+import fetch from "isomorphic-unfetch";
+import Panel from '../src/components/Panel';
+import FusionTable from '../src/components/FusionTable';
+import NavLink from "../src/components/NavLink";
 
+export default function AssetListPage (props) {
+  return (
+    <>
+      <Head>
+        <title>Assets On Fusion | FSN explorer</title>
+      </Head>
+      <Container>
+        <Typography variant='h6'>Assets</Typography>
+        <Panel>
+          <FusionTable
+            columns={columns}
+            data={fetchAssets}
+            options={{toolbar: false}}
+          />
+        </Panel>
+      </Container>
+    </>
+  )
+}
 
-export default class TxListPage extends Component {
-  state = {
-    loading: false,
-  };
+AssetListPage.getInitialProps = async({query}) => {
+  return {...query}
+}
 
-  render () {
-    const tableOptions = {
-      headerStyle: {
-        textAlign: 'center'
-      },
-      cellStyle: {
-        textAlign: 'center'
-      },
-      toolbar:false,
-      pageSize: 10,
-      pageSizeOptions: [10, 20, 50]
-    };
-    const style = {
-      border: "none",
-      boxShadow: "none",
-      paddingBottom: "1.75rem"
-    };
-
-    return (
-      <>
-        <Head>
-          <title>Transactions | FSN explorer</title>
-        </Head>
-        <Container>
-          <Typography variant='h6'>Transactions</Typography>
-          <Panel>
-            <FusionTable
-              data = {this.fetchData}
-              columns={columns}
-              options={tableOptions}
-              style={style}
-            />
-          </Panel>
-        </Container>
-      </>
-    )
-  }
-
-  fetchData =  () => new Promise( (resolve) => {
-    const state = this.state;
-    if(state.loading) {
-      return;
-    }
-    this.setState({
-      ...state,
-      loading: true
-    })
-     fetch(`http://localhost:8888/api/tx`)
+const fetchAssets = ({
+    page,
+    pageSize
+  }) =>
+  new Promise(resolve => {
+    const pageQuery = `?page=${page + 1}&size=${pageSize}`;
+    fetch(`http://localhost:8888/api/asset${pageQuery}`)
       .then(res => res.json())
-      .then((data) => {
-        this.setState({
-          loading: false,
-        });
+      .then(data => {
         resolve({
           data: data.data,
-          page: data.page - 1 ,
+          page: data.page - 1,
           totalCount: data.total
-        })
+        });
       })
       .catch(e => {
-        this.setState({
-          loading: false
-        })
         resolve({
           data: [],
           page: 1,
           totalCount: 0
-        })
+        });
       });
-  })
-}
+  });
 
-TxListPage.getInitialProps = async ({query, res}) => {
-  return {
-    ...query,
-    isServer: !!res
-  }
-}
-
-const columns = [
+const columns =  [
   {
-    field: "hash",
-    title: "Tx Hash",
-    render: row => {
-      const style = {
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        display: 'inline-block',
-        maxWidth: '120px'
-      }
-      return (
-        <NavLink href={`/tx/${row.hash}`} className="tx-hash is-hash">
-          <span style={style}>{row.hash}</span>
-        </NavLink>
-      );
-    }
+    field: "name",
+    title: "Asset",
+    sorting: false,
+    render: row =>  <NavLink href={`/asset/${row.id}`}>{row.name}({row.symbol})</NavLink>
+  },
+   {
+    field: "verified",
+    title: "Asset Type",
+    sorting: false,
+    render: row =>  <strong>{row.verified ? 'Verified' : 'Unverified'}</strong>
   },
   {
-    field: "from",
-    title: "From",
-    render: row => {
-      const style = {
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        display: 'inline-block',
-        maxWidth: '120px'
-      }
-      return (
-        <NavLink href={`/address/${row.from}`} className="tx-from is-hash">
-          <span style={style}>{row.from}</span>
-        </NavLink>
-      );
-    }
+    field: "id",
+    title: "Asset ID",
+    sorting: false,
+    render: row => <NavLink href={`/asset/${row.id}`}>{row.id}</NavLink>
   },
   {
-    field: "to",
-    title: "To",
-    render: row => {
-      const style = {
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        display: 'inline-block',
-        maxWidth: '120px'
-      }
-      return (
-        <NavLink href={`/address/${row.to}`} className="tx-to is-hash">
-          <span style={style}>{row.to}</span>
-        </NavLink>
-      );
-    }
-  },
-  {
-    field: "block",
-    title: "Block",
-    render: row => {
-      return (
-        <NavLink href={`/block/${row.block}`} className="tx-block">
-          {row.block}
-        </NavLink>
-      );
-    }
-  },
-  {
-    field: "timestamp",
-    title: "Age",
-    render: row => {
-      const style = {
-        minWidth: '120px',
-        display: 'inline-block'
-      }
-      return (
-        <span style={style}>
-          <TimeAgo time={row.timestamp * 1000} />
-        </span>
-      );
-    }
-  },
-  {
-   field: "type",
-    title: "Type"
-  },
-  {
-   field: "gasUsed",
-    title: "Fees"
+    field: "quantity",
+    title: "Quantity",
+    sorting: false,
+    render: row => <span className="asset-quantity">{row.quantity}</span>
   }
 ];
