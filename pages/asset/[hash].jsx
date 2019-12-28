@@ -6,6 +6,7 @@ import Panel from '../../src/components/Panel';
 import Typography from '@material-ui/core/Typography';
 import KeyValue from '../../src/components/KeyValue';
 import NavLink from '../../src/components/NavLink';
+import Box from '@material-ui/core/Box';
 
 export default function AssetPage ({asset}) {
   return (
@@ -26,7 +27,9 @@ export default function AssetPage ({asset}) {
             <NavLink href={`/address/${asset.issuer}`}>{asset.issuer}</NavLink>
           </KeyValue>
           <KeyValue label="Issue Height" value={asset.block} />
-          <KeyValue label="Verified" value={asset.verified ?'Yes': 'No'} />
+          <KeyValue label="Verified">
+            {asset.verified ? <Box color="success.main" component="strong">Yes</Box> : <Box color="error.main" component="strong">No</Box>}
+          </KeyValue>
         </Panel>
       </Container>
     </>

@@ -1,4 +1,5 @@
 import React from "react";
+import Box from "@material-ui/core/Box";
 import TimeAgo from "../TimeAgo";
 import NavLink from "../NavLink";
 import KeyValue from "../KeyValue";
@@ -8,7 +9,17 @@ export default function TxOverview(props) {
   return (
     <div className="tx-overview">
       <KeyValue label="hash" value={tx.hash} />
-      <KeyValue label="status" value={tx.status ? "success" : "failed"} />
+      <KeyValue label="status">
+        {tx.status ? (
+          <Box component="strong" color="success.main">
+            Success
+          </Box>
+        ) : (
+          <Box component="strong" color="error.main">
+            Failed
+          </Box>
+        )}
+      </KeyValue>
       <KeyValue label="Block">
         <NavLink href={`/block/${tx.block}`}>{tx.block}</NavLink>
       </KeyValue>

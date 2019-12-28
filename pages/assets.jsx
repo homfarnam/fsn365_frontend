@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import fetch from "isomorphic-unfetch";
 import Panel from '../src/components/Panel';
@@ -66,7 +67,13 @@ const columns =  [
     field: "verified",
     title: "Asset Type",
     sorting: false,
-    render: row =>  <strong>{row.verified ? 'Verified' : 'Unverified'}</strong>
+    render: row =>  {
+      if(row.verified) {
+        return <Box component="strong" color="success.main">Verfied Asset</Box>
+      } else {
+        return <Box component="strong" color="error.main">Unverified Asset</Box>
+      }
+    }
   },
   {
     field: "id",
