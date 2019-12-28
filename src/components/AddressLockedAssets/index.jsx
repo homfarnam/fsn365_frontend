@@ -20,7 +20,7 @@ const columns = [
     title: "Asset",
     sorting: false,
     render: row => (
-      <NavLink href={`/assset/${row.id}`}>
+      <NavLink href={`/asset/${row.id}`}>
         {row.symbol}({row.name},
         {row.verified ? (
           <Box color="success.main" component="strong">
