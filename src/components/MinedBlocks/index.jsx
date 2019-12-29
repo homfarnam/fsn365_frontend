@@ -1,52 +1,42 @@
-import React, { Component } from "react";
+import React from "react";
 import fetch from "isomorphic-unfetch";
 import FusionTable from "../FusionTable";
 import NavLink from "../NavLink";
 import TimeAgo from "../TimeAgo";
 
-export default class MinedBlocks extends Component {
-  render() {
-    const { tableOptions = {} } = this.props;
-    const options = {
-      toolbar: false,
-      pageSize: 5,
-      pageSizeOptions: [5, 10, 20],
-      ...tableOptions
-    };
-    return (
-      <FusionTable data={this.fetchData} columns={columns} options={options} />
-    );
-  }
-
-  fetchData = ({ page, pageSize }) =>
-    new Promise(resolve => {
-      const { miner = "" } = this.props;
-      const pageQuery = `?page=${page + 1}&size=${pageSize}`;
-      const minerQuery = miner ? `&miner=${miner}` : "";
-      fetch(`http://localhost:8888/api/block${pageQuery}${minerQuery}`)
-        .then(res => res.json())
-        .then(data => {
-          this.setState({
-            loading: false
-          });
-          resolve({
-            data: data.data,
-            page: data.page - 1,
-            totalCount: data.total
-          });
-        })
-        .catch(e => {
-          this.setState({
-            loading: false
-          });
-          resolve({
-            data: [],
-            page: 1,
-            totalCount: 0
-          });
-        });
-    });
+export default function MinedBlocks(props) {
+  const { tableOptions = {}, miner } = props;
+  const options = {
+    toolbar: false,
+    pageSize: 5,
+    pageSizeOptions: [5, 10, 20],
+    ...tableOptions
+  };
+  const fetchData = createQuery(miner);
+  return <FusionTable data={fetchData} columns={columns} options={options} />;
 }
+
+const createQuery = miner => ({ page, pageSize }) =>
+  new Promise(resolve => {
+    const pageQuery = `?page=${page + 1}&size=${pageSize}`;
+    const minerQuery = miner ? `&miner=${miner}` : "";
+    fetch(`http://localhost:8888/api/block${pageQuery}${minerQuery}`)
+      .then(res => res.json())
+      .then(data => {
+        resolve({
+          data: data.data,
+          page: data.page - 1,
+          totalCount: data.total
+        });
+      })
+      .catch(e => {
+        resolve({
+          data: [],
+          page: 1,
+          totalCount: 0
+        });
+      });
+  });
 
 const columns = [
   {
