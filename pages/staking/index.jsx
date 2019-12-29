@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import Head from 'next/head';
 import fetch from 'isomorphic-unfetch';
@@ -15,65 +15,56 @@ const circleStyle = {
   verticalAlign: 'middle'
 };
 
-export default class StakingPage extends PureComponent {
-  state = {
+export default function StakingPage ({miner}) {
+  const [state, setState] = useState({
     summary: {},
     stakeInfo: {},
     error: ''
-  }
+  });
 
-  async componentDidMount() {
-    const staking = await this.fetchNetworkStaingState();
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        ...staking
-      }
-    })
-  }
-
-  render () {
-    const { summary, stakeInfo, error } = this.state;
-    return (
-      <>
-        <Head><title>Fusion Miners  | FSN explorer</title></Head>
-        <Container style={{marginBottom: '1.25rem'}}>
-          <Typography variant="h4">Fusion Staking</Typography>
-        </Container>
-        <Container style={{marginBottom: '1.75rem'}}>
-          <Panel>
-            <Typography  variant="h6">Summary</Typography>
-            <div className="summary">
-              <div><strong>Total Miners:</strong> {summary.totalMiners ?  summary.totalMiners : (error ? <span>{error}</span>: <CircularProgress size={10} style={circleStyle} />)}</div>
-              <div><strong>Total Tickets:</strong> {summary.totalTickets ?  summary.totalTickets : (error ? <span>{error}</span>: <CircularProgress size={10} style={circleStyle} />)}</div>
-            </div>
-          </Panel>
-        </Container>
-        <Container>{summary.totalMiners ?
-          <Panel><NetworkStakingState data={stakeInfo} /></Panel>:
-          <Panel>
-            <Typography component="h6" variant="h6">
-              Fusion Miners {error ? <span>{error}</span>: <CircularProgress size={20} style={circleStyle} />}
-            </Typography>
-          </Panel>}
-        </Container>
-      </>
-    )
-  }
-
-  fetchNetworkStaingState = async () => {
-    return fetch('http://localhost:8888/api/staking')
+  useEffect(() => {
+    fetch('http://localhost:8888/api/staking')
       .then(res => res.json())
       .then(res => res.data)
       .then((data) => {
-        return data;
+        setState({
+          ...data,
+          error: ''
+        });
       })
       .catch(e => {
-        return {
-          error: 'Something went wrong, please refresh page.'
-        }
-      });
-  }
+        setState({
+          error: 'Something went wrong, please refresh page and have a try!'
+        })
+      }).then
+  }, [miner])
+
+  const { summary, stakeInfo, error } = state;
+  return (
+    <>
+      <Head><title>Fusion Miners  | FSN explorer</title></Head>
+      <Container style={{marginBottom: '1.25rem'}}>
+        <Typography variant="h4">Fusion Staking</Typography>
+      </Container>
+      <Container style={{marginBottom: '1.75rem'}}>
+        <Panel>
+          <Typography  variant="h6">Summary</Typography>
+          <div className="summary">
+            <div><strong>Total Miners:</strong> {summary.totalMiners ?  summary.totalMiners : (error ? <span>{error}</span>: <CircularProgress size={10} style={circleStyle} />)}</div>
+            <div><strong>Total Tickets:</strong> {summary.totalTickets ?  summary.totalTickets : (error ? <span>{error}</span>: <CircularProgress size={10} style={circleStyle} />)}</div>
+          </div>
+        </Panel>
+      </Container>
+      <Container>{summary.totalMiners ?
+        <Panel><NetworkStakingState data={stakeInfo} /></Panel>:
+        <Panel>
+          <Typography component="h6" variant="h6">
+            Fusion Miners {error ? <span>{error}</span>: <CircularProgress size={20} style={circleStyle} />}
+          </Typography>
+        </Panel>}
+      </Container>
+    </>
+  )
 }
 
 StakingPage.getInitialProps = async({query, res}) => {
