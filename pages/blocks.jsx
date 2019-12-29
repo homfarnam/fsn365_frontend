@@ -27,9 +27,3 @@ export default class BlockListPage extends Component {
     )
   }
 }
-
-BlockListPage.getInitialProps = async({query}) => {
-  return {
-    ...query
-  }
-}
