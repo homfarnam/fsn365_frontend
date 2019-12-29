@@ -56,7 +56,7 @@ export default function StakingPage ({miner}) {
         </Panel>
       </Container>
       <Container>{summary.totalMiners ?
-        <Panel><NetworkStakingState data={stakeInfo} /></Panel>:
+        <Panel><NetworkStakingState data={stakeInfo} totalTickets={summary.totalTickets} /></Panel>:
         <Panel>
           <Typography component="h6" variant="h6">
             Fusion Miners {error ? <span>{error}</span>: <CircularProgress size={20} style={circleStyle} />}
