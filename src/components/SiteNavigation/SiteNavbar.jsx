@@ -65,6 +65,9 @@ const Nav = ({ className }) => {
       <Link href="/txs">
         <a className={classes.navItem}>Transactions</a>
       </Link>
+      <Link href="/address">
+        <a className={classes.navItem}>Address</a>
+      </Link>
       <Link href="/staking">
         <a className={classes.navItem}>Staking</a>
       </Link>
