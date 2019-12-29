@@ -1,13 +1,12 @@
 import React, { useState }  from 'react';
 import fetch from 'isomorphic-unfetch';
 import Container from '@material-ui/core/Container';
-import Head from 'next/head';
 import Panel from '../../src/components/Panel';
-import Typography from '@material-ui/core/Typography';
 import { FusionTab, FusionTabs, FusionTabPanel } from '../../src/components/FusionTabs';
 import TxLog from '../../src/components/TxLog';
 import FusionTabPanels from '../../src/components/FusionTabs/FusionTabPanels';
 import TxOverview from '../../src/components/TxOverview';
+import PageHeading from '../../src/components/PageHeading'
 
 export default function TransactionPage(props) {
   const { tx } = props;
@@ -24,13 +23,11 @@ export default function TransactionPage(props) {
   };
 
   const txHasLog = Object.keys(txLog).length;
+  const suffix = tx.type === 'Buy Ticket' ? `#${tx.type}` : `#${tx.type || 'Origin'}(${tx.coin})`;
   return (
     <>
-      <Head>
-        <title>Tx#{tx.type} | FSN explorer</title>
-      </Head>
+      <PageHeading title="Tx" suffix={suffix} />
       <Container>
-        <Typography variant="h6">Tx#{tx.type}<small>({tx.coin})</small></Typography>
         <Panel>
           <FusionTabs
             value={state.tab}

@@ -1,19 +1,15 @@
 import React from 'react';
-import Head from 'next/head';
 import Container from '@material-ui/core/Container';
 import Panel from '../src/components/Panel';
-import Typography from '@material-ui/core/Typography';
+import PageHeading from '../src/components/PageHeading';
 import MinedBlocks from '../src/components/MinedBlocks';
 
 export default function BlockListPage (props) {
   const {miner} = props;
   return (
     <>
-      <Head>
-        <title>Blocks | FSN explorer</title>
-      </Head>
+      <PageHeading title={'Blocks'} />
       <Container>
-        <Typography variant='h6'>Blocks</Typography>
         <Panel>
           <MinedBlocks
             miner={miner}

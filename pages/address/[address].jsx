@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import Head from 'next/head';
 import Container from '@material-ui/core/Container';
 import fetch from "isomorphic-unfetch"
-import Typography from '@material-ui/core/Typography';
 import AddressOverview from '../../src/components/AddressOverview';
 import FusionTabPanels, { FusionTab, FusionTabs, FusionTabPanel } from '../../src/components/FusionTabs';
 import Panel from '../../src/components/Panel';
 import Transactions from '../../src/components/Transactions';
 import AddressAssets from '../../src/components/AddressAssets';
 import AddressLockedAssets from '../../src/components/AddressLockedAssets';
+import PageHeading from '../../src/components/PageHeading';
 
 export default function AddressDetailPage(props) {
   const { address , overview, tab }  = props;
@@ -41,12 +40,9 @@ export default function AddressDetailPage(props) {
 
   return (
     <>
-      <Head><title>Address | FSN explorer</title></Head>
+      <PageHeading title="Adress Detail" />
       {/* address overview  */}
       <Container style={{marginBottom: '1.75rem'}}>
-        <Typography  variant="h6">
-          Address#
-        </Typography>
         <AddressOverview  overview={overview} />
       </Container>
       {/* address assets, mining, transactions */}

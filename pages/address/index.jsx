@@ -1,21 +1,16 @@
 import React  from 'react';
-import Head from 'next/head';
 import Container from '@material-ui/core/Container';
 import fetch from 'isomorphic-unfetch';
 import FusionTable from '../../src/components/FusionTable';
 import NavLink from '../../src/components/NavLink';
 import Panel from '../../src/components/Panel';
-import Typography from '@material-ui/core/Typography';
+import PageHeading from '../../src/components/PageHeading';
 
-
-export default function AddressListPage (props) {
+export default function AddressListPage () {
   return (
     <>
-      <Head>
-        <title>Fusion Addresses | FSN explorer</title>
-      </Head>
+      <PageHeading title="Adresses" />
       <Container>
-        <Typography variant='h6'>Fusion Addresses</Typography>
         <Panel>
           <FusionTable
             data = {fetchData}
@@ -26,25 +21,25 @@ export default function AddressListPage (props) {
       </Container>
     </>
   )
- }
- const fetchData =  ({page, pageSize}) => new Promise((resolve) => {
-   const query = `?page=${page+1}&size=${pageSize}`;
-    fetch(`http://localhost:8888/api/address${query}`)
-    .then(res => res.json())
-    .then((data) => {
-      resolve({
-        data: data.data,
-        page: data.page - 1 ,
-        totalCount: data.total
-      })
+}
+const fetchData =  ({page, pageSize}) => new Promise((resolve) => {
+  const query = `?page=${page+1}&size=${pageSize}`;
+  fetch(`http://localhost:8888/api/address${query}`)
+  .then(res => res.json())
+  .then((data) => {
+    resolve({
+      data: data.data,
+      page: data.page - 1 ,
+      totalCount: data.total
     })
-    .catch(e => {
-      resolve({
-        data: [],
-        page: 0,
-        totalCount: 0
-      })
-    });
+  })
+  .catch(e => {
+    resolve({
+      data: [],
+      page: 0,
+      totalCount: 0
+    })
+  });
 })
 
 const columns = [

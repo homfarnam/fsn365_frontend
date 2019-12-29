@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Container from '@material-ui/core/Container';
-import Head from 'next/head';
-import Typography from '@material-ui/core/Typography';
 import MiningState from '../../src/components/MiningState';
 import MiningOverview from '../../src/components/MiningOverview';
+import PageHeading from '../../src/components/PageHeading';
 
 export default function MinerStakingPage ({miner, tab="block"}) {
   return (
     <>
-      <Head><title>Node Monitor | FSN explorer</title></Head>
-      <Container style={{marginBottom: '1.25rem'}}>
-        <Typography variant="h4">Node Monitor</Typography>
-      </Container>
+       <PageHeading title={'Node Monitor'}  />
       <Container style={{marginBottom: '1.75rem'}}>
         <MiningOverview miner={miner} />
       </Container>

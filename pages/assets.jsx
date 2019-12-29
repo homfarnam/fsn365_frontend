@@ -1,21 +1,17 @@
 import React from 'react';
-import Head from 'next/head';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 import fetch from "isomorphic-unfetch";
 import Panel from '../src/components/Panel';
 import FusionTable from '../src/components/FusionTable';
 import NavLink from "../src/components/NavLink";
+import PageHeading from '../src/components/PageHeading';
 
 export default function AssetListPage (props) {
   return (
     <>
-      <Head>
-        <title>Assets On Fusion | FSN explorer</title>
-      </Head>
+      <PageHeading title="Assets" />
       <Container>
-        <Typography variant='h6'>Assets</Typography>
         <Panel>
           <FusionTable
             columns={columns}

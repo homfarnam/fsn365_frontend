@@ -1,21 +1,18 @@
 import React from 'react';
-import Head from 'next/head';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
 import Transactions from '../src/components/Transactions';
 import Panel from '../src/components/Panel';
+import PageHeading from '../src/components/PageHeading';
 
-export default function TxListPage (props) {
+export default function TxListPage ({params}) {
+  let type = params.type ? `#${params.type}`: '';
   return (
     <>
-      <Head>
-        <title>Transactions | FSN explorer</title>
-      </Head>
+      <PageHeading title="Transactions" suffix={type} />
       <Container>
-        <Typography variant='h6'>Transactions</Typography>
         <Panel>
           <Transactions
-            params={props.params}
+            params={params}
           />
         </Panel>
       </Container>

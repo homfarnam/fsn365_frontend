@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
-import Head from 'next/head';
 import fetch from 'isomorphic-unfetch';
-import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import NetworkStakingState from '../../src/components/NetworkStakingState';
 import Panel from '../../src/components/Panel';
+import PageHeading from '../../src/components/PageHeading';
 
 const circleStyle = {
   display: 'inline-block',
@@ -42,10 +42,7 @@ export default function StakingPage ({miner}) {
   const { summary, stakeInfo, error } = state;
   return (
     <>
-      <Head><title>Fusion Miners  | FSN explorer</title></Head>
-      <Container style={{marginBottom: '1.25rem'}}>
-        <Typography variant="h4">Fusion Staking</Typography>
-      </Container>
+      <PageHeading title={'Fusion Miners'} />
       <Container style={{marginBottom: '1.75rem'}}>
         <Panel>
           <Typography  variant="h6">Summary</Typography>

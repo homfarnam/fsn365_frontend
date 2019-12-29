@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
-import Head from 'next/head';
 import Panel from '../../src/components/Panel';
 import fetch from "isomorphic-unfetch"
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { FusionTab, FusionTabs, FusionTabPanel } from '../../src/components/FusionTabs';
 import FusionTabPanels from '../../src/components/FusionTabs/FusionTabPanels';
 import BlockOverview from '../../src/components/BlockOverview';
 import TxsInBlock from '../../src/components/TxsInBlock';
+import PageHeading from '../../src/components/PageHeading';
 
 const tabMap = {
   'overview': 0,
@@ -31,11 +30,8 @@ export default function BlockPage (props) {
   const hasTx = block.txCount > 0;
   return (
     <>
-      <Head>
-        <title>Block#{block.height} | FSN explorer</title>
-      </Head>
+      <PageHeading title={'Block'} suffix={`#${block.height}`} />
       <Container>
-        <Typography variant='h6'>Block#{block.height}</Typography>
         <Panel>
           <FusionTabs
             value={state.tab}
