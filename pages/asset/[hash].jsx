@@ -18,7 +18,7 @@ export default function AssetPage ({asset}) {
           <KeyValue label="Asset symbol" value={asset.symbol} />
           <KeyValue label="Asset ID" value={asset.id} />
           <KeyValue label="Decimals" value={asset.decimals} />
-          <KeyValue label="Total Supply" value={asset.total} />
+          <KeyValue label="Total Supply" value={+asset.total/Math.pow(10, asset.decimals)} />
           <KeyValue label="Changeable" value={asset.changeable ? 'Yes': 'No'} />
           <KeyValue label="Issuer">
             <FusionAdressLink address={asset.issuer} />
