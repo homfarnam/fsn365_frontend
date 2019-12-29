@@ -3,6 +3,7 @@ import fetch from "isomorphic-unfetch";
 import FusionTable from "../FusionTable";
 import NavLink from "../NavLink";
 import TimeAgo from "../TimeAgo";
+import FusionAdressLink from "../FusionAdressLink";
 
 export default class Transactions extends PureComponent {
   render() {
@@ -79,26 +80,12 @@ const columns = [
     field: "from",
     title: "From",
     sorting: false,
-    render: row => (
-      <NavLink href={`/address/${row.from}`}>
-        <span style={isHashStyle}>{row.from}</span>
-      </NavLink>
-    )
+    render: row => <FusionAdressLink address={row.from} style={isHashStyle} />
   },
   {
     field: "to",
     title: "To",
-    render: row => {
-      if (row.to == "0xffffffffffffffffffffffffffffffffffffffff") {
-        return <span>{row.to}</span>;
-      } else {
-        return (
-          <NavLink href={`/address/${row.to}`}>
-            <span style={isHashStyle}>{row.to}</span>
-          </NavLink>
-        );
-      }
-    }
+    render: row => <FusionAdressLink address={row.to} style={isHashStyle} />
   },
   {
     field: "block",

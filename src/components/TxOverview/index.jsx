@@ -3,6 +3,7 @@ import Box from "@material-ui/core/Box";
 import TimeAgo from "../TimeAgo";
 import NavLink from "../NavLink";
 import KeyValue from "../KeyValue";
+import FusionAdressLink from "../FusionAdressLink";
 
 export default function TxOverview(props) {
   const { tx } = props;
@@ -24,14 +25,10 @@ export default function TxOverview(props) {
         <NavLink href={`/block/${tx.block}`}>{tx.block}</NavLink>
       </KeyValue>
       <KeyValue label="from">
-        <NavLink href={`/address/${tx.from}`}>{tx.from}</NavLink>
+        <FusionAdressLink address={tx.from} />
       </KeyValue>
       <KeyValue label="to">
-        {tx.to == "0xffffffffffffffffffffffffffffffffffffffff" ? (
-          tx.to
-        ) : (
-          <NavLink href={`/address/${tx.to}`}>{tx.to}</NavLink>
-        )}
+        <FusionAdressLink address={tx.to} />
       </KeyValue>
       <KeyValue label="timestamp">
         <span>
