@@ -18,10 +18,12 @@ export default function MinedBlocks(props) {
 
 const createQuery = miner => ({ page, pageSize }) =>
   new Promise(resolve => {
-    const pageQuery = `?page=${page + 1}&size=${pageSize}`;
-    const minerQuery = miner ? `&miner=${miner}` : "";
+    const params = {
+      page: page + 1,
+      miner
+    };
 
-    fetch(`/block${pageQuery}${minerQuery}`)
+    fetch("/block", params)
       .then(res => res.json())
       .then(data => {
         resolve({
