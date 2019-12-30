@@ -20,6 +20,7 @@ const createQuery = miner => ({ page, pageSize }) =>
   new Promise(resolve => {
     const params = {
       page: page + 1,
+      size: pageSize,
       miner
     };
 
