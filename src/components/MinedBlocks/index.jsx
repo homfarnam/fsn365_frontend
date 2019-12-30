@@ -1,8 +1,8 @@
 import React from "react";
-import fetch from "isomorphic-unfetch";
 import FusionTable from "../FusionTable";
 import NavLink from "../NavLink";
 import TimeAgo from "../TimeAgo";
+import fetch from "../../libs/fetch";
 
 export default function MinedBlocks(props) {
   const { tableOptions = {}, miner } = props;
@@ -20,7 +20,8 @@ const createQuery = miner => ({ page, pageSize }) =>
   new Promise(resolve => {
     const pageQuery = `?page=${page + 1}&size=${pageSize}`;
     const minerQuery = miner ? `&miner=${miner}` : "";
-    fetch(`http://localhost:8888/api/block${pageQuery}${minerQuery}`)
+
+    fetch(`/block${pageQuery}${minerQuery}`)
       .then(res => res.json())
       .then(data => {
         resolve({

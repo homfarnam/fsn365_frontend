@@ -1,8 +1,7 @@
-const withSass = require('@zeit/next-sass')
-module.exports = withSass({
-  cssModules: true,
-  cssLoaderOptions: {
-    importLoaders: 1,
-    localIdentName: "[local]___[hash:base64:5]",
+const isProd = process.env.NODE_ENV === 'production' ? true: false;
+
+module.exports ={
+  publicRuntimeConfig: {
+    API_PATH: isProd ? 'http://localhost:8888/api': 'http://localhost:8888/api',
   }
-})
+};

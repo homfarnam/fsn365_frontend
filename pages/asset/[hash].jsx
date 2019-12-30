@@ -1,12 +1,11 @@
 import React  from 'react';
-import fetch from 'isomorphic-unfetch';
 import Container from '@material-ui/core/Container';
 import Panel from '../../src/components/Panel';
 import KeyValue from '../../src/components/KeyValue';
 import Box from '@material-ui/core/Box';
 import PageHeading from '../../src/components/PageHeading';
 import FusionAdressLink from "../../src/components/FusionAdressLink";
-
+import fetch from '../../src/libs/fetch';
 
 export default function AssetPage ({asset}) {
   return (
@@ -35,7 +34,7 @@ export default function AssetPage ({asset}) {
 
 AssetPage.getInitialProps = async ({query}) =>{
   const { hash } = query;
-  const asset = await fetch(`http://localhost:8888/api/asset/${hash}`)
+  const asset = await fetch(`/asset/${hash}`)
     .then(res => res.json())
     .then(res => res.data)
     .catch(e => ({hash}));

@@ -1,11 +1,11 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
-import fetch from "isomorphic-unfetch";
 import Panel from '../src/components/Panel';
 import FusionTable from '../src/components/FusionTable';
 import NavLink from "../src/components/NavLink";
 import PageHeading from '../src/components/PageHeading';
+import fetch from '../src/libs/fetch';
 
 export default function AssetListPage (props) {
   return (
@@ -34,7 +34,7 @@ const fetchAssets = ({
   }) =>
   new Promise(resolve => {
     const pageQuery = `?page=${page + 1}&size=${pageSize}`;
-    fetch(`http://localhost:8888/api/asset${pageQuery}`)
+    fetch(`/asset${pageQuery}`)
       .then(res => res.json())
       .then(data => {
         resolve({

@@ -10,7 +10,6 @@
   "dependencies": {
     "@material-ui/core": "^4.8.1",
     "@material-ui/styles": "^4.7.1",
-    "clsx": "latest",
     "fetch": "^1.1.0",
     "isomorphic-unfetch": "^3.0.0",
     "material-table": "^1.54.2",
@@ -21,8 +20,6 @@
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {
-    "@zeit/next-css": "^1.0.1",
-    "@zeit/next-sass": "^1.0.1",
     "add": "^2.0.6",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",

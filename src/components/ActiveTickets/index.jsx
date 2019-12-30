@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import fetch from "isomorphic-unfetch";
 import FusionTable from "../FusionTable";
 import TimeAgo from "../TimeAgo";
+import fetch from "../../libs/fetch";
 
 export default function ActiveTickets({ miner }) {
   const [state, setState] = useState({ tickets: [] });
@@ -13,7 +13,7 @@ export default function ActiveTickets({ miner }) {
     pageSizeOptions: [5, 10, 20]
   };
   useEffect(() => {
-    fetch(`http://localhost:8888/api/address/${miner}/tickets`)
+    fetch(`/address/${miner}/tickets`)
       .then(res => res.json())
       .then(res => res.data)
       .catch(e => [])

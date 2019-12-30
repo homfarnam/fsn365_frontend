@@ -1,10 +1,10 @@
 import React  from 'react';
 import Container from '@material-ui/core/Container';
-import fetch from 'isomorphic-unfetch';
 import FusionTable from '../../src/components/FusionTable';
 import NavLink from '../../src/components/NavLink';
 import Panel from '../../src/components/Panel';
 import PageHeading from '../../src/components/PageHeading';
+import fetch from '../../src/libs/fetch';
 
 export default function AddressListPage () {
   return (
@@ -24,7 +24,7 @@ export default function AddressListPage () {
 }
 const fetchData =  ({page, pageSize}) => new Promise((resolve) => {
   const query = `?page=${page+1}&size=${pageSize}`;
-  fetch(`http://localhost:8888/api/address${query}`)
+  fetch(`/address${query}`)
   .then(res => res.json())
   .then((data) => {
     resolve({

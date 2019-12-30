@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
-import fetch from "isomorphic-unfetch";
 import FusionTable from "../FusionTable";
+import fetch from "../../libs/fetch";
 import NavLink from "../NavLink";
 import TimeAgo from "../TimeAgo";
 import FusionAdressLink from "../FusionAdressLink";
@@ -38,7 +38,7 @@ export default class Transactions extends PureComponent {
       params.page = page + 1;
       params.size = pageSize;
       const query = this.toQueryString(params);
-      fetch(`http://localhost:8888/api/tx${query}`)
+      fetch(`/tx${query}`)
         .then(res => res.json())
         .then(data => {
           resolve({

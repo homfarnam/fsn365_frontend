@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
 import Panel from '../../src/components/Panel';
-import fetch from "isomorphic-unfetch"
 import Container from '@material-ui/core/Container';
 import { FusionTab, FusionTabs, FusionTabPanel } from '../../src/components/FusionTabs';
 import FusionTabPanels from '../../src/components/FusionTabs/FusionTabPanels';
 import BlockOverview from '../../src/components/BlockOverview';
 import TxsInBlock from '../../src/components/TxsInBlock';
 import PageHeading from '../../src/components/PageHeading';
+import fetch from '../../src/libs/fetch';
 
 const tabMap = {
   'overview': 0,
@@ -62,14 +62,13 @@ BlockPage.getInitialProps = async ({query, res}) =>{
       Router.push('/blocks')
     }
   } else {
-     const block = await fetch(`http://localhost:8888/api/block/${height}`)
+     const block = await fetch(`/block/${height}`)
       .then(res => res.json())
       .then(res => res.data)
       .catch(e => {});
     return {
       block,
       ...query,
-      isServer:!!res
     }
   }
 }

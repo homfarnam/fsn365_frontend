@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import fetch from "isomorphic-unfetch";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Box from "@material-ui/core/Box";
 import KeyValue from "../KeyValue";
 import Panel from "../Panel";
 import TimeAgo from "../TimeAgo";
+import fetch from "../../libs/fetch";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -30,7 +30,7 @@ export default function MiningOverview({ miner }) {
     overview: {}
   });
   useEffect(() => {
-    fetch(`http://localhost:8888/api/address/${miner}/staking`)
+    fetch(`/address/${miner}/staking`)
       .then(res => res.json())
       .then(res => ({ overview: res.data, msg: "" }))
       .catch(e => ({

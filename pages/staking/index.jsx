@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
-import fetch from 'isomorphic-unfetch';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import NetworkStakingState from '../../src/components/NetworkStakingState';
 import Panel from '../../src/components/Panel';
 import PageHeading from '../../src/components/PageHeading';
+import fetch from '../../src/libs/fetch';
 
 const circleStyle = {
   display: 'inline-block',
@@ -23,7 +23,7 @@ export default function StakingPage ({miner}) {
   });
 
   useEffect(() => {
-    fetch('http://localhost:8888/api/staking')
+    fetch('/staking')
       .then(res => res.json())
       .then(res => res.data)
       .then((data) => {

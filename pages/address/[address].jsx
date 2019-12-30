@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import Container from '@material-ui/core/Container';
-import fetch from "isomorphic-unfetch"
 import AddressOverview from '../../src/components/AddressOverview';
 import FusionTabPanels, { FusionTab, FusionTabs, FusionTabPanel } from '../../src/components/FusionTabs';
 import Panel from '../../src/components/Panel';
@@ -8,6 +7,7 @@ import Transactions from '../../src/components/Transactions';
 import AddressAssets from '../../src/components/AddressAssets';
 import AddressLockedAssets from '../../src/components/AddressLockedAssets';
 import PageHeading from '../../src/components/PageHeading';
+import fetch from '../../src/libs/fetch';
 
 export default function AddressDetailPage(props) {
   const { address , overview, tab }  = props;
@@ -86,7 +86,7 @@ export default function AddressDetailPage(props) {
 
 AddressDetailPage.getInitialProps = async({query}) => {
   const {address} = query;
-  const overview = await fetch(`http://localhost:8888/api/address/${address}`)
+  const overview = await fetch(`/address/${address}`)
     .then(res => res.json())
     .then(res => res.data)
     .catch(() => {
@@ -105,7 +105,7 @@ const tabMap = {
 };
 
 function fetchAdressAssets(address) {
-   return  fetch(`http://localhost:8888/api/address/${address}/assets`)
+   return  fetch(`/address/${address}/assets`)
   .then(res => res.json())
   .then(res => {
     return res.data;
@@ -116,7 +116,7 @@ function fetchAdressAssets(address) {
  };
 
 function fetchAddressLockedAssets(address)  {
-  return fetch(`http://localhost:8888/api/address/${address}/locked`)
+  return fetch(`/address/${address}/locked`)
   .then(res => res.json())
   .then(res => {
     return res.data;

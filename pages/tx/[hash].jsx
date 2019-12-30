@@ -1,12 +1,12 @@
 import React, { useState }  from 'react';
-import fetch from 'isomorphic-unfetch';
 import Container from '@material-ui/core/Container';
 import Panel from '../../src/components/Panel';
 import { FusionTab, FusionTabs, FusionTabPanel } from '../../src/components/FusionTabs';
 import TxLog from '../../src/components/TxLog';
 import FusionTabPanels from '../../src/components/FusionTabs/FusionTabPanels';
 import TxOverview from '../../src/components/TxOverview';
-import PageHeading from '../../src/components/PageHeading'
+import PageHeading from '../../src/components/PageHeading';
+import fetch from '../../src/libs/fetch';
 
 export default function TransactionPage(props) {
   const { tx } = props;
@@ -48,9 +48,9 @@ export default function TransactionPage(props) {
   )
 }
 
-TransactionPage.getInitialProps = async ({query, res}) =>{
+TransactionPage.getInitialProps = async ({query}) =>{
   const { hash } = query;
-  const tx = await fetch(`http://localhost:8888/api/tx/${hash}`)
+  const tx = await fetch(`/tx/${hash}`)
     .then(res => res.json())
     .then(res => res.data)
     .catch(e => {});
