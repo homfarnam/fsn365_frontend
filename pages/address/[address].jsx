@@ -40,7 +40,7 @@ export default function AddressDetailPage(props) {
 
   return (
     <>
-      <PageHeading title="Adress Detail" />
+      <PageHeading title="Address Detail" />
       {/* address overview  */}
       <Container style={{marginBottom: '1.75rem'}}>
         <AddressOverview  overview={overview} />
