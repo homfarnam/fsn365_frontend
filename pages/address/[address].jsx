@@ -2,11 +2,24 @@ import React, {useState, useEffect} from 'react';
 import AddressOverview from '../../src/components/AddressOverview';
 import FusionTabPanels, { FusionTab, FusionTabs, FusionTabPanel } from '../../src/components/FusionTabs';
 import Panel from '../../src/components/Panel';
-import Transactions from '../../src/components/Transactions';
-import AddressAssets from '../../src/components/AddressAssets';
-import AddressLockedAssets from '../../src/components/AddressLockedAssets';
 import PageHeading from '../../src/components/PageHeading';
 import fetch from '../../src/libs/fetch';
+import dynamic from 'next/dynamic';
+
+const DynamicTransactions = dynamic(() => import('../../src/components/Transactions'), {
+  loading: () => <p>Loading...</p>,
+  ssr: false
+});
+
+const DynamicAssets =  dynamic(() => import('../../src/components/AddressAssets'), {
+  loading: () => <p>Loading...</p>,
+  ssr: false
+});
+
+const DynamicLockedAssets =  dynamic(() => import('../../src/components/AddressLockedAssets'), {
+  loading: () => <p>Loading...</p>,
+  ssr: false
+});
 
 export default function AddressDetailPage(props) {
   const { address , overview, tab }  = props;
@@ -51,7 +64,7 @@ export default function AddressDetailPage(props) {
           </FusionTabs>
           <FusionTabPanels>
             <FusionTabPanel value={state.tab} index={0}>
-              <Transactions
+              <DynamicTransactions
                 params={{from:address}}
                 tableOptions={{
                   pageSizeOptions: [5, 10],
@@ -62,14 +75,14 @@ export default function AddressDetailPage(props) {
               { 
               hasAssets ? 
                 (<FusionTabPanel value={state.tab} index={1}>
-                  <AddressAssets assets={state.assets} />
+                  <DynamicAssets assets={state.assets} />
                 </FusionTabPanel>):
                 null
               }
            {
              hasLockedAssets ?
                 (<FusionTabPanel value={state.tab} index={2}>
-                  <AddressLockedAssets assets={locked} />
+                  <DynamicLockedAssets assets={locked} />
                 </FusionTabPanel>)
                 :null
            }
