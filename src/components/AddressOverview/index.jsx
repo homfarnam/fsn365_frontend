@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import NavLink from "next/link";
 import KeyValue from "../KeyValue";
 import Panel from "../Panel";
+import fetch from "../../libs/fetch";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -23,9 +24,18 @@ const useStyles = makeStyles(({ breakpoints }) =>
   })
 );
 
-export default function AddressOverview(props) {
-  const { overview } = props;
+export default function AddressOverview({ address }) {
   const classes = useStyles();
+  const [overview, setOverview] = useState({});
+  useEffect(() => {
+    fetch(`/address/${address}`)
+      .then(res => res.json())
+      .then(res => res.data)
+      .catch(e => ({}))
+      .then(overview => {
+        setOverview(overview);
+      });
+  }, [address]);
   overview.txCount = overview.txCount ? overview.txCount : 0;
   return (
     <Panel title="Overview">
@@ -40,11 +50,11 @@ export default function AddressOverview(props) {
           value={overview.san}
           className={classes.field}
         />
-        <KeyValue
-          label="fsn balance"
-          value={`${overview.fsnBalance} FSN`}
-          className={classes.field}
-        />
+        <KeyValue label="fsn balance" className={classes.field}>
+          {overview.fsnBalance === undefined
+            ? null
+            : `${overview.fsnBalance} FSN`}
+        </KeyValue>
         {overview.rewards ? (
           <KeyValue
             label="rewards"

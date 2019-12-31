@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import AddressOverview from '../../src/components/AddressOverview';
 import FusionTabPanels, { FusionTab, FusionTabs, FusionTabPanel } from '../../src/components/FusionTabs';
 import Panel from '../../src/components/Panel';
 import PageHeading from '../../src/components/PageHeading';
@@ -21,12 +20,14 @@ const DynamicLockedAssets =  dynamic(() => import('../../src/components/AddressL
   ssr: false
 });
 
+const DynamicOverview = dynamic(() => import('../../src/components/AddressOverview'))
+
 export default function AddressDetailPage(props) {
-  const { address , overview, tab }  = props;
+  const { address, tab }  = props;
   const [ state, setState ] = useState({
     tab: tabMap[tab] || 0,
     assets: [],
-    locked: []
+    locked: [],
   });
   const  handleTabChange = (e, newValue) => {
     setState({
@@ -54,10 +55,10 @@ export default function AddressDetailPage(props) {
     <>
       <PageHeading title="Address Detail" />
       {/* address overview  */}
-        <AddressOverview  overview={overview} />
+        <DynamicOverview  address={address} />
       {/* address assets, mining, transactions */}
         <Panel>
-          <FusionTabs value={state.tab} onChange={handleTabChange} style={{margin:0}}>
+          <FusionTabs value={state.tab} onChange={handleTabChange} style={{marginBottom: '1.75rem'}}>
             <FusionTab label="Transactions" />
             {hasAssets ?<FusionTab label="Assets"></FusionTab>:null}
             {hasLockedAssets ?<FusionTab label="TimeLocked"></FusionTab>:null}
@@ -93,17 +94,7 @@ export default function AddressDetailPage(props) {
 }
 
 AddressDetailPage.getInitialProps = async({query}) => {
-  const {address} = query;
-  const overview = await fetch(`/address/${address}`)
-    .then(res => res.json())
-    .then(res => res.data)
-    .catch(() => {
-      return {address}
-    });
-    return {
-      ...query,
-      overview
-    }
+  return {address:query.address}
 };
 
 const tabMap = {
@@ -115,20 +106,15 @@ const tabMap = {
 function fetchAdressAssets(address) {
    return  fetch(`/address/${address}/assets`)
   .then(res => res.json())
-  .then(res => {
-    return res.data;
-  })
-  .catch(() => {
-    return []
-  });
+  .then(res => res.data)
+  .catch((e) => ([]));
  };
 
 function fetchAddressLockedAssets(address)  {
   return fetch(`/address/${address}/locked`)
   .then(res => res.json())
-  .then(res => {
-    return res.data;
-  })
+  .then(res => res.data)
+  .catch(e => ({}))
   .then(assetsMap => {
     const lockedAssets = [];
     Object.keys(assetsMap).map((key) => {
@@ -148,7 +134,5 @@ function fetchAddressLockedAssets(address)  {
     });
     return lockedAssets;
   })
-  .catch((e) => {
-    return []
-  });
+  .catch((e) =>([]));
 };
