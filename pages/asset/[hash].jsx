@@ -1,5 +1,4 @@
 import React  from 'react';
-import Container from '@material-ui/core/Container';
 import Panel from '../../src/components/Panel';
 import KeyValue from '../../src/components/KeyValue';
 import Box from '@material-ui/core/Box';
@@ -11,7 +10,6 @@ export default function AssetPage ({asset}) {
   return (
     <>
       <PageHeading title={'Asset'} suffix={`#${asset.symbol}`} />
-      <Container>
         <Panel>
           <KeyValue label="Asset Name" value={asset.name} />
           <KeyValue label="Asset symbol" value={asset.symbol} />
@@ -27,7 +25,6 @@ export default function AssetPage ({asset}) {
             {asset.verified ? <Box color="success.main" component="strong">Yes</Box> : <Box color="error.main" component="strong">No</Box>}
           </KeyValue>
         </Panel>
-      </Container>
     </>
   )
 }

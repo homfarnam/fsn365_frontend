@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Container from '@material-ui/core/Container';
 import AddressOverview from '../../src/components/AddressOverview';
 import FusionTabPanels, { FusionTab, FusionTabs, FusionTabPanel } from '../../src/components/FusionTabs';
 import Panel from '../../src/components/Panel';
@@ -42,11 +41,8 @@ export default function AddressDetailPage(props) {
     <>
       <PageHeading title="Address Detail" />
       {/* address overview  */}
-      <Container style={{marginBottom: '1.75rem'}}>
         <AddressOverview  overview={overview} />
-      </Container>
       {/* address assets, mining, transactions */}
-      <Container>
         <Panel>
           <FusionTabs value={state.tab} onChange={handleTabChange} style={{margin:0}}>
             <FusionTab label="Transactions" />
@@ -79,7 +75,6 @@ export default function AddressDetailPage(props) {
            }
           </FusionTabPanels>
         </Panel>
-      </Container>
     </>
   )
 }

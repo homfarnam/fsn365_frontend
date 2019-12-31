@@ -5,6 +5,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
 import SiteNavigation from '../src/components/SiteNavigation';
+import Container from '@material-ui/core/Container';
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -28,7 +29,7 @@ export default class MyApp extends App {
           <CssBaseline />
           <SiteNavigation route={route} />
           <main>
-            <Component {...pageProps} />
+            <Container><Component {...pageProps} /></Container>
           </main>
         </ThemeProvider>
       </React.Fragment>

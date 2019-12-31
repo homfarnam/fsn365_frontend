@@ -1,5 +1,4 @@
 import React, { useState }  from 'react';
-import Container from '@material-ui/core/Container';
 import Panel from '../../src/components/Panel';
 import { FusionTab, FusionTabs, FusionTabPanel } from '../../src/components/FusionTabs';
 import TxLog from '../../src/components/TxLog';
@@ -27,7 +26,6 @@ export default function TransactionPage(props) {
   return (
     <>
       <PageHeading title="Tx" suffix={suffix} />
-      <Container>
         <Panel>
           <FusionTabs
             value={state.tab}
@@ -43,7 +41,6 @@ export default function TransactionPage(props) {
             {txHasLog ? <FusionTabPanel value={state.tab} index={1}><TxLog log={txLog} /></FusionTabPanel>: null}
           </FusionTabPanels>
         </Panel>
-      </Container>
     </>
   )
 }

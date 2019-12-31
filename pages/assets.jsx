@@ -1,5 +1,4 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Panel from '../src/components/Panel';
 import FusionTable from '../src/components/FusionTable';
@@ -11,7 +10,6 @@ export default function AssetListPage (props) {
   return (
     <>
       <PageHeading title="Assets" />
-      <Container>
         <Panel>
           <FusionTable
             columns={columns}
@@ -19,7 +17,6 @@ export default function AssetListPage (props) {
             options={{toolbar: false}}
           />
         </Panel>
-      </Container>
     </>
   )
 }

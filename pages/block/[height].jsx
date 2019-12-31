@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
 import Panel from '../../src/components/Panel';
-import Container from '@material-ui/core/Container';
 import { FusionTab, FusionTabs, FusionTabPanel } from '../../src/components/FusionTabs';
 import FusionTabPanels from '../../src/components/FusionTabs/FusionTabPanels';
 import BlockOverview from '../../src/components/BlockOverview';
@@ -31,21 +30,19 @@ export default function BlockPage (props) {
   return (
     <>
       <PageHeading title={'Block'} suffix={`#${block.height}`} />
-      <Container>
-        <Panel>
-          <FusionTabs
-            value={state.tab}
-            onChange={handleTabChange}
-          >
-            <FusionTab label="overview"  />
-            {hasTx ? <FusionTab label="Txs" />:null}
-          </FusionTabs>
-          <FusionTabPanels>
-            <FusionTabPanel value={state.tab} index={0}><BlockOverview block={block} /></FusionTabPanel>
-            {hasTx ? <FusionTabPanel value={state.tab} index={1} style={{marginTop: '-1rem'}}><TxsInBlock block={block.height} /></FusionTabPanel>:null}
-          </FusionTabPanels>
-        </Panel>
-      </Container>
+      <Panel>
+        <FusionTabs
+          value={state.tab}
+          onChange={handleTabChange}
+        >
+          <FusionTab label="overview"  />
+          {hasTx ? <FusionTab label="Txs" />:null}
+        </FusionTabs>
+        <FusionTabPanels>
+          <FusionTabPanel value={state.tab} index={0}><BlockOverview block={block} /></FusionTabPanel>
+          {hasTx ? <FusionTabPanel value={state.tab} index={1} style={{marginTop: '-1rem'}}><TxsInBlock block={block.height} /></FusionTabPanel>:null}
+        </FusionTabPanels>
+      </Panel>
     </>
   )
 }
