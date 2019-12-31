@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
@@ -21,7 +20,7 @@ export default function PageHeading(props) {
   const docTitle = title + (suffix && `${suffix}`);
   const classes = useStyles();
   return (
-    <Container>
+    <>
       <Head>
         <title>{docTitle} | Fsn Explorer</title>
       </Head>
@@ -29,6 +28,6 @@ export default function PageHeading(props) {
         {title}
         {suffix ? <small className={classes.small}>{suffix}</small> : null}
       </Typography>
-    </Container>
+    </>
   );
 }
