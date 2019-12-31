@@ -3,7 +3,7 @@ import FusionTable from "../FusionTable";
 import fetch from "../../libs/fetch";
 import NavLink from "../NavLink";
 import TimeAgo from "../TimeAgo";
-import FusionAdressLink from "../FusionAdressLink";
+import FusionAddressLink from "../FusionAddressLink";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 export default function Transactions(props) {
@@ -77,7 +77,7 @@ const createColumns = () => {
       title: "From",
       sorting: false,
       render: row => (
-        <FusionAdressLink address={row.from} className={classes.isHash} />
+        <FusionAddressLink address={row.from} className={classes.isHash} />
       )
     },
     {
@@ -85,7 +85,7 @@ const createColumns = () => {
       title: "To",
       sorting: false,
       render: row => (
-        <FusionAdressLink address={row.to} className={classes.isHash} />
+        <FusionAddressLink address={row.to} className={classes.isHash} />
       )
     },
     {

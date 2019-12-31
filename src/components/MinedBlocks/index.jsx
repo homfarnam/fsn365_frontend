@@ -3,7 +3,7 @@ import FusionTable from "../FusionTable";
 import NavLink from "../NavLink";
 import TimeAgo from "../TimeAgo";
 import fetch from "../../libs/fetch";
-import FusionAdressLink from "../FusionAdressLink";
+import FusionAddressLink from "../FusionAddressLink";
 
 export default function MinedBlocks(props) {
   const { tableOptions = {}, miner } = props;
@@ -74,7 +74,7 @@ const columns = [
     field: "miner",
     title: "Miner",
     sorting: false,
-    render: row => <FusionAdressLink address={row.miner} />
+    render: row => <FusionAddressLink address={row.miner} />
   },
   {
     dataField: "txCount",
