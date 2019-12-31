@@ -3,7 +3,7 @@ import Panel from '../../src/components/Panel';
 import KeyValue from '../../src/components/KeyValue';
 import Box from '@material-ui/core/Box';
 import PageHeading from '../../src/components/PageHeading';
-import FusionAdressLink from "../../src/components/FusionAdressLink";
+import FusionAddressLink from "../../src/components/FusionAddressLink";
 import fetch from '../../src/libs/fetch';
 
 export default function AssetPage ({asset}) {
@@ -18,7 +18,7 @@ export default function AssetPage ({asset}) {
           <KeyValue label="Total Supply" value={+asset.total/Math.pow(10, asset.decimals)} />
           <KeyValue label="Changeable Supply" value={asset.changeable ? 'Yes': 'No'} />
           <KeyValue label="Issuer">
-            <FusionAdressLink address={asset.issuer} />
+            <FusionAddressLink address={asset.issuer} />
           </KeyValue>
           <KeyValue label="Issue Height" value={asset.block} />
           <KeyValue label="Verified">

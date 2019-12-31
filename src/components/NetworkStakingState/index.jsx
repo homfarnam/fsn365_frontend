@@ -1,6 +1,6 @@
 import React from "react";
 import FusionTable from "../FusionTable";
-import FusionAddressLink from "../../components/FusionAdressLink";
+import FusionAddressLink from "../../components/FusionAddressLink";
 
 export default function NetworkStakingState({ data, totalTickets }) {
   const tableOptions = {
