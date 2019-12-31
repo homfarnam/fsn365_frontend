@@ -54,11 +54,11 @@ export default function AddressDetailPage(props) {
   return (
     <>
       <PageHeading title="Address Detail" />
-      {/* address overview  */}
-        <DynamicOverview  address={address} />
-      {/* address assets, mining, transactions */}
+        {/* address overview  */}
+        <Panel title="Overview" style={{marginBottom: '1.75rem'}}><DynamicOverview  address={address} /></Panel>
+        {/* address assets, mining, transactions */}
         <Panel>
-          <FusionTabs value={state.tab} onChange={handleTabChange} style={{marginBottom: '1.75rem'}}>
+          <FusionTabs value={state.tab} onChange={handleTabChange}>
             <FusionTab label="Transactions" />
             {hasAssets ?<FusionTab label="Assets"></FusionTab>:null}
             {hasLockedAssets ?<FusionTab label="TimeLocked"></FusionTab>:null}
