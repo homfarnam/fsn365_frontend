@@ -27,7 +27,9 @@ export default class MyApp extends App {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <SiteNavigation route={route} />
+          <header>
+            <Container><SiteNavigation route={route} /></Container>
+          </header>
           <main>
             <Container><Component {...pageProps} /></Container>
           </main>
