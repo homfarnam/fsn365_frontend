@@ -32,7 +32,7 @@ const columns = totalTickets => {
         width: "45%",
         textAlign: "center"
       },
-      render: row => <FusionAddressLink address={row.owner} />
+      render: row => <FusionAddressLink address={row.owner} miner={true} />
     },
     {
       field: "tickets",

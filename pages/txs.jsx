@@ -10,12 +10,13 @@ const useStyles = makeStyles(() =>
     address: {
       display: 'flex',
       flexWrap: 'wrap',
-      wordBreak: 'break-all'
+      wordBreak: 'break-all',
+      paddingLeft: '.75rem'
     },
     span: {
       margin: '0 4px',
       display: 'inline-block'
-    }
+    },
   })
 );
 
@@ -27,9 +28,9 @@ export default function TxListPage ({params}) {
   return (
     <>
       <PageHeading title="Transactions" suffix={type} />
-      <Panel>
+      <Panel style={{paddingTop:0, paddingLeft:0, paddingRight:0}}>
         {from ? <p className={classes.address}><strong>Out </strong><span className={classes.span}>transactions for</span> <FusionAddressLink address={from} /></p>:null}
-        {to? <p> className={classes.address}<strong>Incoming </strong><span className={classes.span}>transactions for</span> <FusionAddressLink address={to} /></p>:null}
+        {to? <p className={classes.address}><strong>Incoming </strong><span className={classes.span}>transactions for</span> <FusionAddressLink address={to} /></p>:null}
         <Transactions
           params={params}
         />
