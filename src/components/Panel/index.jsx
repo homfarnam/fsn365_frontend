@@ -22,10 +22,10 @@ const useStyles = makeStyles(({ palette }) =>
 );
 
 export default function Panel(props) {
-  const { title, children } = props;
+  const { title, children, style = {} } = props;
   const classes = useStyles();
   return (
-    <Paper variant="outlined" className={classes.root}>
+    <Paper variant="outlined" className={classes.root} style={style}>
       {/* panel title */}
       {title ? (
         <Typography component="h6" className={classes.title}>
