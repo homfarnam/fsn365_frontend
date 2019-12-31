@@ -1,6 +1,6 @@
 import React from "react";
-import NavLink from "../NavLink";
 import FusionTable from "../FusionTable";
+import FusionAddressLink from "../../components/FusionAdressLink";
 
 export default function NetworkStakingState({ data, totalTickets }) {
   const tableOptions = {
@@ -32,9 +32,7 @@ const columns = totalTickets => {
         width: "45%",
         textAlign: "center"
       },
-      render: row => (
-        <NavLink href={`/staking/${row.owner}`}>{row.owner}</NavLink>
-      )
+      render: row => <FusionAddressLink address={row.owner} />
     },
     {
       field: "tickets",

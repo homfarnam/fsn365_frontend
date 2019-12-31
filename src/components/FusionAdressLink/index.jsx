@@ -1,17 +1,20 @@
 import React from "react";
 import NavLink from "../NavLink";
-
-const FUSION_NATIVE_CONTRACT_ADDRESS =
-  "0xffffffffffffffffffffffffffffffffffffffff";
+import addressMap from "../../constants/addressMap";
 
 export default function FusionAdressLink(props) {
   const { address, children, ...others } = props;
-  if (address === FUSION_NATIVE_CONTRACT_ADDRESS) {
-    return <span>Fusion Contract</span>;
+  const text = addressMap[address];
+  if (addressMap[address] === "Fusion Contract") {
+    return <strong>{text}</strong>;
   } else {
     return (
       <NavLink href={`/address/${address}`}>
-        <span {...others}>{address}</span>
+        {text ? (
+          <strong {...others}>{text}</strong>
+        ) : (
+          <span {...others}>{address}</span>
+        )}
       </NavLink>
     );
   }
