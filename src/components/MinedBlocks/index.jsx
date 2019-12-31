@@ -74,7 +74,7 @@ const columns = [
     field: "miner",
     title: "Miner",
     sorting: false,
-    render: row => <FusionAddressLink address={row.miner} />
+    render: row => <FusionAddressLink address={row.miner} miner={true} />
   },
   {
     dataField: "txCount",
@@ -89,7 +89,7 @@ const columns = [
   },
   {
     field: "gasUsed",
-    title: "Gas Used",
+    title: "Gas Used/GasLimit",
     sorting: false,
     render: row => (
       <span className="bk-gasUsed">
@@ -98,7 +98,7 @@ const columns = [
     )
   },
   {
-    field: "gasLimit",
+    field: "rewards",
     title: "Gas Limit",
     sorting: false,
     render: row => <span className="bk-gasLimit">{row.gasLimit}</span>
