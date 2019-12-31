@@ -1,5 +1,4 @@
 import React  from 'react';
-import Container from '@material-ui/core/Container';
 import FusionTable from '../../src/components/FusionTable';
 import NavLink from '../../src/components/NavLink';
 import Panel from '../../src/components/Panel';
@@ -10,15 +9,13 @@ export default function AddressListPage () {
   return (
     <>
       <PageHeading title="Adresses" />
-      <Container>
-        <Panel>
-          <FusionTable
-            data = {fetchData}
-            columns={columns}
-            options={{toolbar:false}}
-          />
-        </Panel>
-      </Container>
+      <Panel>
+        <FusionTable
+          data = {fetchData}
+          columns={columns}
+          options={{toolbar:false}}
+        />
+      </Panel>
     </>
   )
 }
