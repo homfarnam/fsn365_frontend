@@ -2,7 +2,7 @@ import React from 'react';
 import Transactions from '../src/components/Transactions';
 import Panel from '../src/components/Panel';
 import PageHeading from '../src/components/PageHeading';
-import FusionAddressLink from '../src/components/FusionAdressLink';
+import FusionAddressLink from '../src/components/FusionAddressLink';
 import { makeStyles, createStyles,  } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() =>
