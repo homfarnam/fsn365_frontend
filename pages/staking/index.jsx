@@ -41,7 +41,7 @@ export default function StakingPage ({miner}) {
   const { summary, stakeInfo, error } = state;
   return (
     <>
-      <PageHeading title={'Fusion Miners'} />
+      <PageHeading title={'Fusion Staking'} />
       <Panel style={{marginBottom: '1.75rem'}}>
         <Typography  variant="h6">Summary</Typography>
         <div className="summary">

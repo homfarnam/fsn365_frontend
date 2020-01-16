@@ -98,9 +98,9 @@ const columns = [
     )
   },
   {
-    field: "rewards",
-    title: "Gas Limit",
+    field: "reward",
+    title: "Block reward",
     sorting: false,
-    render: row => <span className="bk-gasLimit">{row.gasLimit}</span>
+    render: row => <span className="bk-gasLimit">{row.reward.toFixed(2)}</span>
   }
 ];
