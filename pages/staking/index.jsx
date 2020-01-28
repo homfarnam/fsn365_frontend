@@ -1,69 +1,123 @@
-import React, { useState, useEffect } from 'react';
-import Router from 'next/router';
-import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import NetworkStakingState from '../../src/components/NetworkStakingState';
-import Panel from '../../src/components/Panel';
-import PageHeading from '../../src/components/PageHeading';
-import fetch from '../../src/libs/fetch';
+import React, { useState, useEffect } from "react";
+import Router from "next/router";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import NetworkStakingState from "../../src/components/NetworkStakingState";
+import Panel from "../../src/components/Panel";
+import PageHeading from "../../src/components/PageHeading";
+import fetch from "../../src/libs/fetch";
+import KeyValue from "../../src/components/KeyValue";
 
-const circleStyle = {
-  display: 'inline-block',
-  verticalAlign: 'center',
-  marginLeft: '10px',
-  verticalAlign: 'middle'
-};
+const useStyles = makeStyles(({ palette }) =>
+  createStyles({
+    circle: {
+      display: "inline-block",
+      verticalAlign: "center",
+      marginLeft: "10px",
+      verticalAlign: "middle"
+    },
+    margin: {
+      marginBottom: ".5rem"
+    },
+    title: {
+      marginBottom: "1rem"
+    }
+  })
+);
 
-export default function StakingPage ({miner}) {
+export default function StakingPage({ miner }) {
   const [state, setState] = useState({
     summary: {},
     stakeInfo: {},
-    error: ''
+    error: ""
   });
+  const cssClasses = useStyles();
 
   useEffect(() => {
-    fetch('/staking')
-      .then(res => res.json())
-      .then(res => res.data)
-      .then((data) => {
-        setState({
-          ...data,
-          error: ''
-        });
-      })
-      .catch(e => {
-        setState({
-          error: 'Something went wrong, please refresh page and have a try!'
+    let cancel = false;
+    const runEffect = () => {
+      fetch("/staking")
+        .then(res => res.json())
+        .then(res => res.data)
+        .then(data => {
+          setState({
+            ...data,
+            error: ""
+          });
         })
-      }).then
-  }, [miner])
+        .catch(e => {
+          setState({
+            error: "Something went wrong, please refresh page and have a try!"
+          });
+        });
+    };
+    runEffect();
+    return () => {
+      cancel = true;
+    };
+  }, [miner]);
 
-  const { summary, stakeInfo, error } = state;
+  const { summary, stakeInfo, error, historicalMiners } = state;
   return (
     <>
-      <PageHeading title={'Fusion Staking'} />
-      <Panel style={{marginBottom: '1.75rem'}}>
-        <Typography  variant="h6">Summary</Typography>
-        <div className="summary">
-          <div><strong>Total Miners:</strong> {summary.totalMiners ?  summary.totalMiners : (error ? <span>{error}</span>: <CircularProgress size={10} style={circleStyle} />)}</div>
-          <div><strong>Total Tickets:</strong> {summary.totalTickets ?  summary.totalTickets : (error ? <span>{error}</span>: <CircularProgress size={10} style={circleStyle} />)}</div>
-        </div>
+      <PageHeading title={"Fusion Staking"} />
+      <Panel title="Summary">
+        <KeyValue label="Active Miners: ">
+          {summary.totalMiners ? (
+            <span>{summary.totalMiners}</span>
+          ) : error ? (
+            <span>{error}</span>
+          ) : (
+            <CircularProgress size={10} className={cssClasses.circle} />
+          )}
+        </KeyValue>
+        <KeyValue label="Active Tickets: ">
+          {summary.totalTickets ? (
+            <span>{summary.totalTickets}</span>
+          ) : error ? (
+            <span>{error}</span>
+          ) : (
+            <CircularProgress size={10} className={cssClasses.circle} />
+          )}
+        </KeyValue>
+        <KeyValue label="Historical Miners: ">
+          {historicalMiners ? (
+            <span>{historicalMiners}</span>
+          ) : error ? (
+            <span>{error}</span>
+          ) : (
+            <CircularProgress size={10} className={cssClasses.circle} />
+          )}
+        </KeyValue>
       </Panel>
-      {summary.totalMiners ?
-      <Panel><NetworkStakingState data={stakeInfo} totalTickets={summary.totalTickets} /></Panel>:
-      <Panel>
-        <Typography component="h6" variant="h6">
-          Fusion Miners {error ? <span>{error}</span>: <CircularProgress size={20} style={circleStyle} />}
-        </Typography>
-      </Panel>}
+      {summary.totalTickets ? (
+        <Panel>
+          <NetworkStakingState
+            data={stakeInfo}
+            totalTickets={summary.totalTickets}
+          />
+        </Panel>
+      ) : (
+        <Panel>
+          <Typography component="h6" variant="h6">
+            Fusion Miners{" "}
+            {error ? (
+              <span>{error}</span>
+            ) : (
+              <CircularProgress size={20} className={cssClasses.circle} />
+            )}
+          </Typography>
+        </Panel>
+      )}
     </>
-  )
+  );
 }
 
-StakingPage.getInitialProps = async({query, res}) => {
+StakingPage.getInitialProps = async ({ query, res }) => {
   const { miner } = query;
-  if(miner) {
-    if(res) {
+  if (miner) {
+    if (res) {
       res.writeHead(302, {
         Location: `/staking/${miner}`
       });
@@ -75,4 +129,4 @@ StakingPage.getInitialProps = async({query, res}) => {
       isServer: !!res
     };
   }
-}
+};

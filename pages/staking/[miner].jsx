@@ -7,7 +7,7 @@ export default function MinerStakingPage ({miner, tab="block"}) {
   return (
     <>
        <PageHeading title={'Node Monitor'}  />
-        <MiningOverview miner={miner} />
+        <MiningOverview miner={miner}/>
         <MiningState miner={miner} view={tab} />
     </>
   )
