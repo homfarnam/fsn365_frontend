@@ -26,7 +26,7 @@ const useStyles = makeStyles(({ palette }) =>
   })
 );
 
-export default function StakingPage({ miner }) {
+export default function StakingPage() {
   const [state, setState] = useState({
     summary: {},
     stakeInfo: {},
@@ -35,60 +35,42 @@ export default function StakingPage({ miner }) {
   const cssClasses = useStyles();
 
   useEffect(() => {
-    let cancel = false;
-    const runEffect = () => {
-      fetch("/staking")
-        .then(res => res.json())
-        .then(res => res.data)
-        .then(data => {
-          setState({
-            ...data,
-            error: ""
-          });
-        })
-        .catch(e => {
-          setState({
-            error: "Something went wrong, please refresh page and have a try!"
-          });
-        });
-    };
-    runEffect();
-    return () => {
-      cancel = true;
-    };
-  }, [miner]);
+    fetch("/staking")
+    .then(res => res.json())
+    .then(res => res.data)
+    .then(data => {
+      setState({
+        ...data,
+        error: ""
+      });
+    })
+    .catch(e => {
+      setState({
+        error: "Something went wrong, please refresh page and have a try!"
+      });
+    });
+  }, []);
+    
 
   const { summary, stakeInfo, error, historicalMiners } = state;
   return (
     <>
       <PageHeading title={"Fusion Staking"} />
       <Panel title="Summary">
-        <KeyValue label="Active Miners: ">
+        <KeyValue label="Active Miners ">
           {summary.totalMiners ? (
             <span>{summary.totalMiners}</span>
-          ) : error ? (
-            <span>{error}</span>
-          ) : (
-            <CircularProgress size={10} className={cssClasses.circle} />
-          )}
+          ) :null }
         </KeyValue>
-        <KeyValue label="Active Tickets: ">
+        <KeyValue label="Active Tickets ">
           {summary.totalTickets ? (
             <span>{summary.totalTickets}</span>
-          ) : error ? (
-            <span>{error}</span>
-          ) : (
-            <CircularProgress size={10} className={cssClasses.circle} />
-          )}
+          ) : null}
         </KeyValue>
-        <KeyValue label="Historical Miners: ">
+        <KeyValue label="Historical Miners ">
           {historicalMiners ? (
             <span>{historicalMiners}</span>
-          ) : error ? (
-            <span>{error}</span>
-          ) : (
-            <CircularProgress size={10} className={cssClasses.circle} />
-          )}
+          ) : null}
         </KeyValue>
       </Panel>
       {summary.totalTickets ? (

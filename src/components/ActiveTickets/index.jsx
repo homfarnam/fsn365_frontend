@@ -13,15 +13,22 @@ export default function ActiveTickets({ miner }) {
     pageSizeOptions: [5, 10, 20]
   };
   useEffect(() => {
-    fetch(`/address/${miner}/tickets`)
-      .then(res => res.json())
-      .then(res => res.data)
-      .catch(e => [])
-      .then(tickets => {
-        setState({
-          tickets
+    let cancel = false;
+    const runEffect = () => {
+      fetch(`/staking/${miner}/tickets`)
+        .then(res => res.json())
+        .then(res => res.data)
+        .catch(e => [])
+        .then(tickets => {
+          setState({
+            tickets
+          });
         });
-      });
+    };
+    runEffect();
+    return () => {
+      cancel = true;
+    };
   }, [miner]);
 
   return (
