@@ -5,6 +5,7 @@ import Box from "@material-ui/core/Box";
 import PageHeading from "../../src/components/PageHeading";
 import FusionAddressLink from "../../src/components/FusionAddressLink";
 import fetch from "../../src/libs/fetch";
+import NavLink from "../../src/components/NavLink";
 
 export default function AssetPage({ asset }) {
   return (
@@ -26,7 +27,13 @@ export default function AssetPage({ asset }) {
         <KeyValue label="Issuer">
           <FusionAddressLink address={asset.issuer} />
         </KeyValue>
-        <KeyValue label="Issue Height" value={asset.height} />
+        <KeyValue label="Issue Height">
+          {asset.height ? (
+            <NavLink href={`/block/${asset.height}`}></NavLink>
+          ) : (
+            <a href="https://en.bitcoin.it/wiki/Genesis_block" target="_blank">Genesis Block</a>
+          )}
+        </KeyValue>
         <KeyValue label="Verified">
           {asset.verified ? (
             <Box color="success.main" component="strong">
