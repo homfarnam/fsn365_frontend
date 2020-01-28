@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import PropType from "prop-types";
 import { FusionTab, FusionTabs, FusionTabPanel } from "../FusionTabs";
 import FusionTabPanels from "../FusionTabs/FusionTabPanels";
-import MinedBlocks from "../MinedBlocks";
 import ActiveTickets from "../ActiveTickets";
+import MinersBuyingTickets from "../MinersBuyingTickets";
 import Panel from "../Panel";
 
 const tabMap = {
@@ -31,15 +31,15 @@ export default function MiningState(props) {
         onChange={handleTabChange}
         style={{ marginBottom: "0" }}
       >
-        <FusionTab label="Mined Blocks"></FusionTab>
         <FusionTab label="Ticket Status"></FusionTab>
+        <FusionTab label="Tickets Buying"></FusionTab>
       </FusionTabs>
       <FusionTabPanels>
         <FusionTabPanel value={state.tab} index={0}>
-          <MinedBlocks miner={miner} />
+          <ActiveTickets miner={miner} />
         </FusionTabPanel>
         <FusionTabPanel value={state.tab} index={1}>
-          <ActiveTickets miner={miner} />
+          <MinersBuyingTickets miner={miner} />
         </FusionTabPanel>
       </FusionTabPanels>
     </Panel>
