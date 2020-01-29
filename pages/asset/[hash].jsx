@@ -7,7 +7,7 @@ import FusionAddressLink from "../../src/components/FusionAddressLink";
 import fetch from "../../src/libs/fetch";
 import NavLink from "../../src/components/NavLink";
 
-export default function AssetPage({ asset }) {
+export default function AssetPage({ asset = {} }) {
   return (
     <>
       <PageHeading title={"Asset"} suffix={`#${asset.symbol}`} />
@@ -31,7 +31,9 @@ export default function AssetPage({ asset }) {
           {asset.height ? (
             <NavLink href={`/block/${asset.height}`}></NavLink>
           ) : (
-            <a href="https://en.bitcoin.it/wiki/Genesis_block" target="_blank">Genesis Block</a>
+            <a href="https://en.bitcoin.it/wiki/Genesis_block" target="_blank">
+              Genesis Block
+            </a>
           )}
         </KeyValue>
         <KeyValue label="Verified">
