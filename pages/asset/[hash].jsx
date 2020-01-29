@@ -29,7 +29,7 @@ export default function AssetPage({ asset = {} }) {
         </KeyValue>
         <KeyValue label="Issue Height">
           {asset.height ? (
-            <NavLink href={`/block/${asset.height}`}></NavLink>
+          <NavLink href={`/block/${asset.height}`}>{asset.height}</NavLink>
           ) : (
             <a href="https://en.bitcoin.it/wiki/Genesis_block" target="_blank">
               Genesis Block
