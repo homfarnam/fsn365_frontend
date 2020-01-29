@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import NavLink from "next/link";
 import KeyValue from "../KeyValue";
 import fetch from "../../libs/fetch";
 
@@ -31,10 +30,10 @@ export default function AddressOverview({ address }) {
     fetch(`/address/${address}`)
       .then(res => res.json())
       .then(res => res.data)
-      .catch(e => ({}))
       .then(overview => {
         setOverview(overview);
-      });
+      })
+      .catch(e => ({}));
   }, [address]);
   overview.txCount = overview.txCount ? overview.txCount : 0;
   return (
@@ -62,12 +61,7 @@ export default function AddressOverview({ address }) {
         />
       ) : null}
       <KeyValue label="total transactions" className={classes.field}>
-        {overview.txCount ? (
-          <NavLink href={`/address/${overview.address}?tab="tx`}></NavLink>
-        ) : (
-          overview.txCount
-        )}{" "}
-        txs in total
+        {overview.txCount} txs in total
       </KeyValue>
     </div>
   );
