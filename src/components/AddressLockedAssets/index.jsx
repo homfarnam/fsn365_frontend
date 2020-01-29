@@ -10,7 +10,7 @@ const tableOptions = {
   pageSizeOptions: [5, 10]
 };
 
-export default function AddressHeldAssets({ assets }) {
+export default function AddressHeldAssets({ assets = [] }) {
   return <FusionTable columns={columns} data={assets} options={tableOptions} />;
 }
 
@@ -20,7 +20,7 @@ const columns = [
     title: "Asset",
     sorting: false,
     render: row => (
-      <NavLink href={`/asset/${row.id}`}>
+      <NavLink href={`/asset/${row.assetId}`}>
         {row.symbol}({row.name},
         {row.verified ? (
           <Box color="success.main" component="strong">
@@ -41,7 +41,7 @@ const columns = [
     sorting: false,
     render: row => (
       <span>
-        <TimeAgo time={row.startTime} />
+        <TimeAgo time={row.startTime * 1000} />
       </span>
     )
   },
@@ -51,14 +51,14 @@ const columns = [
     sorting: false,
     render: row => (
       <span>
-        <TimeAgo time={row.endTime} />
+        <TimeAgo time={row.endTime * 1000} />
       </span>
     )
   },
   {
-    field: "quantity",
+    field: "value",
     title: "Quantity",
     sorting: false,
-    render: row => <span>{row.quantity.toFixed(2)}</span>
+    render: row => <span>{row.value.toFixed(2)} </span>
   }
 ];
