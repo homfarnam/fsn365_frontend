@@ -1,42 +1,48 @@
-import React from 'react';
-import Box from '@material-ui/core/Box';
-import Panel from '../src/components/Panel';
-import FusionTable from '../src/components/FusionTable';
+import React from "react";
+import Box from "@material-ui/core/Box";
+import Panel from "../src/components/Panel";
+import FusionTable from "../src/components/FusionTable";
 import NavLink from "../src/components/NavLink";
-import PageHeading from '../src/components/PageHeading';
-import fetch from '../src/libs/fetch';
+import PageHeading from "../src/components/PageHeading";
+import fetch from "../src/libs/fetch";
 
-export default function AssetListPage (props) {
+export default function AssetListPage(props) {
+  const { query = {} } = props;
+  const fetchAssets = createQuery(query);
   return (
     <>
       <PageHeading title="Assets" />
-        <Panel>
-          <FusionTable
-            columns={columns}
-            data={fetchAssets}
-            options={{toolbar: false}}
-          />
-        </Panel>
+      <Panel>
+        <FusionTable
+          columns={columns}
+          data={fetchAssets}
+          options={{ toolbar: false }}
+        />
+      </Panel>
     </>
-  )
+  );
 }
 
-AssetListPage.getInitialProps = async({query}) => {
-  return {...query}
-}
+AssetListPage.getInitialProps = async ({ query }) => {
+  return {
+    query: query
+  };
+};
 
-const fetchAssets = ({
-    page,
-    pageSize
-  }) =>
+const createQuery = query => ({ page, pageSize }) =>
   new Promise(resolve => {
     const pageQuery = `?page=${page + 1}&size=${pageSize}`;
-    fetch(`/asset${pageQuery}`)
+    const params = {
+      ...query,
+      page: page + 1,
+      size: pageSize
+    };
+    fetch(`/asset`, params)
       .then(res => res.json())
       .then(data => {
         resolve({
           data: data.data,
-          page: data.page - 1,
+          page: page,
           totalCount: data.total
         });
       })
@@ -49,22 +55,34 @@ const fetchAssets = ({
       });
   });
 
-const columns =  [
+const columns = [
   {
     field: "name",
     title: "Asset",
     sorting: false,
-    render: row =>  <NavLink href={`/asset/${row.id}`}>{row.name}({row.symbol})</NavLink>
+    render: row => (
+      <NavLink href={`/asset/${row.id}`}>
+        {row.name}({row.symbol})
+      </NavLink>
+    )
   },
-   {
+  {
     field: "verified",
     title: "Asset Type",
     sorting: false,
-    render: row =>  {
-      if(row.verified) {
-        return <Box component="strong" color="success.main">Verfied Asset</Box>
+    render: row => {
+      if (row.verified) {
+        return (
+          <Box component="strong" color="success.main">
+            Verfied Asset
+          </Box>
+        );
       } else {
-        return <Box component="strong" color="error.main">Unverified Asset</Box>
+        return (
+          <Box component="strong" color="error.main">
+            Unverified Asset
+          </Box>
+        );
       }
     }
   },
