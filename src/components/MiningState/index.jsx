@@ -31,8 +31,8 @@ export default function MiningState(props) {
         onChange={handleTabChange}
         style={{ marginBottom: "0" }}
       >
-        <FusionTab label="Ticket Status"></FusionTab>
-        <FusionTab label="Tickets Buying"></FusionTab>
+        <FusionTab label="Ticket Buying"></FusionTab>
+        <FusionTab label="Tickets Status"></FusionTab>
       </FusionTabs>
       <FusionTabPanels>
         <FusionTabPanel value={state.tab} index={0}>
