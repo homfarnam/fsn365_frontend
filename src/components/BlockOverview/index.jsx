@@ -53,7 +53,7 @@ export default function BlockOverview(props) {
         txs in block
       </KeyValue>
       <KeyValue label="Block Miner" className={classes.field}>
-        <NavLink href={`/address/${block.miner}`}>{block.miner}</NavLink>
+        <NavLink href={`/staking/${block.miner}`}>{block.miner}</NavLink>
       </KeyValue>
       <KeyValue
         label="Block Rewards"
