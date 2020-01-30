@@ -7,7 +7,11 @@ export default function TxLog(props) {
     <div>
       {Object.keys(log).map(key => {
         const value = log[key];
-        return <KeyValue key={key} label={key} value={value} />;
+        return (
+          <KeyValue key={key} label={key}>
+            {value + ""}
+          </KeyValue>
+        );
       })}
     </div>
   );
