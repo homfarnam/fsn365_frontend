@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import KeyValue from "../KeyValue";
-import fetch from "../../libs/fetch";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -23,19 +22,9 @@ const useStyles = makeStyles(({ breakpoints }) =>
   })
 );
 
-export default function AddressOverview({ address }) {
+export default function AddressOverview({ overview = {} }) {
   const classes = useStyles();
-  const [overview, setOverview] = useState({});
-  useEffect(() => {
-    fetch(`/address/${address}`)
-      .then(res => res.json())
-      .then(res => res.data)
-      .then(overview => {
-        setOverview(overview);
-      })
-      .catch(e => ({}));
-  }, [address]);
-  overview.txCount = overview.txCount ? overview.txCount : 0;
+
   return (
     <div className={classes.root}>
       <KeyValue
