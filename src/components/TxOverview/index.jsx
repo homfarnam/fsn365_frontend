@@ -4,12 +4,36 @@ import TimeAgo from "../TimeAgo";
 import NavLink from "../NavLink";
 import KeyValue from "../KeyValue";
 import FusionAddressLink from "../FusionAddressLink";
+import Duration from "../Duration";
 
 export default function TxOverview(props) {
   const { tx } = props;
   return (
     <div className="tx-overview">
       <KeyValue label="hash" value={tx.hash} />
+      {tx.assetId ? (
+        <KeyValue label="Value">
+          {(+tx.value).toFixed(0)}{" "}
+          {tx.assetId ? (
+            <NavLink href={`/asset/${tx.assetId}`}>{tx.coin}</NavLink>
+          ) : (
+            <span>{tx.coin}</span>
+          )}
+        </KeyValue>
+      ) : null}
+      {tx.startTime ? (
+        <KeyValue label="Duration">
+          <Duration startTime={tx.startTime} endTime={tx.endTime} />
+        </KeyValue>
+      ) : null}
+      {tx.type == "GenAssetFunc" ? (
+        <KeyValue label="Generated Asset">
+          <NavLink href={`/asset/${tx.assetId}`}>{tx.coin}</NavLink>
+        </KeyValue>
+      ) : null}
+      {tx.type == "GenNotationFunc" ? (
+        <KeyValue label="Notation">{tx.value}</KeyValue>
+      ) : null}
       <KeyValue label="status">
         <Box component="strong" color="success.main">
           Success
@@ -24,12 +48,11 @@ export default function TxOverview(props) {
       <KeyValue label="to">
         <FusionAddressLink address={tx.to} />
       </KeyValue>
-      <KeyValue label="timestamp">
+      <KeyValue label="Time">
         <span>
           <TimeAgo time={tx.timestamp * 1000}></TimeAgo>
         </span>
       </KeyValue>
-      <KeyValue label="nonce" value={tx.nonce} />
     </div>
   );
 }
