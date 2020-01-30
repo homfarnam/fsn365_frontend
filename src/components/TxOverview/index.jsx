@@ -13,7 +13,7 @@ export default function TxOverview(props) {
       <KeyValue label="hash" value={tx.hash} />
       {tx.assetId ? (
         <KeyValue label="Value">
-          {(+tx.value).toFixed(0)}{" "}
+          {tx.value ? (+tx.value).toFixed(0) : ""}{" "}
           {tx.assetId ? (
             <NavLink href={`/asset/${tx.assetId}`}>{tx.coin}</NavLink>
           ) : (
