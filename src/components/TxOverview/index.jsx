@@ -11,15 +11,9 @@ export default function TxOverview(props) {
     <div className="tx-overview">
       <KeyValue label="hash" value={tx.hash} />
       <KeyValue label="status">
-        {tx.status ? (
-          <Box component="strong" color="success.main">
-            Success
-          </Box>
-        ) : (
-          <Box component="strong" color="error.main">
-            Failed
-          </Box>
-        )}
+        <Box component="strong" color="success.main">
+          Success
+        </Box>
       </KeyValue>
       <KeyValue label="Block">
         <NavLink href={`/block/${tx.block}`}>{tx.block}</NavLink>
