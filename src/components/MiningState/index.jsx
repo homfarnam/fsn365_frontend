@@ -36,10 +36,10 @@ export default function MiningState(props) {
       </FusionTabs>
       <FusionTabPanels>
         <FusionTabPanel value={state.tab} index={0}>
-          <ActiveTickets miner={miner} />
+          <MinersBuyingTickets miner={miner} />
         </FusionTabPanel>
         <FusionTabPanel value={state.tab} index={1}>
-          <MinersBuyingTickets miner={miner} />
+          <ActiveTickets miner={miner} />
         </FusionTabPanel>
       </FusionTabPanels>
     </Panel>
