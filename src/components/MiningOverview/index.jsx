@@ -19,7 +19,7 @@ const useStyles = makeStyles(({ breakpoints }) =>
     field: {
       width: "100%",
       [breakpoints.up("lg")]: {
-        width: "49%"
+        width: "48.5%"
       }
     }
   })
