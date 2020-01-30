@@ -10,7 +10,7 @@ import fetch from "../../src/libs/fetch";
 import dynamic from "next/dynamic";
 
 const DynamicTransactions = dynamic(
-  () => import("../../src/components/Transactions"),
+  () => import("../../src/components/AddressTxs"),
   {
     loading: () => <p>Loading...</p>,
     ssr: false
@@ -63,6 +63,19 @@ export default function AddressDetailPage(props) {
       .catch(e => {});
   }, [address]);
 
+  const [overview, setOverview] = useState({txMade:0});
+  useEffect(() => {
+    fetch(`/address/${address}`)
+      .then(res => res.json())
+      .then(res => {
+        setOverview(res.data)
+      }).catch(e =>{});
+    return () => {
+      true
+    };
+  }, [address])
+
+
   const { assets, locked } = state;
   const hasAssets = assets.length;
   const hasLockedAssets = locked.length;
@@ -72,7 +85,7 @@ export default function AddressDetailPage(props) {
       <PageHeading title="Address Detail" />
       {/* address overview  */}
       <Panel title="Overview" style={{ marginBottom: "1.75rem" }}>
-        <DynamicOverview address={address} />
+        <DynamicOverview overview={overview} />
       </Panel>
       {/* address assets, mining, transactions */}
       <Panel>
@@ -84,11 +97,12 @@ export default function AddressDetailPage(props) {
         <FusionTabPanels>
           <FusionTabPanel value={state.tab} index={0}>
             <DynamicTransactions
-              params={{ from: address }}
               tableOptions={{
                 pageSizeOptions: [5, 10],
                 pageSize: 5
               }}
+              address={address}
+              txMade={overview.txMade}
             />
           </FusionTabPanel>
           {hasAssets ? (
