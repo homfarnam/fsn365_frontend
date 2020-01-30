@@ -21,6 +21,7 @@ export default function Transactions(props) {
 }
 
 const createQuery = params => ({ page, pageSize }) => {
+  const txCount = params.txMade || 1000;
   return new Promise(resolve => {
     params.page = page + 1;
     params.size = pageSize;
@@ -29,8 +30,8 @@ const createQuery = params => ({ page, pageSize }) => {
       .then(data => {
         resolve({
           data: data.data,
-          page: data.page - 1,
-          totalCount: data.total
+          page: page,
+          totalCount: txCount || data.total
         });
       })
       .catch(e => {
@@ -73,6 +74,21 @@ const createColumns = () => {
       )
     },
     {
+      field: "timestamp",
+      title: "Time",
+      sorting: false,
+      render: row => (
+        <span className={classes.timestamp}>
+          <TimeAgo time={row.timestamp * 1000} />
+        </span>
+      )
+    },
+    {
+      field: "block",
+      title: "Block",
+      sorting: false
+    },
+    {
       field: "from",
       title: "From",
       sorting: false,
@@ -89,30 +105,39 @@ const createColumns = () => {
       )
     },
     {
-      field: "block",
-      title: "Block",
-      sorting: false,
-      render: row => <NavLink href={`/block/${row.block}`}>{row.block}</NavLink>
-    },
-    {
-      field: "timestamp",
-      title: "Age",
-      sorting: false,
-      render: row => (
-        <span className={classes.timestamp}>
-          <TimeAgo time={row.timestamp * 1000} />
-        </span>
-      )
-    },
-    {
       field: "type",
       title: "Tx Type",
-      sorting: false
+      sorting: false,
+      render: row => {
+        if (row.type.indexOf("TimeLock") > -1) {
+          return "TimeLock";
+        } else {
+          return row.type;
+        }
+      }
     },
     {
-      field: "gasUsed",
-      title: "Fees",
-      sorting: false
+      field: "hash",
+      title: "Info",
+      sorting: false,
+      render: row => <TxValue {...row} />
     }
   ];
+};
+
+const TxValue = props => {
+  let { value, assetId, coin, type } = props;
+  if (type === "GenAssetFunc") {
+    return <span>{value}</span>;
+  }
+  return (
+    <>
+      {value ? <span>{(+value).toFixed(0)}</span> : null}
+      {assetId ? (
+        <NavLink href={`/asset/${assetId}`}>{"  " + coin}</NavLink>
+      ) : (
+        <span>{coin}</span>
+      )}
+    </>
+  );
 };
