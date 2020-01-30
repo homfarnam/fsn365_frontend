@@ -25,7 +25,8 @@ export default makeStyles(({ palette, breakpoints }) =>
     },
     nav: {
       display: "none",
-      justifyContent: "flex-end",
+      justifyContent: "flex-start",
+      marginLeft: "-.625rem",
       [breakpoints.up("sm")]: {
         display: "flex"
       }
@@ -67,6 +68,16 @@ export default makeStyles(({ palette, breakpoints }) =>
       [breakpoints.up("sm")]: {
         display: "none!important"
       }
+    },
+    topBar: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingTop: ".5rem",
+      background: "#fff"
+    },
+    navBar: {
+      width: "464px"
     }
   })
 );

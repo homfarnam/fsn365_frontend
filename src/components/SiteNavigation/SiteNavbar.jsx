@@ -42,7 +42,7 @@ export default function SiteNavItems(props) {
             variant="h4"
             className={classes.drawerTitle}
           >
-            Fsnexplorer
+            Explorer|FSN365
           </Typography>
           <Divider />
           <Nav className={classes.drawerNav} />

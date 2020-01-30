@@ -4,27 +4,26 @@ import { useTheme } from "@material-ui/core/styles";
 import useStyles from "./useStyles";
 import SiteNavItems from "./SiteNavbar";
 import Link from "next/link";
+import SearchForm from "../SearchForm";
 
 export default function SiteNavigation(props) {
-  const theme = useTheme();
-  const classes = useStyles(theme);
   const { route } = props;
-  return <HomeNavbar />;
-}
-
-function HomeNavbar() {
   const theme = useTheme();
   const classes = useStyles(theme);
+
   return (
-    <>
+    <nav className={classes.topBar}>
       <Link href="/">
         <a className={classes.brand}>
           <Typography component="h4" variant="h4">
-            Fsnexplorer
+            Explorer
           </Typography>
         </a>
       </Link>
-      <SiteNavItems />
-    </>
+      <div className={classes.navBar}>
+        {route !== "/" ? <SearchForm place={"others"} /> : null}
+        <SiteNavItems />
+      </div>
+    </nav>
   );
 }
