@@ -18,7 +18,7 @@ const tabMap = {
 };
 
 export default function BlockPage(props) {
-  const { block = {}, tab = "overview" } = props;
+  const { block = {}, tab = "overview", height } = props;
   const [state, setState] = useState({
     tab: tabMap[tab] || 0
   });
@@ -30,6 +30,18 @@ export default function BlockPage(props) {
     });
   };
 
+  
+  if (block.height == undefined) {
+    return (
+      <>
+        <PageHeading title={"Block"} suffix={`#${height}`} />
+        <Panel title="Wrong Request">
+          <p>This block does not exist!</p>
+        </Panel>
+      </>
+    );
+  }
+  
   const hasTx = block.txCount > 0;
   return (
     <>
