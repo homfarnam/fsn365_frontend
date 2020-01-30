@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import KeyValue from "../KeyValue";
+import addressMap from "../../constants/addressMap";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -16,7 +17,7 @@ const useStyles = makeStyles(({ breakpoints }) =>
     field: {
       width: "100%",
       [breakpoints.up("md")]: {
-        width: "49%"
+        width: "48.5%"
       }
     }
   })
@@ -25,6 +26,7 @@ const useStyles = makeStyles(({ breakpoints }) =>
 export default function AddressOverview({ overview = {} }) {
   const classes = useStyles();
 
+  const addressLabel = addressMap[overview.address];
   return (
     <div className={classes.root}>
       <KeyValue
@@ -32,11 +34,18 @@ export default function AddressOverview({ overview = {} }) {
         value={overview.address}
         className={classes.field}
       />
-      <KeyValue
-        label="Short Address"
-        value={overview.san}
-        className={classes.field}
-      />
+      {addressLabel ? (
+        <KeyValue label="Label" className={classes.field}>
+          {addressLabel}
+        </KeyValue>
+      ) : null}
+      {overview.san ? (
+        <KeyValue
+          label="Short Address"
+          value={overview.san}
+          className={classes.field}
+        />
+      ) : null}
       <KeyValue label="fsn balance" className={classes.field}>
         {overview.fsnBalance === undefined
           ? null
