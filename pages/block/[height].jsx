@@ -35,7 +35,7 @@ export default function BlockPage(props) {
     return (
       <>
         <PageHeading title={"Block"} suffix={`#${height}`} />
-        <Panel title="Wrong Request">
+        <Panel title="Bad Request">
           <p>This block does not exist!</p>
         </Panel>
       </>
