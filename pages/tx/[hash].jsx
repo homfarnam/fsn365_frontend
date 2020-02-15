@@ -12,7 +12,7 @@ import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 
 export default function TransactionPage(props) {
-  const { tx = {} } = props;
+  const { tx = {}, hash } = props;
   const txLog = (tx && tx.log) || {};
   const [state, setState] = useState({
     tab: 0
@@ -30,6 +30,18 @@ export default function TransactionPage(props) {
     tx.type === "Buy Ticket"
       ? `#${tx.type}`
       : `#${tx.type}`;
+  
+  if(!tx.hash) {
+    return (
+      <>
+      <PageHeading title={'Bad Tx'} />
+      <Panel>
+        The hash: <strong><em>{hash}</em></strong> is invalid.
+        Please check!
+      </Panel>
+      </>
+    )
+  }
   return (
     <>
       <PageHeading title="Tx" suffix={suffix} />
@@ -50,7 +62,7 @@ export default function TransactionPage(props) {
         </FusionTabPanels>
       </Panel>
     </>
-  );
+  )
 }
 
 TransactionPage.getInitialProps = async ({ query }) => {
@@ -60,6 +72,7 @@ TransactionPage.getInitialProps = async ({ query }) => {
     .then(res => res.data)
     .catch(e => {});
   return {
-    tx
+    tx,
+    hash
   };
 };

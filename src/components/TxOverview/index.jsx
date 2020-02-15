@@ -11,11 +11,11 @@ export default function TxOverview(props) {
   return (
     <div className="tx-overview">
       <KeyValue label="hash" value={tx.hash} />
-      {tx.assetId ? (
+      {tx.assetID ? (
         <KeyValue label="Value">
           {tx.value ? (+tx.value).toFixed(0) : ""}{" "}
-          {tx.assetId ? (
-            <NavLink href={`/asset/${tx.assetId}`}>{tx.coin}</NavLink>
+          {tx.assetID ? (
+            <NavLink href={`/asset/${tx.assetID}`}>{tx.coin}</NavLink>
           ) : (
             <span>{tx.coin}</span>
           )}
@@ -28,7 +28,7 @@ export default function TxOverview(props) {
       ) : null}
       {tx.type == "GenAssetFunc" ? (
         <KeyValue label="Generated Asset">
-          <NavLink href={`/asset/${tx.assetId}`}>{tx.coin}</NavLink>
+          <NavLink href={`/asset/${tx.assetID}`}>{tx.coin}</NavLink>
         </KeyValue>
       ) : null}
       {tx.type == "GenNotationFunc" ? (
