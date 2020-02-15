@@ -126,15 +126,12 @@ const createColumns = () => {
 };
 
 const TxValue = props => {
-  let { value, assetId, coin, type } = props;
-  if (type === "GenAssetFunc") {
-    return <NavLink href={`/asset/${row.assetId}`}>{row.coin}</NavLink>;
-  }
+  let { value, assetID, coin } = props;
   return (
     <>
       {value ? <span>{(+value).toFixed(0)}</span> : null}
-      {assetId ? (
-        <NavLink href={`/asset/${assetId}`}>{"  " + coin}</NavLink>
+      {assetID ? (
+        <NavLink href={`/asset/${assetID}`}>{"  " + coin}</NavLink>
       ) : (
         <span>{coin}</span>
       )}
