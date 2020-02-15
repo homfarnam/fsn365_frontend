@@ -41,8 +41,8 @@ export default function MinersBuyingTickets(props) {
       <FusionTable data={fetchData} columns={columns} options={options} />
       <p className={cssClasses.hint}>
         <small>
-          Notice: we only provide latest 1000 BuyTicketFunc transaction records
-          for miners.
+          <strong>Notice: </strong> we only provide latest 1000 BuyTicketFunc
+          transactions for miners.
         </small>
       </p>
     </div>
