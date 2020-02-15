@@ -27,7 +27,7 @@ export default makeStyles(({ palette, breakpoints }) =>
       display: "none",
       justifyContent: "flex-start",
       marginLeft: "-.625rem",
-      [breakpoints.up("sm")]: {
+      [breakpoints.up("md")]: {
         display: "flex"
       }
     },
@@ -65,19 +65,28 @@ export default makeStyles(({ palette, breakpoints }) =>
     },
     menuButton: {
       display: "flex",
-      [breakpoints.up("sm")]: {
+      [breakpoints.up("md")]: {
         display: "none!important"
       }
     },
     topBar: {
       display: "flex",
+      flexWrap: "wrap",
       justifyContent: "space-between",
       alignItems: "center",
       paddingTop: ".5rem",
       background: "#fff"
     },
     navBar: {
-      width: "464px"
+      flexGrow: 2,
+      width: "100%",
+      marginTop: ".5rem",
+      [breakpoints.up("md")]: {
+        flexGrow: 0,
+        minWidth: "464px",
+        width: "auto",
+        marginTop: "0"
+      }
     }
   })
 );

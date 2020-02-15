@@ -6,9 +6,10 @@ import Divider from "@material-ui/core/Divider";
 import useStyles from "./useStyles";
 import Typography from "@material-ui/core/Typography";
 import { Hidden } from "@material-ui/core";
+import SearchForm from "../SearchForm";
 
 export default function SiteNavItems(props) {
-  const { container } = props;
+  const { container, route = "/" } = props;
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -18,10 +19,13 @@ export default function SiteNavItems(props) {
 
   return (
     <>
-      <Nav className={classes.nav} />
       <Button className={classes.menuButton} onClick={handleDrawerToggle}>
         Toggle
       </Button>
+      <div className={classes.navBar}>
+        {route !== "/" ? <SearchForm place={"others"} /> : null}
+        <Nav className={classes.nav} />
+      </div>
       <Hidden>
         <Drawer
           container={container}
@@ -42,7 +46,7 @@ export default function SiteNavItems(props) {
             variant="h4"
             className={classes.drawerTitle}
           >
-            Explorer|FSN365
+            Explorer
           </Typography>
           <Divider />
           <Nav className={classes.drawerNav} />

@@ -4,7 +4,6 @@ import { useTheme } from "@material-ui/core/styles";
 import useStyles from "./useStyles";
 import SiteNavItems from "./SiteNavbar";
 import Link from "next/link";
-import SearchForm from "../SearchForm";
 
 export default function SiteNavigation(props) {
   const { route } = props;
@@ -20,10 +19,7 @@ export default function SiteNavigation(props) {
           </Typography>
         </a>
       </Link>
-      <div className={classes.navBar}>
-        {route !== "/" ? <SearchForm place={"others"} /> : null}
-        <SiteNavItems />
-      </div>
+      <SiteNavItems route={route} />
     </nav>
   );
 }
