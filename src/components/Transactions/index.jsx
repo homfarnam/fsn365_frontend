@@ -120,13 +120,23 @@ const createColumns = () => {
       field: "hash",
       title: "Info",
       sorting: false,
-      render: row => <TxValue {...row} />
+      render: row => <TxValue {...row} className={classes.isHash} />
     }
   ];
 };
 
 const TxValue = props => {
-  let { value, assetID, coin } = props;
+  let { value, assetID, coin, className = "" } = props;
+
+  if (value && value.swapID) {
+    return (
+      <span>
+        <NavLink href={`/swap/${value.swapID}`}>
+          <i className={className}>{value.swapID}</i>
+        </NavLink>
+      </span>
+    );
+  }
   return (
     <>
       {value ? <span>{(+value).toFixed(0)}</span> : null}
