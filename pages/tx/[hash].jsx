@@ -29,7 +29,7 @@ export default function TransactionPage(props) {
   const suffix =
     tx.type === "Buy Ticket"
       ? `#${tx.type}`
-      : `#${tx.type}`;
+      : `#${tx.type.replace('Func', '').replace('Ext', '')}`;
   
   if(!tx.hash) {
     return (

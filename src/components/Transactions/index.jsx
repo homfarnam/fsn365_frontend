@@ -112,7 +112,7 @@ const createColumns = () => {
         if (row.type.indexOf("TimeLock") > -1) {
           return "TimeLock";
         } else {
-          return row.type;
+          return row.type.replace("Func", "").replace("Ext", "");
         }
       }
     },
