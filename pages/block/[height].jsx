@@ -8,7 +8,6 @@ import {
 } from "../../src/components/FusionTabs";
 import FusionTabPanels from "../../src/components/FusionTabs/FusionTabPanels";
 import BlockOverview from "../../src/components/BlockOverview";
-import TxsInBlock from "../../src/components/TxsInBlock";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 
@@ -29,7 +28,6 @@ export default function BlockPage(props) {
       tab: newValue
     });
   };
-
   
   if (block.height == undefined) {
     return (
@@ -41,29 +39,17 @@ export default function BlockPage(props) {
       </>
     );
   }
-  
-  const hasTx = block.txCount > 0;
   return (
     <>
       <PageHeading title={"Block"} suffix={`#${block.height}`} />
       <Panel>
         <FusionTabs value={state.tab} onChange={handleTabChange}>
           <FusionTab label="overview" />
-          {hasTx ? <FusionTab label="Txs" /> : null}
         </FusionTabs>
         <FusionTabPanels>
           <FusionTabPanel value={state.tab} index={0}>
             <BlockOverview block={block} />
           </FusionTabPanel>
-          {hasTx ? (
-            <FusionTabPanel
-              value={state.tab}
-              index={1}
-              style={{ marginTop: "-1rem" }}
-            >
-              <TxsInBlock block={block.height} />
-            </FusionTabPanel>
-          ) : null}
         </FusionTabPanels>
       </Panel>
     </>
@@ -85,7 +71,9 @@ BlockPage.getInitialProps = async ({ query, res }) => {
     const block = await fetch(`/block/${height}`)
       .then(res => res.json())
       .then(res => res.data)
-      .catch(e => {});
+      .catch(e => {
+        return {}
+      });
     return {
       block,
       ...query

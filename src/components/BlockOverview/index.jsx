@@ -4,6 +4,7 @@ import { useTheme } from "@material-ui/styles";
 import TimeAgo from "../TimeAgo";
 import NavLink from "../NavLink";
 import KeyValue from "../KeyValue";
+import getConfig from "next/config";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -28,6 +29,8 @@ export default function BlockOverview(props) {
   const classes = useStyles(theme);
   const nextHeight = block.height + 1;
   const prevHeight = block.height - 1;
+  const { publicRuntimeConfig } = getConfig();
+  const apiServer = publicRuntimeConfig.API_PATH;
   return (
     <div className={classes.root}>
       <KeyValue label="height" className={classes.field}>
@@ -44,9 +47,11 @@ export default function BlockOverview(props) {
       </KeyValue>
       <KeyValue label="Transactions" className={classes.field}>
         {block.txCount ? (
-          <NavLink href={`/block/${block.height}?tab=tx`}>
+          <a
+            href={`${apiServer}/tx?block=${block.height}&size=${block.txCount}`}
+          >
             {block.txCount}
-          </NavLink>
+          </a>
         ) : (
           block.txCount
         )}{" "}
