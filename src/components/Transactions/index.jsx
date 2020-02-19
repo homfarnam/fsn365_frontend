@@ -5,6 +5,7 @@ import NavLink from "../NavLink";
 import TimeAgo from "../TimeAgo";
 import FusionAddressLink from "../FusionAddressLink";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import getConfig from "next/config";
 
 export default function Transactions(props) {
   const { tableOptions = {}, params = {} } = props;
@@ -21,17 +22,17 @@ export default function Transactions(props) {
 }
 
 const createQuery = params => ({ page, pageSize }) => {
-  const txCount = params.txMade || 1000;
   return new Promise(resolve => {
     params.page = page + 1;
     params.size = pageSize;
     fetch(`/tx`, params)
       .then(res => res.json())
-      .then(data => {
+      .then(resData => {
+        const { data = [], total = 0 } = resData;
         resolve({
-          data: data.data,
+          data: data,
           page: page,
-          totalCount: txCount || data.total
+          totalCount: total
         });
       })
       .catch(e => {
@@ -120,31 +121,58 @@ const createColumns = () => {
       field: "hash",
       title: "Info",
       sorting: false,
-      render: row => <TxValue {...row} className={classes.isHash} />
+      render: row => {
+        if (row.type == "GenNotationFunc") {
+          return <span>{row.value}</span>;
+        }
+        return (
+          <TxValue {...row.value} type={row.type} className={classes.isHash} />
+        );
+      }
     }
   ];
 };
 
 const TxValue = props => {
-  let { value, assetID, coin, className = "" } = props;
+  let { className = "", type } = props;
 
-  if (value && value.swapID) {
+  const { publicRuntimeConfig } = getConfig();
+  const apiServer = publicRuntimeConfig.API_PATH;
+
+  if (props.swapID) {
     return (
       <span>
-        <NavLink href={`/swap/${value.swapID}`}>
-          <i className={className}>{value.swapID}</i>
-        </NavLink>
+        <a href={`${apiServer}swap/${props.swapID}`} target={"_blank"}>
+          <i className={className}>{props.swapID}</i>
+        </a>
       </span>
     );
   }
+
+  if (type == "GenAssetFunc") {
+    return (
+      <span>
+        Issue {props.value}{" "}
+        <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
+      </span>
+    );
+  }
+
+  if (type == "AssetValueChangeFunc") {
+    return (
+      <span>
+        {props.isInc ? "Issue" : "Destory"} {props.value}{" "}
+        <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
+      </span>
+    );
+  }
+
   return (
     <>
-      {value ? <span>{(+value).toFixed(0)}</span> : null}
-      {assetID ? (
-        <NavLink href={`/asset/${assetID}`}>{"  " + coin}</NavLink>
-      ) : (
-        <span>{coin}</span>
-      )}
+      <span>
+        {props.value.toFixed(1)}{" "}
+        <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
+      </span>
     </>
   );
 };
