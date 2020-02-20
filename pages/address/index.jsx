@@ -5,6 +5,7 @@ import Panel from "../../src/components/Panel";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 import TimeAgo from '../../src/components/TimeAgo';
+import addressMap from '../../src/constants/addressMap'
 
 export default function AddressListPage() {
   return (
@@ -64,23 +65,21 @@ const columns = [
     )
   },
   {
-    field: "san",
-    title: "SAN",
-    sorting: false
+    field: "address",
+    title: "Label",
+    sorting: false,
+    render: row => (<strong>{addressMap[row.address]}</strong>)
   },
   {
     filed: "fsnBalance",
-    title: "FSN Balance",
+    title: "Fsn Balance",
     render: row => <span>{row.fsnBalance.toFixed(2)}</span>
   },
   {
     field: "address",
     title: "Txs",
     sorting: false,
-    render: row => {
-      const txCount = row.txMade + row.txReceived;
-      return <span>{txCount}</span>
-    }
+    render: row => <span>{row.txMade + row.txReceived}</span>
   },
   {
     field: 'latestActiveTime',
