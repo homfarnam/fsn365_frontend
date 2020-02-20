@@ -36,7 +36,7 @@ export default function AddressTxs(props) {
       <div className={cssClasses.hint}>
         <p>
           <strong>Notice:</strong>We only provide{" "}
-          <strong>non-ticket transactions</strong> for an address!
+          <strong>10k non-ticket transactions</strong> at most for an address!
         </p>
         <FormControl>
           <Select value={direction} onChange={handelChange}>
