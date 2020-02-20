@@ -46,6 +46,16 @@ export default function AddressOverview({ overview = {} }) {
           className={classes.field}
         />
       ) : null}
+      {overview.assetHeld ? (
+        <KeyValue label="Assets Held" className={classes.field}>
+          {overview.assetHeld}
+        </KeyValue>
+      ) : null}
+      {overview.tlAssetHeld ? (
+        <KeyValue label="TimeLocked Assets Held" className={classes.field}>
+          {overview.tlAssetHeld}
+        </KeyValue>
+      ) : null}
       <KeyValue label="fsn balance" className={classes.field}>
         {overview.fsnBalance === undefined
           ? null
