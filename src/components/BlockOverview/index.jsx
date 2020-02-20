@@ -48,7 +48,8 @@ export default function BlockOverview(props) {
       <KeyValue label="Transactions" className={classes.field}>
         {block.txCount ? (
           <a
-            href={`${apiServer}/tx?block=${block.height}&size=${block.txCount}`}
+            href={`${apiServer}tx?block=${block.height}&size=${block.txCount}`}
+            target={"_blank"}
           >
             {block.txCount}
           </a>
