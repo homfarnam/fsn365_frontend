@@ -5,36 +5,66 @@ import NavLink from "../NavLink";
 import KeyValue from "../KeyValue";
 import FusionAddressLink from "../FusionAddressLink";
 import Duration from "../Duration";
+import getConfig from "next/config";
 
 export default function TxOverview(props) {
   const { tx } = props;
+  const valuedData = tx.value;
+  const { publicRuntimeConfig } = getConfig();
+  const apiServer = publicRuntimeConfig.API_PATH;
   return (
     <div className="tx-overview">
-      <KeyValue label="hash" value={tx.hash} />
-      {tx.assetID ? (
+      <KeyValue label="hash">
+        <a href={`${apiServer}tx/${tx.hash}/detail`} target={"_blank"}>
+          {tx.hash}
+        </a>
+      </KeyValue>
+      {valuedData.lockType ? (
+        <KeyValue label={"Lock Type"}>{valuedData.lockType}</KeyValue>
+      ) : null}
+      {valuedData.assetID ? (
         <KeyValue label="Value">
-          {tx.value ? (+tx.value).toFixed(0) : ""}{" "}
-          {tx.assetID ? (
-            <NavLink href={`/asset/${tx.assetID}`}>{tx.coin}</NavLink>
+          {valuedData.value ? (+valuedData.value).toFixed(0) : ""}{" "}
+          {valuedData.assetID ? (
+            <NavLink href={`/asset/${valuedData.assetID}`}>
+              {valuedData.coin}
+            </NavLink>
           ) : (
-            <span>{tx.coin}</span>
+            <span>{valudData.coin}</span>
           )}
         </KeyValue>
       ) : null}
-      {tx.startTime ? (
+      {valuedData.startTime ? (
         <KeyValue label="Duration">
-          <Duration startTime={tx.startTime} endTime={tx.endTime} />
+          <Duration
+            startTime={valuedData.startTime}
+            endTime={valuedData.endTime}
+          />
         </KeyValue>
       ) : null}
       {tx.type == "GenAssetFunc" ? (
         <KeyValue label="Generated Asset">
-          <NavLink href={`/asset/${tx.assetID}`}>{tx.coin}</NavLink>
+          <NavLink href={`/asset/${valuedData.assetID}`}>
+            {valuedData.coin}
+          </NavLink>
         </KeyValue>
       ) : null}
       {tx.type == "GenNotationFunc" ? (
         <KeyValue label="Notation">{tx.value}</KeyValue>
       ) : null}
-      <KeyValue label="status">
+      {valuedData.swapID ? (
+        <KeyValue label={"Swap ID"}>
+          <a href={`${apiServer}swap/${valuedData.swapID}`} target={"_blank"}>
+            {valuedData.swapID}
+          </a>
+        </KeyValue>
+      ) : null}
+      {valuedData.finished !== undefined ? (
+        <KeyValue label={"Swap Status"}>
+          {valuedData.finished ? "Finished" : "Active"}
+        </KeyValue>
+      ) : null}
+      <KeyValue label="Tx Status">
         <Box component="strong" color="success.main">
           Success
         </Box>
