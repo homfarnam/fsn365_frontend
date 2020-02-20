@@ -7,43 +7,25 @@ import FusionTabPanels, {
 import Panel from "../../src/components/Panel";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
-import dynamic from "next/dynamic";
 import AddressTxs from "../../src/components/AddressTxs";
-import NotFound from '../../src/components/NotFound';
-
-const DynamicAssets = dynamic(
-  () => import("../../src/components/AddressAssets"),
-  {
-    loading: () => <p>Loading...</p>,
-    ssr: false
-  }
-);
-
-const DynamicLockedAssets = dynamic(
-  () => import("../../src/components/AddressLockedAssets"),
-  {
-    loading: () => <p>Loading...</p>,
-    ssr: false
-  }
-);
-
-const DynamicOverview = dynamic(() =>
-  import("../../src/components/AddressOverview")
-);
+import NotFound from "../../src/components/NotFound";
+import AddressAssets from "../../src/components/AddressAssets";
+import AddressTimeLockedAssets from "../../src/components/AddressLockedAssets";
+import AddressOverview from "../../src/components/AddressOverview";
 
 export default function AddressDetailPage(props) {
-  const { address, tab, overview = {}} = props;
-  if(!overview.address) {
+  const { address, tab, overview = {} } = props;
+
+  if (!overview.address) {
     return (
       <>
         <PageHeading title="Address Detail" />
-        <Panel style={{textAlign: 'center', padding: '10vh 0'}}>
+        <Panel style={{ textAlign: "center", padding: "10vh 0" }}>
           <NotFound />
         </Panel>
       </>
-    )
-  };
-
+    );
+  }
 
   const [state, setState] = useState({
     tab: tabMap[tab] || 0,
@@ -72,17 +54,14 @@ export default function AddressDetailPage(props) {
   const hasAssets = overview.assetHeld;
   const hasTlAssets = overview.tlAssetHeld;
   const publicAddress = overview.address;
-
-  const { tlAssets, assets } = state;
-
   return (
     <>
       <PageHeading title="Address Detail" />
-      {/* address overview  */}
+
       <Panel title="Overview" style={{ marginBottom: "1.75rem" }}>
-        <DynamicOverview overview={overview} />
+        <AddressOverview overview={overview} />
       </Panel>
-      {/* address assets, mining, transactions */}
+
       <Panel>
         <FusionTabs value={state.tab} onChange={handleTabChange}>
           <FusionTab label="Transactions" />
@@ -105,12 +84,12 @@ export default function AddressDetailPage(props) {
           </FusionTabPanel>
           {hasAssets ? (
             <FusionTabPanel value={state.tab} index={1}>
-              <DynamicAssets assets={state.assets} />
+              <AddressAssets assets={state.assets} />
             </FusionTabPanel>
           ) : null}
           {hasTlAssets ? (
             <FusionTabPanel value={state.tab} index={2}>
-              <DynamicLockedAssets assets={tlAssets} />
+              <AddressTimeLockedAssets assets={state.tlAssets} />
             </FusionTabPanel>
           ) : null}
         </FusionTabPanels>
@@ -121,13 +100,16 @@ export default function AddressDetailPage(props) {
 
 AddressDetailPage.getInitialProps = async ({ query }) => {
   const address = query.address;
-
+  const pubReg = /^[0-9a-zA-Z]{42}$/;
+  const sanReg = /^[1-9]{1}[0-9]{2,}$/;
+  if (!pubReg.test(query.address) && !sanReg.test(query.address)) {
+    return {};
+  }
   const overview = await fetch(`/address/${address}`)
-      .then(res => res.json())
-      .then(res => res.data)
-      .catch(e => ({
-      }));
-  
+    .then(res => res.json())
+    .then(res => res.data)
+    .catch(e => ({}));
+
   return { address: query.address, overview };
 };
 
