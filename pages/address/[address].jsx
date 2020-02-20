@@ -8,14 +8,7 @@ import Panel from "../../src/components/Panel";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 import dynamic from "next/dynamic";
-
-const DynamicTransactions = dynamic(
-  () => import("../../src/components/AddressTxs"),
-  {
-    loading: () => <p>Loading...</p>,
-    ssr: false
-  }
-);
+import AddressTxs from "../../src/components/AddressTxs";
 
 const DynamicAssets = dynamic(
   () => import("../../src/components/AddressAssets"),
@@ -42,7 +35,7 @@ export default function AddressDetailPage(props) {
   const [state, setState] = useState({
     tab: tabMap[tab] || 0,
     assets: [],
-    locked: []
+    tlAssets: []
   });
   const handleTabChange = (e, newValue) => {
     setState({
@@ -53,32 +46,36 @@ export default function AddressDetailPage(props) {
   useEffect(() => {
     Promise.all([fetchAddressLockedAssets(address), fetchAdressAssets(address)])
       .then(data => {
-        const [locked, assets] = data;
+        const [tlAssets, assets] = data;
         setState({
           ...state,
           assets,
-          locked
+          tlAssets
         });
       })
       .catch(e => {});
   }, [address]);
-
-  const [overview, setOverview] = useState({txMade:0});
+  
+  const [overview, setOverview] = useState({
+    address: /^[0-9a-zA-Z]{42}$/.test(address) ? address: ''
+  });
   useEffect(() => {
     fetch(`/address/${address}`)
       .then(res => res.json())
       .then(res => {
-        setOverview(res.data)
-      }).catch(e =>{});
+        setOverview(res.data || {});
+      })
+      .catch(e => {});
     return () => {
-      true
+      true;
     };
-  }, [address])
+  }, [address]);
 
+  const hasAssets = overview.assetHeld;
+  const hasTlAssets = overview.tlAssetHeld;
+  const publicAddress = overview.address;
 
-  const { assets, locked } = state;
-  const hasAssets = assets.length;
-  const hasLockedAssets = locked.length;
+  const { tlAssets, assets } = state;
 
   return (
     <>
@@ -92,27 +89,28 @@ export default function AddressDetailPage(props) {
         <FusionTabs value={state.tab} onChange={handleTabChange}>
           <FusionTab label="Transactions" />
           {hasAssets ? <FusionTab label="Assets"></FusionTab> : null}
-          {hasLockedAssets ? <FusionTab label="TimeLocked"></FusionTab> : null}
+          {hasTlAssets ? <FusionTab label="TimeLocked"></FusionTab> : null}
         </FusionTabs>
         <FusionTabPanels>
           <FusionTabPanel value={state.tab} index={0}>
-            <DynamicTransactions
-              tableOptions={{
-                pageSizeOptions: [5, 10],
-                pageSize: 5
-              }}
-              address={address}
-              txMade={overview.txMade}
-            />
+            {publicAddress ? (
+              <AddressTxs
+                tableOptions={{
+                  pageSizeOptions: [5, 10],
+                  pageSize: 5
+                }}
+                address={publicAddress}
+              />
+            ) : <>Loading...</>}
           </FusionTabPanel>
           {hasAssets ? (
             <FusionTabPanel value={state.tab} index={1}>
               <DynamicAssets assets={state.assets} />
             </FusionTabPanel>
           ) : null}
-          {hasLockedAssets ? (
+          {hasTlAssets ? (
             <FusionTabPanel value={state.tab} index={2}>
-              <DynamicLockedAssets assets={locked} />
+              <DynamicLockedAssets assets={tlAssets} />
             </FusionTabPanel>
           ) : null}
         </FusionTabPanels>
