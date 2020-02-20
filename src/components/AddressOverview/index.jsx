@@ -36,7 +36,7 @@ export default function AddressOverview({ overview = {} }) {
       />
       {addressLabel ? (
         <KeyValue label="Label" className={classes.field}>
-          {addressLabel}
+          <strong>{addressLabel}</strong>
         </KeyValue>
       ) : null}
       {overview.san ? (
@@ -59,7 +59,7 @@ export default function AddressOverview({ overview = {} }) {
         />
       ) : null}
       <KeyValue label="total transactions" className={classes.field}>
-        {overview.txCount} txs in total
+        {overview.txMade + overview.txReceived} txs in total
       </KeyValue>
     </div>
   );
