@@ -1,5 +1,4 @@
 import React from "react";
-import Box from "@material-ui/core/Box";
 import FusionTable from "../FusionTable";
 import NavLink from "../NavLink";
 import TimeAgo from "../TimeAgo";
@@ -21,17 +20,7 @@ const columns = [
     sorting: false,
     render: row => (
       <NavLink href={`/asset/${row.assetId}`}>
-        {row.symbol}({row.name},
-        {row.verified ? (
-          <Box color="success.main" component="strong">
-            Verified{" "}
-          </Box>
-        ) : (
-          <Box color="error.main" component="strong">
-            Unverfieid{" "}
-          </Box>
-        )}
-        )
+        {row.symbol}({row.name})
       </NavLink>
     )
   },
