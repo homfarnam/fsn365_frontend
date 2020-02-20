@@ -9,7 +9,7 @@ import getConfig from "next/config";
 
 export default function TxOverview(props) {
   const { tx } = props;
-  const valuedData = tx.value;
+  const valueData = tx.value;
   const { publicRuntimeConfig } = getConfig();
   const apiServer = publicRuntimeConfig.API_PATH;
   return (
@@ -19,49 +19,59 @@ export default function TxOverview(props) {
           {tx.hash}
         </a>
       </KeyValue>
-      {valuedData.lockType ? (
-        <KeyValue label={"Lock Type"}>{valuedData.lockType}</KeyValue>
+      {valueData.lockType ? (
+        <KeyValue label={"Lock Type"}>{valueData.lockType}</KeyValue>
       ) : null}
-      {valuedData.assetID ? (
+      {valueData.assetID ? (
         <KeyValue label="Value">
-          {valuedData.value ? (+valuedData.value).toFixed(0) : ""}{" "}
-          {valuedData.assetID ? (
-            <NavLink href={`/asset/${valuedData.assetID}`}>
-              {valuedData.coin}
+          {valueData.value ? (+valueData.value).toFixed(0) : ""}{" "}
+          {valueData.assetID ? (
+            <NavLink href={`/asset/${valueData.assetID}`}>
+              {valueData.coin}
             </NavLink>
           ) : (
             <span>{valudData.coin}</span>
           )}
         </KeyValue>
       ) : null}
-      {valuedData.startTime ? (
+      {valueData.miner ? (
+        <KeyValue label={"Miner"}>
+          <NavLink href={`/staking/${valueData.miner}`}>
+            {valueData.miner}
+          </NavLink>
+        </KeyValue>
+      ) : null}
+      {valueData.ticket ? (
+        <KeyValue label={"Ticket ID"}>{valueData.ticket}</KeyValue>
+      ) : null}
+      {valueData.startTime ? (
         <KeyValue label="Duration">
           <Duration
-            startTime={valuedData.startTime}
-            endTime={valuedData.endTime}
+            startTime={valueData.startTime}
+            endTime={valueData.endTime}
           />
         </KeyValue>
       ) : null}
       {tx.type == "GenAssetFunc" ? (
         <KeyValue label="Generated Asset">
-          <NavLink href={`/asset/${valuedData.assetID}`}>
-            {valuedData.coin}
+          <NavLink href={`/asset/${valueData.assetID}`}>
+            {valueData.coin}
           </NavLink>
         </KeyValue>
       ) : null}
       {tx.type == "GenNotationFunc" ? (
         <KeyValue label="Notation">{tx.value}</KeyValue>
       ) : null}
-      {valuedData.swapID ? (
+      {valueData.swapID ? (
         <KeyValue label={"Swap ID"}>
-          <a href={`${apiServer}swap/${valuedData.swapID}`} target={"_blank"}>
-            {valuedData.swapID}
+          <a href={`${apiServer}swap/${valueData.swapID}`} target={"_blank"}>
+            {valueData.swapID}
           </a>
         </KeyValue>
       ) : null}
-      {valuedData.finished !== undefined ? (
+      {valueData.finished !== undefined ? (
         <KeyValue label={"Swap Status"}>
-          {valuedData.finished ? "Finished" : "Active"}
+          {valueData.finished ? "Finished" : "Active"}
         </KeyValue>
       ) : null}
       <KeyValue label="Tx Status">
@@ -72,9 +82,11 @@ export default function TxOverview(props) {
       <KeyValue label="Block">
         <NavLink href={`/block/${tx.block}`}>{tx.block}</NavLink>
       </KeyValue>
-      <KeyValue label="from">
-        <FusionAddressLink address={tx.from} />
-      </KeyValue>
+      {!valueData.miner ? (
+        <KeyValue label="from">
+          <FusionAddressLink address={tx.from} />
+        </KeyValue>
+      ) : null}
       <KeyValue label="to">
         <FusionAddressLink address={tx.to} />
       </KeyValue>
