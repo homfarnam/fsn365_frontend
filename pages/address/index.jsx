@@ -23,6 +23,8 @@ export default function AddressListPage() {
 }
 const fetchData = query =>
   new Promise(resolve => {
+    const orderBy = query.orderBy;
+    const sort = orderBy && orderBy.field == 'latestActiveTime' ? 'time': 'fsnBalance';
     const {
       page = 1,
       pageSize = 10,
@@ -32,7 +34,7 @@ const fetchData = query =>
       page: page + 1,
       size: pageSize,
       order: orderDirection || "desc",
-      sort: "fsnBalance"
+      sort
     };
     fetch(`/address`, params)
       .then(res => res.json())
@@ -69,18 +71,21 @@ const columns = [
   {
     filed: "fsnBalance",
     title: "FSN Balance",
-    render: row => <span>{row.fsnBalance}</span>
+    render: row => <span>{row.fsnBalance.toFixed(2)}</span>
   },
   {
-    field: "transactions",
-    title: "Transactions",
+    field: "address",
+    title: "Txs",
     sorting: false,
-    render: row => <span>{row.txCount}</span>
+    render: row => {
+      const txCount = row.txMade + row.txReceived;
+      return <span>{txCount}</span>
+    }
   },
   {
     field: 'latestActiveTime',
     title: 'Latest Active Time',
-    sorting: false,
+    sorting: true,
     render: row => <TimeAgo time={row.latestActiveTime * 1000}  />
   }
 ];
