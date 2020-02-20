@@ -42,7 +42,7 @@ export default function MinersBuyingTickets(props) {
       <p className={cssClasses.hint}>
         <small>
           <strong>Notice: </strong> we only provide latest 1000 BuyTicketFunc
-          transactions for miners.
+          txs for miner.
         </small>
       </p>
     </div>
