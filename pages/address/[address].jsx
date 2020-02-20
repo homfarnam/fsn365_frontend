@@ -9,6 +9,7 @@ import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 import dynamic from "next/dynamic";
 import AddressTxs from "../../src/components/AddressTxs";
+import NotFound from '../../src/components/NotFound';
 
 const DynamicAssets = dynamic(
   () => import("../../src/components/AddressAssets"),
@@ -31,7 +32,19 @@ const DynamicOverview = dynamic(() =>
 );
 
 export default function AddressDetailPage(props) {
-  const { address, tab } = props;
+  const { address, tab, overview = {}} = props;
+  if(!overview.address) {
+    return (
+      <>
+        <PageHeading title="Address Detail" />
+        <Panel style={{textAlign: 'center', padding: '10vh 0'}}>
+          <NotFound />
+        </Panel>
+      </>
+    )
+  };
+
+
   const [state, setState] = useState({
     tab: tabMap[tab] || 0,
     assets: [],
@@ -54,21 +67,6 @@ export default function AddressDetailPage(props) {
         });
       })
       .catch(e => {});
-  }, [address]);
-  
-  const [overview, setOverview] = useState({
-    address: /^[0-9a-zA-Z]{42}$/.test(address) ? address: ''
-  });
-  useEffect(() => {
-    fetch(`/address/${address}`)
-      .then(res => res.json())
-      .then(res => {
-        setOverview(res.data || {});
-      })
-      .catch(e => {});
-    return () => {
-      true;
-    };
   }, [address]);
 
   const hasAssets = overview.assetHeld;
@@ -101,7 +99,9 @@ export default function AddressDetailPage(props) {
                 }}
                 address={publicAddress}
               />
-            ) : <>Loading...</>}
+            ) : (
+              <>Loading...</>
+            )}
           </FusionTabPanel>
           {hasAssets ? (
             <FusionTabPanel value={state.tab} index={1}>
@@ -120,7 +120,15 @@ export default function AddressDetailPage(props) {
 }
 
 AddressDetailPage.getInitialProps = async ({ query }) => {
-  return { address: query.address };
+  const address = query.address;
+
+  const overview = await fetch(`/address/${address}`)
+      .then(res => res.json())
+      .then(res => res.data)
+      .catch(e => ({
+      }));
+  
+  return { address: query.address, overview };
 };
 
 const tabMap = {
