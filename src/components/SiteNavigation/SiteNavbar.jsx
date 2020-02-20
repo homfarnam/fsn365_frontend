@@ -7,6 +7,8 @@ import useStyles from "./useStyles";
 import Typography from "@material-ui/core/Typography";
 import { Hidden } from "@material-ui/core";
 import SearchForm from "../SearchForm";
+import MenuIcon from "@material-ui/icons/Menu";
+import CloseIcon from "@material-ui/icons/Close";
 
 export default function SiteNavItems(props) {
   const { container, route = "/" } = props;
@@ -20,7 +22,7 @@ export default function SiteNavItems(props) {
   return (
     <>
       <Button className={classes.menuButton} onClick={handleDrawerToggle}>
-        Toggle
+        <MenuIcon></MenuIcon>
       </Button>
       <div className={classes.navBar}>
         {route !== "/" ? <SearchForm place={"others"} /> : null}
@@ -47,6 +49,9 @@ export default function SiteNavItems(props) {
             className={classes.drawerTitle}
           >
             Explorer
+            <Button onClick={handleDrawerToggle}>
+              <CloseIcon></CloseIcon>
+            </Button>
           </Typography>
           <Divider />
           <Nav className={classes.drawerNav} />

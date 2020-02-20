@@ -46,7 +46,10 @@ export default makeStyles(({ palette, breakpoints }) =>
     drawerTitle: {
       padding: ".625rem 1rem",
       color: "#fff",
-      boxShadow: "0 1px 10px rgba(151,164,175,.1)"
+      boxShadow: "0 1px 10px rgba(151,164,175,.1)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-around"
     },
     navItem: {
       color: "#6c757e",
