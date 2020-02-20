@@ -17,20 +17,7 @@ const columns = [
     field: "name",
     title: "Asset Name",
     sorting: false,
-    render: row => (
-      <NavLink href={`/asset/${row.id}`}>
-        {row.symbol}
-        {row.verified ? (
-          <Box component="span" color="success.main">
-            (Verified)
-          </Box>
-        ) : (
-          <Box component="span" color="error.main">
-            (Unverified)
-          </Box>
-        )}
-      </NavLink>
-    )
+    render: row => <NavLink href={`/asset/${row.assetID}`}>{row.name}</NavLink>
   },
   {
     field: "symbol",
@@ -39,11 +26,11 @@ const columns = [
     render: row => <span className="asset-symbol">{row.symbol}</span>
   },
   {
-    field: "quantity",
+    field: "value",
     title: "Quantity",
     sorting: false,
     render: row => (
-      <span className="asset-quantity">{row.quantity.toFixed(2)}</span>
+      <span className="asset-quantity">{row.value.toFixed(2)}</span>
     )
   }
 ];
