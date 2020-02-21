@@ -8,6 +8,7 @@ import options from "./options";
 import { Button } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import fetch from "../../libs/fetch";
+import Router from "next/router";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -85,7 +86,7 @@ const useStyles = makeStyles(({ breakpoints }) =>
   })
 );
 export default function SearchBar(props) {
-  const { place = "home" } = props;
+  const { place = "home", className = " " } = props;
   const size = place === "home" ? "medium" : "small";
   const [searchType, setSearchType] = useState(options[0].type);
   const handelSearchType = e => {
@@ -102,7 +103,7 @@ export default function SearchBar(props) {
 
   const cssClasses = useStyles();
   return (
-    <form className={cssClasses.form} onSubmit={handelSubmit}>
+    <form className={cssClasses.form + ` ${className}`} onSubmit={handelSubmit}>
       <FormControl className={cssClasses.searchForm}>
         <Select
           value={searchType}
@@ -151,13 +152,22 @@ async function doSearch(type, keyword) {
     type,
     keyword
   };
-  console.log(params);
 
-  return fetch("/search", params)
+  const resData = await fetch("/search", params)
     .then(res => res.json())
     .then(res => res.data)
     .catch(e => {
-      console.log(e);
-      return null;
+      return {
+        type: type,
+        result: ""
+      };
     });
+
+  const searchType = resData.type;
+  const searchResult = resData.result;
+
+  if (!searchResult) {
+    Router.push(`/search?keyword=${keyword}`);
+  }
+  window.location = `/${searchType}/${searchResult}`;
 }
