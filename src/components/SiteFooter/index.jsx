@@ -5,8 +5,9 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import FreeBreakfastIcon from "@material-ui/icons/FreeBreakfast";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import NavLink from "../NavLink";
+import OutLink from "../OutLink";
 
-const useStyles = makeStyles(({ palette, breakpoints }) =>
+const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
     container: {
       display: "flex",
@@ -29,16 +30,20 @@ const useStyles = makeStyles(({ palette, breakpoints }) =>
       color: "#6F4E37"
     },
     outlink: {
-      color: "#4a4f55",
-      textDecoration: "none"
+      color: "#4a4f55"
     },
     strong: {
-      marginLeft: ".25rem"
+      margin: "0 .25rem"
     },
     flexItem: {
-      [breakpoints.down("sm")]: {
+      marginBottom: "1rem",
+      width: "100%",
+      [breakpoints.up("sm")]: {
         marginBottom: "1rem",
         width: "50%"
+      },
+      [breakpoints.up("lg")]: {
+        width: "33.33%"
       }
     }
   })
@@ -51,32 +56,24 @@ export default function SiteFooter() {
       <div className={style.flexItem}>
         <Typography>
           Powered by{" "}
-          <a
-            href="https://www.fusion.org/"
-            target={"_blank"}
-            className={style.outlink}
-          >
+          <OutLink href="https://www.fusion.org/" className={style.outlink}>
             <strong className={style.strong}>Fusion Network</strong>
-          </a>{" "}
+          </OutLink>
           and
-          <a
-            href={"https://github.com/fsn-dev"}
-            target={"_blank"}
-            className={style.outlink}
-          >
-            <strong className={style.strong}>FOSC</strong>.
-          </a>
+          <OutLink href="https://github.com/fsn-dev" className={style.outlink}>
+            <strong className={style.strong}>FOSC</strong>
+          </OutLink>
+          .
         </Typography>
         <small>
-          We'd like to show our repsect and thanks to FOSC tech lead
+          We'd like to show our respect and thanks to FOSC tech lead
           <br></br>{" "}
-          <a
+          <OutLink
             href="https://github.com/zhaojun-sh"
-            target={"_blank"}
             className={style.outlink}
           >
-            <strong className={style.strong}>zhaojun</strong>{" "}
-          </a>{" "}
+            <strong className={style.strong}>zhaojun</strong>
+          </OutLink>{" "}
           and the project supporter <strong>XiaoKeAi</strong>.
         </small>
       </div>
@@ -86,14 +83,19 @@ export default function SiteFooter() {
         </Typography>
         <small>
           All suggestions are welcomed. Please click{" "}
-          <a
-            href="https://t.me/yocnkc"
-            target={"_blank"}
+          <OutLink href="https://t.me/yocnkc" className={style.outlink}>
+            <strong className={style.strong}>here</strong>.
+          </OutLink>
+        </small>
+        <br></br>
+        <small>
+          Wanna view project progress? Please click{" "}
+          <OutLink
+            href="https://trello.com/b/juRQ9fgM/fusion-block-browser"
             className={style.outlink}
           >
-            {" "}
-            <strong className={style.strong}>here</strong>.
-          </a>{" "}
+            <strong>here</strong>.
+          </OutLink>
         </small>
       </div>
       <div className={style.flexItem}>
