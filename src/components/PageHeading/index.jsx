@@ -22,7 +22,7 @@ export default function PageHeading(props) {
   return (
     <>
       <Head>
-        <title>{docTitle} | Fsn Explorer</title>
+        <title>{docTitle} | FSN365 Fusion BlockChain Explorer</title>
       </Head>
       <Typography variant="h6" component="h6" className={classes.heading}>
         {title}
