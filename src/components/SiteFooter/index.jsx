@@ -33,10 +33,10 @@ const useStyles = makeStyles(({ breakpoints }) =>
       color: "#4a4f55"
     },
     strong: {
-      margin: "0 .25rem"
+      margin: "0 .15rem"
     },
     flexItem: {
-      marginBottom: "1rem",
+      marginBottom: "2rem",
       width: "100%",
       [breakpoints.up("sm")]: {
         marginBottom: "1rem",
@@ -66,7 +66,7 @@ export default function SiteFooter() {
           .
         </Typography>
         <small>
-          We'd like to show our respect and thanks to FOSC tech lead
+          We'd like to show our thanks to FOSC tech lead
           <br></br>{" "}
           <OutLink
             href="https://github.com/zhaojun-sh"
