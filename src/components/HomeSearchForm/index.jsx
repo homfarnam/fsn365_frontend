@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import Typography from "@material-ui/core/Typography";
-import Router from "next/router";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import SearchForm from "../SearchForm";
 
-const useStyles = makeStyles(({ breakpoints }) =>
+const useStyles = makeStyles(() =>
   createStyles({
     container: {
       backgroundImage: "linear-gradient(150deg,#19a0ff,#2d1582)",
       backgroundRepeat: "repeat-x",
       padding: "1rem",
-      borderRadius: "4px"
+      borderRadius: "4px",
+      boxShadow: "0 0.5rem 1.2rem rgba(189,197,209,.2)"
     },
     title: {
       color: "#fff",
