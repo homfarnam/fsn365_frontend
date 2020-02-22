@@ -2,6 +2,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import TextStrong from "../TextStrong";
 
 const useStyles = makeStyles(({ palette }) =>
   createStyles({
@@ -13,10 +14,9 @@ const useStyles = makeStyles(({ palette }) =>
     },
     title: {
       marginBottom: "1rem",
-      "& span": {
+      "& strong": {
         display: "inline-block",
-        borderBottom: `1px solid ${palette.border.main}`,
-        fontWeight: "bold"
+        borderBottom: `1px solid ${palette.border.main}`
       }
     }
   })
@@ -30,7 +30,7 @@ export default function Panel(props) {
       {/* panel title */}
       {title ? (
         <Typography component="h6" className={classes.title}>
-          <span>{title}</span>
+          <TextStrong>{title}</TextStrong>
         </Typography>
       ) : null}
       {children}

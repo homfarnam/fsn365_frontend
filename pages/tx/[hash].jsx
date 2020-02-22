@@ -5,15 +5,14 @@ import {
   FusionTabs,
   FusionTabPanel
 } from "../../src/components/FusionTabs";
-import TxLog from "../../src/components/TxLog";
 import FusionTabPanels from "../../src/components/FusionTabs/FusionTabPanels";
 import TxOverview from "../../src/components/TxOverview";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
+import TextStrong from '../../src/components/TextStrong';
 
 export default function TransactionPage(props) {
   const { tx = {}, hash } = props;
-  const txLog = (tx && tx.log) || {};
   const [state, setState] = useState({
     tab: 0
   });
@@ -25,7 +24,6 @@ export default function TransactionPage(props) {
     });
   };
 
-  const txHasLog = Object.keys(txLog).length;
   const suffix =
     tx.type === "Buy Ticket"
       ? `#${tx.type}`
@@ -36,7 +34,7 @@ export default function TransactionPage(props) {
       <>
       <PageHeading title={'Bad Tx'} />
       <Panel>
-        The hash: <strong><em>{hash}</em></strong> is invalid.
+        The hash: <TextStrong><em>{hash}</em></TextStrong> is invalid.
         Please check!
       </Panel>
       </>
@@ -48,17 +46,11 @@ export default function TransactionPage(props) {
       <Panel>
         <FusionTabs value={state.tab} onChange={handleTabChange}>
           <FusionTab label="Tx Overview" />
-          {txHasLog ? <FusionTab label="Tx Log" /> : null}
         </FusionTabs>
         <FusionTabPanels>
           <FusionTabPanel value={state.tab} index={0}>
             <TxOverview tx={tx} />
           </FusionTabPanel>
-          {txHasLog ? (
-            <FusionTabPanel value={state.tab} index={1}>
-              <TxLog log={txLog} />
-            </FusionTabPanel>
-          ) : null}
         </FusionTabPanels>
       </Panel>
     </>

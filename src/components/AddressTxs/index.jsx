@@ -5,6 +5,7 @@ import Select from "@material-ui/core/Select";
 import Router from "next/router";
 import Transactions from "../Transactions";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import TextStrong from "../TextStrong";
 
 const useStyles = makeStyles(({ palette }) =>
   createStyles({
@@ -35,19 +36,20 @@ export default function AddressTxs(props) {
     <>
       <div className={cssClasses.hint}>
         <p>
-          <strong>Notice:</strong>We only provide{" "}
-          <strong>10k non-ticket transactions</strong> at most for an address!
+          <TextStrong>Notice:</TextStrong>We only provide{" "}
+          <TextStrong>10k non-ticket transactions</TextStrong> at most for an
+          address!
         </p>
         <FormControl>
           <Select value={direction} onChange={handelChange}>
             <MenuItem value={"from"}>
               <small>
-                <strong>Outgoing Txns</strong>
+                <TextStrong>Outgoing Txns</TextStrong>
               </small>
             </MenuItem>
             <MenuItem value={"to"}>
               <small>
-                <strong>Incoming Txns</strong>
+                <TextStrong>Incoming Txns</TextStrong>
               </small>
             </MenuItem>
           </Select>
@@ -58,7 +60,7 @@ export default function AddressTxs(props) {
           pageSizeOptions: [5, 10],
           pageSize: 5
         }}
-        params={{ [direction]: address, txMade }}
+        params={{ [direction]: address }}
       />
     </>
   );

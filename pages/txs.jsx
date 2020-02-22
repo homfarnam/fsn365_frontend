@@ -4,6 +4,7 @@ import Panel from "../src/components/Panel";
 import PageHeading from "../src/components/PageHeading";
 import FusionAddressLink from "../src/components/FusionAddressLink";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import TextStrong from '../src/components/TextStrong'
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -36,22 +37,22 @@ export default function TxListPage({ params }) {
       <Panel style={{ paddingTop: 0, paddingLeft: 0, paddingRight: 0 }}>
         {hasAddressFilter ? (
           <p className={classes.hint}>
-            <strong className={classes.strong}>Notice: </strong>We only provide
+            <TextStrong className={classes.strong}>Notice: </TextStrong>We only provide
             latest at most <prev className={classes.prev}></prev>
-            <strong className={classes.strong}>10k non-ticket txs </strong>{" "}
+            <TextStrong className={classes.strong}>10k non-ticket txs </TextStrong>{" "}
             <prev className={classes.prev}></prev>for an address.
           </p>
         ) : null}
         {from ? (
           <p className={classes.hint}>
-            <strong className={classes.strong}>Outgoing </strong>
+            <TextStrong className={classes.strong}>Outgoing </TextStrong>
             <span className={classes.span}>txs for</span>{" "}
             <FusionAddressLink address={from} />
           </p>
         ) : null}
         {to ? (
           <p className={classes.hint}>
-            <strong className={classes.strong}>Incoming </strong>
+            <TextStrong className={classes.strong}>Incoming </TextStrong>
             <span className={classes.span}>txs for</span>{" "}
             <FusionAddressLink address={to} />
           </p>
