@@ -50,7 +50,7 @@ export default makeStyles(({ palette, breakpoints }) =>
       boxShadow: "0 1px 10px rgba(151,164,175,.1)",
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-around"
+      justifyContent: "space-between"
     },
     navItem: {
       color: "#6c757e",
