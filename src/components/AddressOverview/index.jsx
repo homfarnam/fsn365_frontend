@@ -2,6 +2,8 @@ import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import KeyValue from "../KeyValue";
 import addressMap from "../../constants/addressMap";
+import TimeAgo from "../TimeAgo";
+import TextStrong from "../TextStrong";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -36,7 +38,7 @@ export default function AddressOverview({ overview = {} }) {
       />
       {addressLabel ? (
         <KeyValue label="Label" className={classes.field}>
-          <strong>{addressLabel}</strong>
+          <TextStrong>{addressLabel}</TextStrong>
         </KeyValue>
       ) : null}
       {overview.san ? (
@@ -61,16 +63,11 @@ export default function AddressOverview({ overview = {} }) {
           ? null
           : `${overview.fsnBalance} FSN`}
       </KeyValue>
-      {overview.rewards ? (
-        <KeyValue
-          label="rewards"
-          value={`${overview.rewards} FSN`}
-          className={classes.field}
-        />
+      {overview.latestActiveTime ? (
+        <KeyValue label="Latest Active Time" className={classes.field}>
+          <TimeAgo time={overview.latestActiveTime * 1000} />
+        </KeyValue>
       ) : null}
-      <KeyValue label="total transactions" className={classes.field}>
-        {overview.txMade + overview.txReceived} txs in total
-      </KeyValue>
     </div>
   );
 }

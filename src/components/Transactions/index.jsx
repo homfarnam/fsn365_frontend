@@ -6,6 +6,7 @@ import TimeAgo from "../TimeAgo";
 import FusionAddressLink from "../FusionAddressLink";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import getConfig from "next/config";
+import TextStrong from "../TextStrong";
 
 export default function Transactions(props) {
   const { tableOptions = {}, params = {} } = props;
@@ -121,13 +122,11 @@ const createColumns = () => {
       field: "type",
       title: "Tx Type",
       sorting: false,
-      render: row => {
-        if (row.type.indexOf("TimeLock") > -1) {
-          return "TimeLock";
-        } else {
-          return row.type.replace("Func", "").replace("Ext", "");
-        }
-      }
+      render: row => (
+        <TextStrong>
+          {row.type.replace("Func", "").replace("Ext", "")}
+        </TextStrong>
+      )
     },
     {
       field: "hash",
@@ -161,11 +160,22 @@ const TxValue = props => {
     );
   }
 
+  let value = props.value;
+  if (value > 1000000) {
+    value = (value / Math.pow(10, 6)).toFixed(2) + " M";
+  } else if (value >= 1000) {
+    value = (value / Math.pow(10, 3)).toFixed(2) + " k";
+  } else if (value >= 0.55) {
+    value = props.value.toFixed(2);
+  } else {
+    value = props.value.toFixed(4);
+  }
+
   if (type == "GenAssetFunc") {
     return (
       <span>
-        Issue {props.value}{" "}
-        <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
+        <TextStrong>Issue </TextStrong>
+        {value} <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
       </span>
     );
   }
@@ -173,8 +183,8 @@ const TxValue = props => {
   if (type == "AssetValueChangeFunc") {
     return (
       <span>
-        {props.isInc ? "Issue" : "Destory"} {props.value}{" "}
-        <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
+        <TextStrong>{props.isInc ? "Issue " : "Destory "}</TextStrong>
+        {value} <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
       </span>
     );
   }
@@ -182,8 +192,7 @@ const TxValue = props => {
   return (
     <>
       <span>
-        {props.value.toFixed(1)}{" "}
-        <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
+        {value} <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
       </span>
     </>
   );

@@ -5,6 +5,7 @@ import fetch from "isomorphic-unfetch";
 import siteFetch from "../../libs/fetch";
 import HrSpace from "../HrSpace";
 import Panel from "../Panel";
+import TextStrong from "../TextStrong";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -60,7 +61,7 @@ export default function FusionOverview() {
       <ul className={style.ul}>
         <li>
           <span>
-            <strong>Price</strong>
+            <TextStrong>Price</TextStrong>
             <br></br>${overview.priceData.price}(
             <Box
               component="small"
@@ -72,20 +73,20 @@ export default function FusionOverview() {
           </span>
           <HrSpace />
           <span>
-            <strong>MarketCap</strong>
+            <TextStrong>MarketCap</TextStrong>
             <br></br>${overview.priceData.mcap}
           </span>
           <HrSpace />
         </li>
         <li>
           <span>
-            <strong>Total Txs</strong>
+            <TextStrong>Total Txns</TextStrong>
             <br></br>
             {overview.stats.txs}
           </span>
           <HrSpace />
           <span>
-            <strong>Block Height</strong>
+            <TextStrong>Block Height</TextStrong>
             <br></br>
             {overview.stats.height}
           </span>
@@ -93,13 +94,13 @@ export default function FusionOverview() {
         </li>
         <li>
           <span>
-            <strong>Total swaps</strong>
+            <TextStrong>Total swaps</TextStrong>
             <br></br>
             {txSummary.swaps}
           </span>
           <HrSpace />
           <span>
-            <strong>Valid Txs</strong>
+            <TextStrong>Valid Txns</TextStrong>
             <br></br>
             {txSummary.txs}
           </span>
@@ -107,13 +108,13 @@ export default function FusionOverview() {
         </li>
         <li>
           <span>
-            <strong>Active Miners</strong>
+            <TextStrong>Active Miners</TextStrong>
             <br></br>
             {mining.totalMiners || "loading..."}
           </span>
           <HrSpace />
           <span>
-            <strong>Tickets</strong>
+            <TextStrong>Active Tickets</TextStrong>
             <br></br>
             {mining.totalTickets || "loading..."}
           </span>
