@@ -92,7 +92,8 @@ export default function TxOverview(props) {
       </KeyValue>
       <KeyValue label="Time">
         <span>
-          <TimeAgo time={tx.timestamp * 1000}></TimeAgo>
+          <TimeAgo time={tx.timestamp * 1000}></TimeAgo> (
+          {new Date(tx.timestamp * 1000).toUTCString()})
         </span>
       </KeyValue>
     </div>
