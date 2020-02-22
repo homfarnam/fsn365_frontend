@@ -1,18 +1,21 @@
 import React from "react";
 import FusionTable from "../../src/components/FusionTable";
-import NavLink from "../../src/components/NavLink";
 import Panel from "../../src/components/Panel";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
-import TimeAgo from '../../src/components/TimeAgo';
-import addressMap from '../../src/constants/addressMap'
+import FusionAddressLink from "../../src/components/FusionAddressLink";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 export default function AddressListPage() {
+  const columns = createColumns();
   return (
     <>
       <PageHeading title="Fusion Address" />
       <Panel>
-        <p><strong>Notice:</strong>We only list address that holds more than one FSN in wallet at this page.</p>
+        <p>
+          <strong>Notice:</strong>We only list address that holds more than one
+          FSN in wallet at this page.
+        </p>
         <FusionTable
           data={fetchData}
           columns={columns}
@@ -22,15 +25,13 @@ export default function AddressListPage() {
     </>
   );
 }
+
 const fetchData = query =>
   new Promise(resolve => {
     const orderBy = query.orderBy;
-    const sort = orderBy && orderBy.field == 'latestActiveTime' ? 'time': 'fsnBalance';
-    const {
-      page = 1,
-      pageSize = 10,
-      orderDirection = "desc"
-    } = query;
+    const sort =
+      orderBy && orderBy.field == "latestActiveTime" ? "time" : "fsnBalance";
+    const { page = 1, pageSize = 10, orderDirection = "desc" } = query;
     const params = {
       page: page + 1,
       size: pageSize,
@@ -54,37 +55,78 @@ const fetchData = query =>
         });
       });
   });
-
-const columns = [
-  {
-    field: "address",
-    title: "Address",
-    sorting: false,
-    render: row => (
-      <NavLink href={`/address/${row.address}`}>{row.address}</NavLink>
-    )
-  },
-  {
-    field: "address",
-    title: "Label",
-    sorting: false,
-    render: row => (<strong>{addressMap[row.address]}</strong>)
-  },
-  {
-    filed: "fsnBalance",
-    title: "Fsn Balance",
-    render: row => <span>{row.fsnBalance.toFixed(2)}</span>
-  },
-  {
-    field: "address",
-    title: "Txs",
-    sorting: false,
-    render: row => <span>{row.txMade + row.txReceived}</span>
-  },
-  {
-    field: 'latestActiveTime',
-    title: 'Latest Active Time',
-    sorting: true,
-    render: row => <TimeAgo time={row.latestActiveTime * 1000}  />
-  }
-];
+const useStyles = makeStyles(({ palette }) =>
+  createStyles({
+    isHash: {
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+      display: "inline-block",
+      maxWidth: "120px"
+    },
+    timestamp: {
+      minWidth: "120px",
+      display: "inline-block"
+    },
+    hint: {
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
+      justifyContent: "flex-end",
+      paddingRight: "1rem"
+    }
+  })
+);
+const createColumns = () => {
+  const style = useStyles();
+  return [
+    {
+      field: "address",
+      title: "Address",
+      sorting: false,
+      render: row => <FusionAddressLink address={row.address} />
+    },
+    {
+      filed: "fsnBalance",
+      title: "Fsn Balance",
+      render: row => {
+        let value = row.fsnBalance;
+        if (value > 1000000) {
+          value = (value / Math.pow(10, 6)).toFixed(2) + " M";
+        } else if (value > 1000) {
+          value = (value / Math.pow(10, 3)).toFixed(2) + " k";
+        } else {
+          value = row.fsnBalance.toFixed(2);
+        }
+        return <span>{value}</span>;
+      }
+    },
+    {
+      field: "address",
+      title: "Txs",
+      sorting: false,
+      render: row => {
+        let value = row.txReceived + row.txMade;
+        if (value > 1000000) {
+          value = (value / Math.pow(10, 6)).toFixed(2) + " M";
+        } else if (value > 1000) {
+          value = (value / Math.pow(10, 3)).toFixed(2) + " k";
+        } else {
+        }
+        return <span>{value}</span>;
+      }
+    },
+    {
+      field: "latestActiveTime",
+      title: "Last Active At",
+      sorting: true,
+      render: row => {
+        return (
+          <span>
+            {new Date(row.latestActiveTime * 1000).toLocaleDateString()}
+          </span>
+        );
+      }
+    }
+  ];
+};
