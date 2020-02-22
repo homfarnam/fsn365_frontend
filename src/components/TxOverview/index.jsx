@@ -24,7 +24,7 @@ export default function TxOverview(props) {
       ) : null}
       {valueData.assetID ? (
         <KeyValue label="Value">
-          {valueData.value ? (+valueData.value).toFixed(0) : ""}{" "}
+          {valueData.value ? +valueData.value : ""}{" "}
           {valueData.assetID ? (
             <NavLink href={`/asset/${valueData.assetID}`}>
               {valueData.coin}

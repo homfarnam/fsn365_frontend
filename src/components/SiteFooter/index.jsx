@@ -29,7 +29,7 @@ const useStyles = makeStyles(({ palette, breakpoints }) =>
       color: "#6F4E37"
     },
     outlink: {
-      color: "#1e2022",
+      color: "#4a4f55",
       textDecoration: "none"
     },
     strong: {
@@ -38,7 +38,7 @@ const useStyles = makeStyles(({ palette, breakpoints }) =>
     flexItem: {
       [breakpoints.down("sm")]: {
         marginBottom: "1rem",
-        width: "100%"
+        width: "50%"
       }
     }
   })
@@ -49,7 +49,7 @@ export default function SiteFooter() {
   return (
     <Container component="section" className={style.container}>
       <div className={style.flexItem}>
-        <Typography variant="h8" component="h8">
+        <Typography>
           Powered by{" "}
           <a
             href="https://www.fusion.org/"
@@ -67,21 +67,23 @@ export default function SiteFooter() {
             <strong className={style.strong}>FOSC</strong>.
           </a>
         </Typography>
-        <br></br>
         <small>
           We'd like to show our repsect and thanks to FOSC tech lead
           <br></br>{" "}
-          <a href="https://github.com/zhaojun-sh" className={style.outlink}>
+          <a
+            href="https://github.com/zhaojun-sh"
+            target={"_blank"}
+            className={style.outlink}
+          >
             <strong className={style.strong}>zhaojun</strong>{" "}
           </a>{" "}
           and the project supporter <strong>XiaoKeAi</strong>.
         </small>
       </div>
       <div className={style.flexItem}>
-        <Typography variant="h8" component="h8">
+        <Typography>
           <strong>Suggestions</strong>
         </Typography>
-        <br></br>
         <small>
           All suggestions are welcomed. Please click{" "}
           <a
@@ -95,7 +97,7 @@ export default function SiteFooter() {
         </small>
       </div>
       <div className={style.flexItem}>
-        <Typography variant="h8" component="h8">
+        <Typography>
           <strong>About</strong>
         </Typography>
         <small className={style.hint}>
@@ -109,7 +111,6 @@ export default function SiteFooter() {
             {" "}
             <strong className={style.strong}>Kate</strong>.
           </a>
-          <br></br>
         </small>{" "}
         <small>
           <strong>Donation:</strong>
