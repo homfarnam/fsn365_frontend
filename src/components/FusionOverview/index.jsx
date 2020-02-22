@@ -94,15 +94,15 @@ export default function FusionOverview() {
         </li>
         <li>
           <span>
-            <TextStrong>Total swaps</TextStrong>
+            <TextStrong>Swaps Made</TextStrong>
             <br></br>
             {txSummary.swaps}
           </span>
           <HrSpace />
           <span>
-            <TextStrong>Valid Txns</TextStrong>
+            <TextStrong>Assets</TextStrong>
             <br></br>
-            {txSummary.txs}
+            {overview.stats.assets || "loading..."}
           </span>
           <HrSpace />
         </li>
@@ -139,7 +139,8 @@ async function fetchNetworkOverview() {
         stats: {
           txs: (data.totalTransactions / Math.pow(10, 6)).toFixed(2) + " M",
           height: (data.maxBlock + "").replace(reg, ","),
-          account: "109,099"
+          account: "109,099",
+          assets: data.totalAssets
         }
       };
     })
@@ -150,9 +151,15 @@ async function fetchTxsSummary() {
   return siteFetch("/tx/summary")
     .then(res => res.json())
     .then(res => res.data)
+    .then(data => {
+      const reg = /(?=(\d{3})+$)/g;
+      return {
+        swaps: (data.swaps + "").replace(reg, ",")
+      };
+    })
     .catch(e => ({
-      swaps: 3202,
-      total: 401432
+      swaps: "3,202",
+      total: "40,1432"
     }));
 }
 
