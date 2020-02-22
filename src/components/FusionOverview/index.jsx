@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
 import fetch from "isomorphic-unfetch";
 import siteFetch from "../../libs/fetch";
 import HrSpace from "../HrSpace";
@@ -55,20 +54,20 @@ export default function FusionOverview() {
   }
   const priceDown =
     overview.priceData && overview.priceData.changeIn24H.indexOf("-") > -1;
+  console.log(priceDown);
+  console.log(overview);
 
   return (
     <Panel style={{ margin: "2rem auto", paddingBottom: "0" }}>
       <ul className={style.ul}>
         <li>
           <span>
-            <TextStrong>Price</TextStrong>
-            <br></br>${overview.priceData.price}(
-            <Box
-              component="small"
-              color={priceDown ? "success.main" : "secondary.main"}
-            >
+            <TextStrong>Price($)</TextStrong>
+            <br></br>
+            {overview.priceData.price}(
+            <small style={{ color: priceDown ? "red" : "rgb(76, 175, 80)" }}>
               {overview.priceData.changeIn24H}
-            </Box>{" "}
+            </small>{" "}
             in 24h)
           </span>
           <HrSpace />
@@ -132,7 +131,7 @@ async function fetchNetworkOverview() {
       const reg = /(?=(\d{3})+$)/g;
       return {
         priceData: {
-          price: data.priceInfo.price.toFixed(3),
+          price: data.priceInfo.price.toFixed(2),
           changeIn24H: data.priceInfo.percentChange24H + "%",
           mcap: (data.priceInfo.market_cap / Math.pow(10, 6)).toFixed(2) + " M"
         },
