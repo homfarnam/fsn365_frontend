@@ -94,7 +94,7 @@ const createColumns = () => {
         if (value > 1000000) {
           value = (value / Math.pow(10, 6)).toFixed(2) + " M";
         } else if (value > 1000) {
-          value = (value / Math.pow(10, 3)).toFixed(2) + " k";
+          value = (value / Math.pow(10, 3)).toFixed(2) + " K";
         } else {
           value = row.fsnBalance.toFixed(2);
         }
@@ -110,7 +110,7 @@ const createColumns = () => {
         if (value > 1000000) {
           value = (value / Math.pow(10, 6)).toFixed(2) + " M";
         } else if (value > 1000) {
-          value = (value / Math.pow(10, 3)).toFixed(2) + " k";
+          value = (value / Math.pow(10, 3)).toFixed(2) + " K";
         } else {
         }
         return <span>{value}</span>;

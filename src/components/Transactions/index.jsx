@@ -162,9 +162,9 @@ const TxValue = props => {
 
   let value = props.value;
   if (value > 1000000) {
-    value = (value / Math.pow(10, 6)).toFixed(2) + " M";
+    value = (value / Math.pow(10, 6)).toFixed(2) + "M";
   } else if (value >= 1000) {
-    value = (value / Math.pow(10, 3)).toFixed(2) + " k";
+    value = (value / Math.pow(10, 3)).toFixed(2) + "K";
   } else if (value >= 0.55) {
     value = props.value.toFixed(2);
   } else {
