@@ -57,6 +57,13 @@ const useStyles = makeStyles(({ palette }) =>
     timestamp: {
       minWidth: "120px",
       display: "inline-block"
+    },
+    hint: {
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
+      justifyContent: "flex-end",
+      paddingRight: "1rem"
     }
   })
 );
@@ -87,7 +94,12 @@ const createColumns = () => {
     {
       field: "block",
       title: "Block",
-      sorting: false
+      sorting: false,
+      render: row => (
+        <NavLink href={`/block/${row.block}`} className={classes.isHash}>
+          {row.block}
+        </NavLink>
+      )
     },
     {
       field: "from",
