@@ -22,12 +22,12 @@ export default class MyApp extends App {
     return (
       <React.Fragment>
         <Head>
-          <title>FSN explorer</title>
+          <title>FSN365 Fusion BlockChain Explorer</title>
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}> 
-            <header style={{background: '#fff'}}>
+            <header style={{background: '#fff', boxShadow:'0 0.5rem 1.2rem rgba(189,197,209,.2)'}}>
               <Container>
                 <SiteNavigation route={route} />
               </Container>
