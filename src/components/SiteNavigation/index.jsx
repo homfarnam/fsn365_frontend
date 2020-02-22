@@ -15,7 +15,7 @@ export default function SiteNavigation(props) {
       <Link href="/">
         <a className={classes.brand}>
           <Typography component="h4" variant="h4">
-            Explorer
+            Exploer
           </Typography>
         </a>
       </Link>

@@ -22,7 +22,7 @@ export default function SiteNavItems(props) {
   return (
     <>
       <Button className={classes.menuButton} onClick={handleDrawerToggle}>
-        <MenuIcon></MenuIcon>
+        <MenuIcon color={"primary"}></MenuIcon>
       </Button>
       <div className={classes.navBar}>
         {route !== "/" ? <SearchForm place={"others"} /> : null}
@@ -48,9 +48,9 @@ export default function SiteNavItems(props) {
             variant="h4"
             className={classes.drawerTitle}
           >
-            Explorer
+            Exploer
             <Button onClick={handleDrawerToggle}>
-              <CloseIcon></CloseIcon>
+              <CloseIcon color={"primary"}></CloseIcon>
             </Button>
           </Typography>
           <Divider />
