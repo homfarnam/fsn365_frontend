@@ -1,8 +1,7 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import TextStrong from "../TextStrong";
+import { PanelHeading } from "./PanelHeading";
 
 const useStyles = makeStyles(({ palette }) =>
   createStyles({
@@ -11,13 +10,6 @@ const useStyles = makeStyles(({ palette }) =>
       padding: "0.75rem",
       boxShadow: "0 0.5rem 1.2rem rgba(189,197,209,.2)",
       marginBottom: "1.75rem"
-    },
-    title: {
-      marginBottom: "1rem",
-      "& strong": {
-        display: "inline-block",
-        borderBottom: `1px solid ${palette.border.main}`
-      }
     }
   })
 );
@@ -27,11 +19,8 @@ export default function Panel(props) {
   const classes = useStyles();
   return (
     <Paper variant="outlined" className={classes.root} style={style}>
-      {/* panel title */}
       {title ? (
-        <Typography component="h6" className={classes.title}>
-          <TextStrong>{title}</TextStrong>
-        </Typography>
+        <PanelHeading component="h6" title={title}></PanelHeading>
       ) : null}
       {children}
     </Paper>
