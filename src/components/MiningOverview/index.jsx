@@ -62,7 +62,8 @@ export default function MiningOverview({ miner }) {
       )}
       {!msg && (
         <div className={classes.overview}>
-          <KeyValue label="Address">
+          <KeyValue label="Address" className={classes.field}>
+            >
             <NavLink href={`/address/${overview.address}`}>
               {overview.address}
             </NavLink>
