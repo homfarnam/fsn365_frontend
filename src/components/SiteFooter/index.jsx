@@ -20,8 +20,7 @@ const useStyles = makeStyles(({ breakpoints }) =>
     },
     hint: {
       display: "flex",
-      alignItems: "center",
-      marginTop: ".5rem"
+      alignItems: "center"
     },
     love: {
       color: "red"
@@ -79,10 +78,10 @@ export default function SiteFooter() {
       </div>
       <div className={style.flexItem}>
         <Typography>
-          <strong>Suggestions</strong>
+          <strong>Suggestion and Contribution</strong>
         </Typography>
         <small>
-          All suggestions are welcomed. Please click{" "}
+          Suggestions and contributions are welcomed. Please click{" "}
           <OutLink href="https://t.me/yocnkc" className={style.outlink}>
             <strong className={style.strong}>here</strong>.
           </OutLink>
