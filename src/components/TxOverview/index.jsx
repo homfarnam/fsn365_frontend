@@ -6,6 +6,7 @@ import KeyValue from "../KeyValue";
 import FusionAddressLink from "../FusionAddressLink";
 import Duration from "../Duration";
 import getConfig from "next/config";
+import OutLink from "../OutLink";
 
 export default function TxOverview(props) {
   const { tx } = props;
@@ -15,9 +16,7 @@ export default function TxOverview(props) {
   return (
     <div className="tx-overview">
       <KeyValue label="hash">
-        <a href={`${apiServer}tx/${tx.hash}/detail`} target={"_blank"}>
-          {tx.hash}
-        </a>
+        <OutLink href={`${apiServer}tx/${tx.hash}/detail`}>{tx.hash}</OutLink>
       </KeyValue>
       {valueData.lockType ? (
         <KeyValue label={"Lock Type"}>{valueData.lockType}</KeyValue>

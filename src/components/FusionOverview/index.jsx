@@ -21,9 +21,8 @@ const useStyles = makeStyles(({ breakpoints }) =>
         }
       }
     },
-
     panel: {
-      marginTop: "2rem"
+      marginTop: "0"
     }
   })
 );
