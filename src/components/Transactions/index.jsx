@@ -7,6 +7,7 @@ import FusionAddressLink from "../FusionAddressLink";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import getConfig from "next/config";
 import TextStrong from "../TextStrong";
+import OutLink from "../OutLink";
 
 export default function Transactions(props) {
   const { tableOptions = {}, params = {} } = props;
@@ -153,9 +154,9 @@ const TxValue = props => {
   if (props.swapID) {
     return (
       <span>
-        <a href={`${apiServer}swap/${props.swapID}`} target={"_blank"}>
+        <OutLink href={`${apiServer}swap/${props.swapID}`}>
           <i className={className}>{props.swapID}</i>
-        </a>
+        </OutLink>
       </span>
     );
   }
