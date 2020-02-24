@@ -4,6 +4,8 @@ import NavLink from "../NavLink";
 import TimeAgo from "../TimeAgo";
 import fetch from "../../libs/fetch";
 import FusionAddressLink from "../FusionAddressLink";
+import getConfig from "next/config";
+import OutLink from "../OutLink";
 
 export default function MinedBlocks(props) {
   const { tableOptions = {}, miner } = props;
@@ -27,7 +29,7 @@ const createQuery = miner => ({ page, pageSize }) =>
 
     fetch("/block", params)
       .then(res => res.json())
-      .then(res => res.data)
+      .then(res => res)
       .then(data => {
         resolve({
           data: data.data,
@@ -81,12 +83,20 @@ const columns = [
     dataField: "txCount",
     title: "Txn",
     sorting: false,
-    render: row =>
-      row.txCount && (
-        <NavLink href={`/block/${row.height}?tab=tx`} className="bk-txCount">
+    render: row => {
+      const { publicRuntimeConfig } = getConfig();
+      const apiServer = publicRuntimeConfig.API_PATH;
+      const renderEle = row.txCount ? (
+        <OutLink
+          href={`${apiServer}tx?block=${row.height}&size=${row.txCount}`}
+        >
           {row.txCount}
-        </NavLink>
-      )
+        </OutLink>
+      ) : (
+        <>0</>
+      );
+      return renderEle;
+    }
   },
   {
     field: "gasUsed",
