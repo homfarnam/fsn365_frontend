@@ -1,20 +1,20 @@
-import React from 'react';
-import MiningState from '../../src/components/MiningState';
-import MiningOverview from '../../src/components/MiningOverview';
-import PageHeading from '../../src/components/PageHeading';
+import React from "react";
+import MiningState from "../../src/components/MiningState";
+import MiningOverview from "../../src/components/MiningOverview";
+import PageHeading from "../../src/components/PageHeading";
 
-export default function MinerStakingPage ({miner, tab="block"}) {
+export default function MinerStakingPage({ miner, tab = "block" }) {
   return (
     <>
-       <PageHeading title={'Node Monitor'}  />
-        <MiningOverview miner={miner}/>
-        <MiningState miner={miner} view={tab} />
+      <PageHeading title={"Node Monitor"} />
+      <MiningOverview miner={miner} />
+      <MiningState miner={miner} view={tab} />
     </>
-  )
+  );
 }
 
-MinerStakingPage.getInitialProps = async ({query, res}) =>{
+MinerStakingPage.getInitialProps = async ({ query }) => {
   return {
-    ...query,
-  }
-}
+    ...query
+  };
+};
