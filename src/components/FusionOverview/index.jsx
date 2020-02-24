@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import fetch from "isomorphic-unfetch";
 import siteFetch from "../../libs/fetch";
 import HrSpace from "../HrSpace";
@@ -29,7 +30,12 @@ const useStyles = makeStyles(({ breakpoints }) =>
 
 export default function FusionOverview() {
   const style = useStyles();
-  const [overview = {}, setOverview] = useState({});
+  const [overview = {}, setOverview] = useState({
+    priceData: {
+      changeIn24H: ""
+    },
+    stats: {}
+  });
   useEffect(() => {
     fetchNetworkOverview().then(data => {
       setOverview(data);
@@ -48,9 +54,7 @@ export default function FusionOverview() {
       setMining(data);
     });
   }, []);
-  if (!overview.priceData) {
-    return null;
-  }
+
   const priceDown =
     overview.priceData && overview.priceData.changeIn24H.indexOf("-") > -1;
 
@@ -61,16 +65,29 @@ export default function FusionOverview() {
           <span>
             <TextStrong>Price($)</TextStrong>
             <br></br>
-            {overview.priceData.price}(
-            <small style={{ color: priceDown ? "red" : "rgb(76, 175, 80)" }}>
-              {overview.priceData.changeIn24H}
-            </small>{" "}
-            in 24h)
+            {overview.priceData.price ? (
+              <>
+                {overview.priceData.price}(
+                <small
+                  style={{ color: priceDown ? "red" : "rgb(76, 175, 80)" }}
+                >
+                  {overview.priceData.changeIn24H}
+                </small>{" "}
+                in 24h)
+              </>
+            ) : (
+              <CircularProgress size={10} />
+            )}
           </span>
           <HrSpace />
           <span>
             <TextStrong>MarketCap</TextStrong>
-            <br></br>${overview.priceData.mcap}
+            <br></br>
+            {overview.priceData.mcap ? (
+              <>${overview.priceData.mcap}</>
+            ) : (
+              <CircularProgress size={10} />
+            )}
           </span>
           <HrSpace />
         </li>
@@ -78,13 +95,21 @@ export default function FusionOverview() {
           <span>
             <TextStrong>Total Txns</TextStrong>
             <br></br>
-            {overview.stats.txs}
+            {overview.stats.txs ? (
+              <>{overview.stats.txs}</>
+            ) : (
+              <CircularProgress size={10} />
+            )}
           </span>
           <HrSpace />
           <span>
             <TextStrong>Block Height</TextStrong>
             <br></br>
-            {overview.stats.height}
+            {overview.stats.height ? (
+              <>{overview.stats.height}</>
+            ) : (
+              <CircularProgress size={10} />
+            )}
           </span>
           <HrSpace />
         </li>
@@ -92,13 +117,21 @@ export default function FusionOverview() {
           <span>
             <TextStrong>Swaps Made</TextStrong>
             <br></br>
-            {txSummary.swaps}
+            {txSummary.swaps ? (
+              <>{txSummary.swaps}</>
+            ) : (
+              <CircularProgress size={10} />
+            )}
           </span>
           <HrSpace />
           <span>
             <TextStrong>Assets</TextStrong>
             <br></br>
-            {overview.stats.assets || "loading..."}
+            {overview.stats.assets ? (
+              <>{overview.stats.assets}</>
+            ) : (
+              <CircularProgress size={10} />
+            )}
           </span>
           <HrSpace />
         </li>
@@ -106,13 +139,21 @@ export default function FusionOverview() {
           <span>
             <TextStrong>Active Miners</TextStrong>
             <br></br>
-            {mining.totalMiners || "loading..."}
+            {mining.totalMiners ? (
+              <>{mining.totalMiners}</>
+            ) : (
+              <CircularProgress size={10} />
+            )}
           </span>
           <HrSpace />
           <span>
             <TextStrong>Active Tickets</TextStrong>
             <br></br>
-            {mining.totalTickets || "loading..."}
+            {mining.totalTickets ? (
+              <>{mining.totalTickets}</>
+            ) : (
+              <CircularProgress size={10} />
+            )}
           </span>
           <HrSpace />
         </li>
