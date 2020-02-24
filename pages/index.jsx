@@ -45,19 +45,6 @@ function fetchRealTimeData() {
   return fetch("/latest")
     .then(res => res.json())
     .then(res => res.data)
-    .then(data => {
-      let { bks, txs } = data;
-      const lBks = bks.map(bkItem => {
-        return JSON.parse(bkItem);
-      });
-      const lTxns = txs.map(txItem => {
-        return JSON.parse(txItem);
-      });
-      return {
-        bks: lBks,
-        txs: lTxns
-      };
-    })
     .catch(e => ({
       bks: [],
       txs: [],
