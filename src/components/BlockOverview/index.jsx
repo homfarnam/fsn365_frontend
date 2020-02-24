@@ -5,6 +5,7 @@ import TimeAgo from "../TimeAgo";
 import NavLink from "../NavLink";
 import KeyValue from "../KeyValue";
 import getConfig from "next/config";
+import OutLink from "../OutLink";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -47,12 +48,12 @@ export default function BlockOverview(props) {
       </KeyValue>
       <KeyValue label="Transactions" className={classes.field}>
         {block.txCount ? (
-          <a
+          <OutLink
             href={`${apiServer}tx?block=${block.height}&size=${block.txCount}`}
             target={"_blank"}
           >
             {block.txCount}
-          </a>
+          </OutLink>
         ) : (
           block.txCount
         )}{" "}

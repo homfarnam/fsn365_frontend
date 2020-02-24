@@ -4,7 +4,11 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() =>
   createStyles({
     outLink: {
-      textDecoration: "none"
+      textDecoration: "none",
+      color: "#3498db",
+      "&:hover": {
+        color: "#1d6fa5"
+      }
     }
   })
 );
