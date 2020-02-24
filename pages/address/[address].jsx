@@ -63,7 +63,7 @@ export default function AddressDetailPage(props) {
       </Panel>
 
       <Panel>
-        <FusionTabs value={state.tab} onChange={handleTabChange}>
+        <FusionTabs value={state.tab} onChange={handleTabChange}  style={{marginBottom: 0}}>
           <FusionTab label="Transactions" />
           {hasAssets ? <FusionTab label="Assets"></FusionTab> : null}
           {hasTlAssets ? <FusionTab label="TimeLocked"></FusionTab> : null}
@@ -91,7 +91,7 @@ export default function AddressDetailPage(props) {
             <FusionTabPanel value={state.tab} index={2}>
               <AddressTimeLockedAssets assets={state.tlAssets} />
             </FusionTabPanel>
-          ) : null}
+          ) : "loading..."}
         </FusionTabPanels>
       </Panel>
     </>
