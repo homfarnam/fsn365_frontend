@@ -4,7 +4,6 @@ import Panel from "../../src/components/Panel";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 import FusionAddressLink from "../../src/components/FusionAddressLink";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 export default function AddressListPage() {
   const columns = createColumns();
@@ -55,30 +54,8 @@ const fetchData = query =>
         });
       });
   });
-const useStyles = makeStyles(({ palette }) =>
-  createStyles({
-    isHash: {
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-      display: "inline-block",
-      maxWidth: "120px"
-    },
-    timestamp: {
-      minWidth: "120px",
-      display: "inline-block"
-    },
-    hint: {
-      display: "flex",
-      flexWrap: "wrap",
-      alignItems: "center",
-      justifyContent: "flex-end",
-      paddingRight: "1rem"
-    }
-  })
-);
+
 const createColumns = () => {
-  const style = useStyles();
   return [
     {
       field: "address",
