@@ -37,6 +37,7 @@ const useStyles = makeStyles(({ breakpoints }) =>
       marginRight: ".5rem"
     },
     accounts: {
+      minWidth: "120px",
       marginLeft: ".5rem",
       "& span": {
         display: "flex"
@@ -84,7 +85,9 @@ export default function TxItem({ tx }) {
         </div>
         <span className={style.type}>
           <TextStrong>
-            {tx.type.replace("Ext", "").replace("Func", "")}
+            {tx.type == "Origin"
+              ? "SendAsset"
+              : tx.type.replace("Ext", "").replace("Func", "")}
           </TextStrong>
         </span>
         <span className={style.fee}>

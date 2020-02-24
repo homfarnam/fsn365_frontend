@@ -53,7 +53,7 @@ export default function BlockItem({ bk }) {
           <NavLink href={`/block/${bk.height}`}>{bk.height}</NavLink>
           <br></br>
           <span>
-            <TimeAgo time={bk.timestamp} />
+            <TimeAgo time={bk.timestamp * 1000} />
           </span>
         </div>
         <div className={style.miner}>
@@ -72,7 +72,7 @@ export default function BlockItem({ bk }) {
           )}{" "}
           in block.
         </div>
-        <span className={style.reward}>{bk.reward} FSN</span>
+        <span className={style.reward}>{bk.reward.toFixed(2)} FSN</span>
       </div>
       <HrSpace />
     </>
