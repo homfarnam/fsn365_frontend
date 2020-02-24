@@ -50,7 +50,9 @@ export default function BlockItem({ bk }) {
       <div className={style.root}>
         <strong className={style.icon}>Bk</strong>
         <div className={style.height}>
-          <NavLink href={`/block/${bk.height}`}>{bk.height}</NavLink>
+          <NavLink href={`/block/${bk.height}`}>
+            <strong>{bk.height}</strong>
+          </NavLink>
           <br></br>
           <span>
             <TimeAgo time={bk.timestamp * 1000} />
