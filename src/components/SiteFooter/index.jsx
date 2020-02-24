@@ -65,15 +65,15 @@ export default function SiteFooter() {
           .
         </Typography>
         <small>
-          We'd like to show our thanks to FOSC tech lead
-          <br></br>{" "}
+          I'd like to say thanks to
           <OutLink
             href="https://github.com/zhaojun-sh"
             className={style.outlink}
           >
             <strong className={style.strong}>zhaojun</strong>
-          </OutLink>{" "}
-          and the project supporter <strong>XiaoKeAi</strong>.
+          </OutLink>
+          , the project supporter <strong>XiaoKeAi</strong>
+          <br></br> and my previous patner <strong>WYY</strong>.
         </small>
       </div>
       <div className={style.flexItem}>
