@@ -53,8 +53,6 @@ export default function FusionOverview() {
   }
   const priceDown =
     overview.priceData && overview.priceData.changeIn24H.indexOf("-") > -1;
-  console.log(priceDown);
-  console.log(overview);
 
   return (
     <Panel style={{ margin: "2rem auto", paddingBottom: "0" }}>
