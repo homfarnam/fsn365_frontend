@@ -1,46 +1,60 @@
-import React from 'react';
-import Panel from '../src/components/Panel';
-import PageHeading from '../src/components/PageHeading';
-import { makeStyles, createStyles,  } from "@material-ui/core/styles";
-import NotFound from '../src/components/NotFound';
+import React from "react";
+import Panel from "../src/components/Panel";
+import PageHeading from "../src/components/PageHeading";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+import NotFound from "../src/components/NotFound";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(() =>
   createStyles({
     container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
-      padding: '10vh 8vw',
-      alignItems: 'center',
-      fontSize: '1.25rem',
-      '&:img': {
-        width: '240px'
-      }
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "space-around",
+      padding: "10vh 8vw",
+      alignItems: "center",
+      fontSize: "1.25rem",
+    },
+    heading: {
+      color: "#3498db",
+      marginBottom: '1rem'
+    },
+    keyword: {
+      wordBreak: 'break-all'
+    },
+    hint: {
+      marginBottom: '2rem'
     }
   })
 );
 
-
-export default function SearchPage ({query}) {
+export default function SearchPage({ query }) {
   const classes = useStyles();
   return (
     <>
-      <PageHeading title={'Search Result'} />
-        <Panel >
-          <div className={classes.container}>
-            <div>
-            <p>Oops! The search string you entered was: <strong>{query.keyword}</strong>.</p>
-            <p>Sorry! This is an invalid search string.</p>
+      <PageHeading title={"Explorer Search"} />
+      <Panel>
+        <div className={classes.container}>
+          <div className={classes.hint}>
+            <Typography variant="h4" component="h4" className={classes.heading}>
+              Search Not Found
+            </Typography>
+            <Typography variant="p" component="p">
+              Oops! The search string was:{" "}
+              <strong className={classes.keyword}>{query.keyword}</strong>.
+            </Typography >
+            <Typography  variant="p" component="p">Sorry! This is an invalid search string.</Typography>
+            <Typography  variant="p" component="p">If you have any suggestion, please tell us.</Typography>
           </div>
           <NotFound />
-          </div>
-        </Panel>
+        </div>
+      </Panel>
     </>
-  )
+  );
 }
 
-SearchPage.getInitialProps = async ({query}) => {
+SearchPage.getInitialProps = async ({ query }) => {
   return {
     query: query
-  }
-}
+  };
+};
