@@ -4,6 +4,7 @@ import Panel from "../../src/components/Panel";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 import FusionAddressLink from "../../src/components/FusionAddressLink";
+import * as helpers from "../../src/libs/helpers";
 
 export default function AddressListPage() {
   const columns = createColumns();
@@ -67,32 +68,10 @@ const createColumns = () => {
       filed: "fsnBalance",
       title: "Fsn Balance",
       render: row => {
-        let value = row.fsnBalance;
-        if (value > 1000000) {
-          value = (value / Math.pow(10, 6)).toFixed(2) + " M";
-        } else if (value > 1000) {
-          value = (value / Math.pow(10, 3)).toFixed(2) + " K";
-        } else {
-          value = row.fsnBalance.toFixed(2);
-        }
+        let value = helpers.formatValue(row.fsnBalance);
         return <span>{value}</span>;
       }
     },
-    // {
-    //   field: "address",
-    //   title: "Txs",
-    //   sorting: false,
-    //   render: row => {
-    //     let value = row.txReceived + row.txMade;
-    //     if (value > 1000000) {
-    //       value = (value / Math.pow(10, 6)).toFixed(2) + " M";
-    //     } else if (value > 1000) {
-    //       value = (value / Math.pow(10, 3)).toFixed(2) + " K";
-    //     } else {
-    //     }
-    //     return <span>{value}</span>;
-    //   }
-    // },
     {
       field: "latestActiveTime",
       title: "Last Active At",

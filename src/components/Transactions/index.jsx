@@ -8,6 +8,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import getConfig from "next/config";
 import TextStrong from "../TextStrong";
 import OutLink from "../OutLink";
+import * as helpser from "../../libs/helpers";
 
 export default function Transactions(props) {
   const { tableOptions = {}, params = {} } = props;
@@ -161,16 +162,7 @@ const TxValue = props => {
     );
   }
 
-  let value = props.value;
-  if (value > 1000000) {
-    value = (value / Math.pow(10, 6)).toFixed(2) + "M";
-  } else if (value >= 1000) {
-    value = (value / Math.pow(10, 3)).toFixed(2) + "K";
-  } else if (value >= 0.55) {
-    value = props.value.toFixed(2);
-  } else {
-    value = props.value.toFixed(4);
-  }
+  let value = helpser.formatValue(props.value);
 
   if (type == "GenAssetFunc") {
     return (
