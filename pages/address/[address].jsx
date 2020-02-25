@@ -78,9 +78,7 @@ export default function AddressDetailPage(props) {
                 }}
                 address={publicAddress}
               />
-            ) : (
-              <>Loading...</>
-            )}
+            ) : null}
           </FusionTabPanel>
           {hasAssets ? (
             <FusionTabPanel value={state.tab} index={1}>
@@ -91,7 +89,7 @@ export default function AddressDetailPage(props) {
             <FusionTabPanel value={state.tab} index={2}>
               <AddressTimeLockedAssets assets={state.tlAssets} />
             </FusionTabPanel>
-          ) : "loading..."}
+          ) : null}
         </FusionTabPanels>
       </Panel>
     </>
