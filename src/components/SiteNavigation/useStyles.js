@@ -87,11 +87,13 @@ export default makeStyles(({ palette, breakpoints }) =>
       flexGrow: 2,
       width: "100%",
       marginTop: ".5rem",
+      marginBottom: ".5rem",
       [breakpoints.up("md")]: {
         flexGrow: 0,
         minWidth: "464px",
         width: "auto",
-        marginTop: "0"
+        marginTop: "0",
+        marginBottom: "0"
       }
     }
   })
