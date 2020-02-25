@@ -26,9 +26,6 @@ function formatter() {
     case "hour":
       desc = "hr";
       break;
-    case "month":
-      desc = "mo";
-      break;
     case "week":
       desc = "wk";
       break;
