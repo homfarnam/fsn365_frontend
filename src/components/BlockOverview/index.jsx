@@ -35,7 +35,9 @@ export default function BlockOverview(props) {
   return (
     <div className={classes.root}>
       <KeyValue label="height" className={classes.field}>
-        {block.height}
+        <OutLink href={`${apiServer}block/${block.height}`}>
+          <strong>{block.height}</strong>
+        </OutLink>
         <span style={{ marginLeft: "10px" }}>
           <NavLink href={`/block/${prevHeight}`}>Prev</NavLink>{" "}
           <NavLink href={`/block/${nextHeight}`}>Next</NavLink>
