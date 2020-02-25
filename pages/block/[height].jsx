@@ -11,16 +11,8 @@ import BlockOverview from "../../src/components/BlockOverview";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 
-const tabMap = {
-  overview: 0,
-  tx: 1
-};
-
 export default function BlockPage(props) {
   const { block = {}, tab = "overview", height } = props;
-  const [state, setState] = useState({
-    tab: tabMap[tab] || 0
-  });
 
   const handleTabChange = (e, newValue) => {
     setState({
@@ -34,7 +26,11 @@ export default function BlockPage(props) {
       <>
         <PageHeading title={"Block"} suffix={`#${height}`} />
         <Panel title="Bad Request">
-          <p>This block does not exist!</p>
+          <p>
+            This block does not exist! 
+            <br></br>
+            Either because the block number is invalid or the network has not reached this height yet.
+          </p>
         </Panel>
       </>
     );
@@ -43,11 +39,11 @@ export default function BlockPage(props) {
     <>
       <PageHeading title={"Block"} suffix={`#${block.height}`} />
       <Panel>
-        <FusionTabs value={state.tab} onChange={handleTabChange}>
+        <FusionTabs value={0}>
           <FusionTab label="overview" />
         </FusionTabs>
         <FusionTabPanels>
-          <FusionTabPanel value={state.tab} index={0}>
+          <FusionTabPanel value={0} index={0}>
             <BlockOverview block={block} />
           </FusionTabPanel>
         </FusionTabPanels>
@@ -75,7 +71,7 @@ BlockPage.getInitialProps = async ({ query, res }) => {
         return {}
       });
     return {
-      block,
+      block: block || {},
       ...query
     };
   }

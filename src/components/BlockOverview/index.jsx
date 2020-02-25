@@ -57,7 +57,7 @@ export default function BlockOverview(props) {
         ) : (
           block.txCount
         )}{" "}
-        txs in block
+        txn{block.txCount > 1 ? "s" : ""} in block
       </KeyValue>
       <KeyValue label="Block Miner" className={classes.field}>
         <NavLink href={`/staking/${block.miner}`}>{block.miner}</NavLink>

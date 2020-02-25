@@ -18,13 +18,25 @@ function formatter() {
 
   switch (desc) {
     case "second":
-      desc = "secs";
+      desc = "sec";
       break;
     case "minute":
-      desc = value > 1 ? "mins" : "min";
+      desc = "min";
+      break;
+    case "hour":
+      desc = "hr";
+      break;
+    case "month":
+      desc = "mo";
+      break;
+    case "week":
+      desc = "wk";
       break;
     default:
       break;
+  }
+  if (value > 1) {
+    desc += "s";
   }
   return `${value} ${desc} ${suffix}`;
 }
