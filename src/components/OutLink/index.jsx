@@ -1,13 +1,13 @@
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles(({ palette }) =>
   createStyles({
     outLink: {
+      color: palette.link.main,
       textDecoration: "none",
-      color: "#3498db",
       "&:hover": {
-        color: "#1d6fa5"
+        color: palette.link.dark
       }
     }
   })
