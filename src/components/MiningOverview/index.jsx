@@ -95,8 +95,8 @@ export default function MiningOverview({ miner }) {
             value={overview.totalBlocks}
             className={classes.field}
           />
-          <KeyValue label="Latest Mined Time" className={classes.field}>
-            <TimeAgo time={overview.latestMinedTime * 1000} />
+          <KeyValue label="Latest block Time" className={classes.field}>
+            <TimeAgo time={overview.latestBlockTime * 1000} />
           </KeyValue>
         </div>
       )}
