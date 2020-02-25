@@ -15,7 +15,6 @@ function formatter() {
   const value = arguments[0];
   let desc = arguments[1];
   const suffix = arguments[2];
-
   switch (desc) {
     case "second":
       desc = "sec";
@@ -25,9 +24,6 @@ function formatter() {
       break;
     case "hour":
       desc = "hr";
-      break;
-    case "week":
-      desc = "wk";
       break;
     default:
       break;

@@ -30,7 +30,11 @@ const columns = [
     sorting: false,
     render: row => (
       <span>
-        <TimeAgo time={row.startTime * 1000} />
+        {row.startTime == 18446744073709552000 ? (
+          "Forever"
+        ) : (
+          <TimeAgo time={row.startTime * 1000} />
+        )}
       </span>
     )
   },
@@ -40,7 +44,11 @@ const columns = [
     sorting: false,
     render: row => (
       <span>
-        <TimeAgo time={row.endTime * 1000} />
+        {row.endTime == 18446744073709552000 ? (
+          "Forever"
+        ) : (
+          <TimeAgo time={row.endTime * 1000} />
+        )}
       </span>
     )
   },
