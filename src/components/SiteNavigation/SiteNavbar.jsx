@@ -48,7 +48,7 @@ export default function SiteNavItems(props) {
             variant="h4"
             className={classes.drawerTitle}
           >
-            Exploer
+            Explorer
             <Button onClick={handleDrawerToggle}>
               <CloseIcon color={"primary"}></CloseIcon>
             </Button>
