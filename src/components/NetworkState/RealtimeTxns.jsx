@@ -1,16 +1,16 @@
 import Panel from "../Panel";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
 import TextStrong from "../TextStrong";
 import NavLink from "../NavLink";
-import TxItem from "./TxItem";
+import useStyles from "./useStyles";
+import TxItem from "./TxnItem";
 
 export default function RealTimeTxns(props) {
   const { txs = [] } = props;
   const style = useStyles();
   return (
     <Panel>
-      <header className={style.title}>
+      <header className={`${style.flexBetween} ${style.header}`}>
         <Typography>
           <TextStrong>Latest Txns</TextStrong>
         </Typography>
@@ -24,16 +24,3 @@ export default function RealTimeTxns(props) {
     </Panel>
   );
 }
-
-const useStyles = makeStyles(({ palette }) =>
-  createStyles({
-    root: {},
-    title: {
-      display: "flex",
-      justifyContent: "space-between",
-      marginBottom: ".75rem",
-      padding: ".75rem 0",
-      borderBottom: `1px solid ${palette.border.main}`
-    }
-  })
-);
