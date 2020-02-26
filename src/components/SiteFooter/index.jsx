@@ -114,7 +114,7 @@ export default function SiteFooter() {
         </small>{" "}
         <small>
           <strong>Donation:</strong>
-          <NavLink href={`address/0x65dada4366ae16e20fdbb7675e752e1fe7abd978`}>
+          <NavLink href={`/address/0x65dada4366ae16e20fdbb7675e752e1fe7abd978`}>
             0x65dada4366ae16e20fdbb7675e752e1fe7abd978
           </NavLink>
         </small>
