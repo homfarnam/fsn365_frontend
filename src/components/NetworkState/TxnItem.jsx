@@ -1,15 +1,12 @@
 import React from "react";
 import HrSpace from "../HrSpace";
 import FusionAddressLink from "../FusionAddressLink";
-import getConfig from "next/config";
 import TimeAgo from "../TimeAgo";
 import NavLink from "../NavLink";
 import useStyles from "./useStyles";
 import TextStrong from "../TextStrong";
 
 export default function TxItem({ tx }) {
-  const { publicRuntimeConfig } = getConfig();
-  const API_PATH = publicRuntimeConfig.API_PATH;
   const style = useStyles();
   return (
     <>

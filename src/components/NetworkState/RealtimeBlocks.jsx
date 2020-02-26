@@ -15,10 +15,10 @@ export default function RealTimeBlocks(props) {
           <TextStrong>Latest Blocks</TextStrong>
         </Typography>
         <TextStrong>
-          <NavLink href={`/blocks`}>View All</NavLink>
+          <NavLink href={`/blocks`}>View all non-ticket txns</NavLink>
         </TextStrong>
       </header>
-      {bks.map((bk, index) => {
+      {bks.map(bk => {
         return <BlockItem bk={bk} key={bk.height} />;
       })}
     </Panel>
