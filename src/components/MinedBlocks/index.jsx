@@ -110,7 +110,7 @@ const columns = [
   },
   {
     field: "reward",
-    title: "Block reward",
+    title: "Reward",
     sorting: false,
     render: row => <span className="bk-gasLimit">{row.reward.toFixed(2)}</span>
   }

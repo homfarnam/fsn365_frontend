@@ -14,10 +14,6 @@ const useStyles = makeStyles(({ palette }) =>
       display: "inline-block",
       maxWidth: "120px"
     },
-    timestamp: {
-      minWidth: "120px",
-      display: "inline-block"
-    },
     hint: {
       textAlign: "right",
       marginTop: "0"
@@ -42,7 +38,7 @@ export default function MinersBuyingTickets(props) {
       <p className={cssClasses.hint}>
         <small>
           <strong>Notice: </strong> we only provide latest 1000 BuyTicketFunc
-          txs for miner.
+          txns for miner.
         </small>
       </p>
     </div>

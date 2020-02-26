@@ -48,26 +48,18 @@ const columns = [
   {
     field: "startTime",
     title: "Start Time",
-    render: row => (
-      <span className="tk-start">
-        <TimeAgo time={row.startTime * 1000} />
-      </span>
-    )
+    render: row => <TimeAgo time={row.startTime * 1000} />
   },
   {
-    field: "expireTime",
+    field: "endTime",
     title: "Expire Time",
     sorting: false,
-    render: row => (
-      <span className="tk-end">
-        <TimeAgo time={row.expireTime * 1000} />
-      </span>
-    )
+    render: row => <TimeAgo time={row.expireTime * 1000} />
   },
   {
     field: "value",
     title: "Value",
     sorting: false,
-    render: row => <span className="tk-value">{row.value}</span>
+    render: row => <span>{row.value}</span>
   }
 ];
