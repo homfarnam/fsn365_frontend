@@ -7,17 +7,19 @@ export default function FusionAdressLink(props) {
   const { address, children, miner = false, ...others } = props;
   const text = addressMap[address];
   if (addressMap[address] === "Fusion Contract") {
-    return <TextStrong>{text}</TextStrong>;
+    return <TextStrong {...others}>{text}</TextStrong>;
   } else {
     const href = miner ? `/staking/${address}` : `/address/${address}`;
     return (
-      <NavLink href={href}>
+      <span {...others}>
+        <NavLink href={href}>{address}</NavLink>
         {text ? (
-          <strong {...others}>{text}</strong>
-        ) : (
-          <span {...others}>{address}</span>
-        )}
-      </NavLink>
+          <>
+            {"   "}
+            {`(${text})`}
+          </>
+        ) : null}
+      </span>
     );
   }
 }
