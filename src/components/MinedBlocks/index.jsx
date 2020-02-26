@@ -51,11 +51,7 @@ const columns = [
     field: "height",
     title: "Block",
     sorting: false,
-    render: row => (
-      <NavLink href={`/block/${row.height}`} className="bk-height">
-        {row.height}
-      </NavLink>
-    )
+    render: row => <NavLink href={`/block/${row.height}`}>{row.height}</NavLink>
   },
   {
     field: "timestamp",
@@ -67,7 +63,7 @@ const columns = [
         minWidth: "120px"
       };
       return (
-        <span className="bk-age" style={style}>
+        <span style={style}>
           <TimeAgo time={row.timestamp * 1000} />
         </span>
       );
@@ -102,8 +98,11 @@ const columns = [
     field: "gasUsed",
     title: "Gas Used/GasLimit",
     sorting: false,
+    headerStyle: {
+      minWidth: "160px"
+    },
     render: row => (
-      <span className="bk-gasUsed">
+      <span>
         {row.gasUsed}({((row.gasUsed / row.gasLimit) * 100).toFixed(2)}%)
       </span>
     )
@@ -112,6 +111,6 @@ const columns = [
     field: "reward",
     title: "Reward",
     sorting: false,
-    render: row => <span className="bk-gasLimit">{row.reward.toFixed(2)}</span>
+    render: row => <span>{row.reward.toFixed(2)}</span>
   }
 ];

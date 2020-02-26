@@ -22,7 +22,7 @@ export default class MyApp extends App {
     return (
       <React.Fragment>
         <Head>
-          <title>FSN365 Fusion BlockChain Explorer</title>
+          <title>FSN365 Fusion Blockchain Explorer</title>
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />

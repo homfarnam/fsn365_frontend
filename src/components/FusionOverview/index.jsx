@@ -125,7 +125,7 @@ export default function FusionOverview() {
           </span>
           <HrSpace />
           <span>
-            <TextStrong>Assets</TextStrong>
+            <TextStrong>Assets Issued</TextStrong>
             <br></br>
             {overview.stats.assets ? (
               <>{overview.stats.assets}</>

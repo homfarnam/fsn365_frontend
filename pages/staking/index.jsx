@@ -8,6 +8,7 @@ import Panel from "../../src/components/Panel";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 import KeyValue from "../../src/components/KeyValue";
+import TextStrong from '../../src/components/TextStrong';
 
 const useStyles = makeStyles(({ palette }) =>
   createStyles({
@@ -83,7 +84,7 @@ export default function StakingPage() {
       ) : (
         <Panel>
           <Typography component="h6" variant="h6">
-            Fusion Miners{" "}
+            <TextStrong>Active Miners</TextStrong>{" "}
             {error ? (
               <span>{error}</span>
             ) : (

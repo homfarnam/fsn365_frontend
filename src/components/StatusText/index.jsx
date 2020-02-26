@@ -14,7 +14,7 @@ const useStyles = makeStyles(({ palette }) =>
       color: `${palette.success.main}`
     },
     notOk: {
-      color: `#d9534f`
+      color: `red`
     }
   })
 );
