@@ -1,5 +1,5 @@
-import RealTimeTxns from "./RealTimeTxns";
-import RealTimeBks from "./RealTimeBlocks";
+import RealTimeTxns from "./RealtimeTxns";
+import RealTimeBks from "./RealtimeBlocks";
 import useStyles from "./useStyles";
 
 export default function NetworkState(props) {
