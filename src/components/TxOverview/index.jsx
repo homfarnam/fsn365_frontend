@@ -1,5 +1,4 @@
 import React from "react";
-import Box from "@material-ui/core/Box";
 import TimeAgo from "../TimeAgo";
 import NavLink from "../NavLink";
 import KeyValue from "../KeyValue";
@@ -7,6 +6,7 @@ import FusionAddressLink from "../FusionAddressLink";
 import Duration from "../Duration";
 import getConfig from "next/config";
 import OutLink from "../OutLink";
+import StatusText from "../StatusText";
 
 export default function TxOverview(props) {
   const { tx } = props;
@@ -74,9 +74,9 @@ export default function TxOverview(props) {
         </KeyValue>
       ) : null}
       <KeyValue label="Tx Status">
-        <Box component="strong" color="success.main">
-          Success
-        </Box>
+        <strong>
+          <StatusText>success</StatusText>
+        </strong>
       </KeyValue>
       <KeyValue label="Block">
         <NavLink href={`/block/${tx.block}`}>{tx.block}</NavLink>

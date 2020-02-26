@@ -1,12 +1,12 @@
 import React from "react";
 import Panel from "../../src/components/Panel";
 import KeyValue from "../../src/components/KeyValue";
-import Box from "@material-ui/core/Box";
 import PageHeading from "../../src/components/PageHeading";
 import FusionAddressLink from "../../src/components/FusionAddressLink";
 import fetch from "../../src/libs/fetch";
 import NavLink from "../../src/components/NavLink";
 import OutLink from '../../src/components/OutLink';
+import StatusText from '../../src/components/StatusText'
 
 export default function AssetPage({ asset = {} }) {
   return (
@@ -39,13 +39,13 @@ export default function AssetPage({ asset = {} }) {
         </KeyValue>
         <KeyValue label="Verified">
           {asset.verified ? (
-            <Box color="success.main" component="strong">
-              Yes
-            </Box>
+            <StatusText>
+              <strong>Yes</strong>
+            </StatusText>
           ) : (
-            <Box color="error.main" component="strong">
+            <StatusText isOk={false}>
               No
-            </Box>
+            </StatusText>
           )}
         </KeyValue>
       </Panel>

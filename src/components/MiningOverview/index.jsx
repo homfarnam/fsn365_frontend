@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Box from "@material-ui/core/Box";
 import KeyValue from "../KeyValue";
 import Panel from "../Panel";
 import TimeAgo from "../TimeAgo";
 import fetch from "../../libs/fetch";
 import NavLink from "../NavLink";
+import StatusText from "../StatusText";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -56,9 +56,9 @@ export default function MiningOverview({ miner }) {
       {msg == "loading" ? (
         <CircularProgress size={20} />
       ) : (
-        <Box color="error.main" component="strong">
-          {msg}
-        </Box>
+        <strong>
+          <StatusText isOk={msg == "loading"}>{msg}</StatusText>
+        </strong>
       )}
       {!msg && (
         <div className={classes.overview}>
@@ -69,13 +69,13 @@ export default function MiningOverview({ miner }) {
           </KeyValue>
           <KeyValue label="Node Status" className={classes.field}>
             {overview.tickets ? (
-              <Box color="success.main" component="strong">
-                Online
-              </Box>
+              <StatusText>
+                <strong>Online</strong>
+              </StatusText>
             ) : (
-              <Box color="error.main" component="strong">
-                Offline
-              </Box>
+              <StatusText isOk={false}>
+                <strong>Offline</strong>
+              </StatusText>
             )}
           </KeyValue>
           {overview.tickets ? (
@@ -95,8 +95,8 @@ export default function MiningOverview({ miner }) {
             value={overview.totalBlocks}
             className={classes.field}
           />
-          <KeyValue label="Latest block Time" className={classes.field}>
-            <TimeAgo time={overview.latestBlockTime * 1000} />
+          <KeyValue label="Latest Mined Time" className={classes.field}>
+            <TimeAgo time={overview.latestMinedTime * 1000} />
           </KeyValue>
         </div>
       )}

@@ -1,19 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Box from "@material-ui/core/Box";
 
 export default function FusionTabPanel(props) {
   const { children, value, index, style = {} } = props;
   const isActive = index === value;
   return (
-    <Box
+    <div
       role="fusion-tabpanel"
       component="div"
       hidden={value !== index}
       style={style}
     >
       {isActive ? children : null}
-    </Box>
+    </div>
   );
 }
 

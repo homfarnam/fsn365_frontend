@@ -1,10 +1,10 @@
 import React from "react";
-import Box from "@material-ui/core/Box";
 import Panel from "../src/components/Panel";
 import FusionTable from "../src/components/FusionTable";
 import NavLink from "../src/components/NavLink";
 import PageHeading from "../src/components/PageHeading";
 import fetch from "../src/libs/fetch";
+import StatusText from "../src/components/StatusText";
 
 export default function AssetListPage(props) {
   const { query = {} } = props;
@@ -70,21 +70,11 @@ const columns = [
     field: "verified",
     title: "Asset Type",
     sorting: false,
-    render: row => {
-      if (row.verified) {
-        return (
-          <Box component="strong" color="success.main">
-            Verfied Asset
-          </Box>
-        );
-      } else {
-        return (
-          <Box component="strong" color="error.main">
-            Unverified Asset
-          </Box>
-        );
-      }
-    }
+    render: row => (
+      <StatusText isOk={row.verified}>
+        <strong>{row.verified ? "Verfied" : "Unverfied"} Asset</strong>
+      </StatusText>
+    )
   },
   {
     field: "id",
