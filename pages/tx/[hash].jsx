@@ -9,52 +9,44 @@ import FusionTabPanels from "../../src/components/FusionTabs/FusionTabPanels";
 import TxOverview from "../../src/components/TxOverview";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
-import TextStrong from '../../src/components/TextStrong';
+import TextStrong from "../../src/components/TextStrong";
 
 export default function TransactionPage(props) {
   const { tx = {}, hash } = props;
-  const [state, setState] = useState({
-    tab: 0
-  });
 
-  const handleTabChange = (e, newValue) => {
-    setState({
-      ...state,
-      tab: newValue
-    });
-  };
-
+  if (!tx.hash) {
+    return (
+      <>
+        <PageHeading title={"Bad Tx"} />
+        <Panel>
+          The hash:{" "}
+          <TextStrong>
+            <em>{hash}</em>
+          </TextStrong>{" "}
+          is invalid. Please check!
+        </Panel>
+      </>
+    );
+  }
   const suffix =
     tx.type === "Buy Ticket"
       ? `#${tx.type}`
-      : `#${tx.type.replace('Func', '').replace('Ext', '')}`;
-  
-  if(!tx.hash) {
-    return (
-      <>
-      <PageHeading title={'Bad Tx'} />
-      <Panel>
-        The hash: <TextStrong><em>{hash}</em></TextStrong> is invalid.
-        Please check!
-      </Panel>
-      </>
-    )
-  }
+      : `#${tx.type.replace("Func", "").replace("Ext", "")}`;
   return (
     <>
       <PageHeading title="Tx" suffix={suffix} />
       <Panel>
-        <FusionTabs value={state.tab} onChange={handleTabChange}>
+        <FusionTabs value={0}>
           <FusionTab label="Tx Overview" />
         </FusionTabs>
         <FusionTabPanels>
-          <FusionTabPanel value={state.tab} index={0}>
+          <FusionTabPanel value={0} index={0}>
             <TxOverview tx={tx} />
           </FusionTabPanel>
         </FusionTabPanels>
       </Panel>
     </>
-  )
+  );
 }
 
 TransactionPage.getInitialProps = async ({ query }) => {
@@ -64,7 +56,7 @@ TransactionPage.getInitialProps = async ({ query }) => {
     .then(res => res.data)
     .catch(e => {});
   return {
-    tx,
+    tx: tx || { type: "" },
     hash
   };
 };
