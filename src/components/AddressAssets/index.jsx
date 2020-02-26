@@ -15,13 +15,13 @@ export default function AddressHeldAssets({ assets }) {
 const columns = [
   {
     field: "name",
-    title: "Asset Name",
+    title: "Name",
     sorting: false,
     render: row => <NavLink href={`/asset/${row.assetID}`}>{row.name}</NavLink>
   },
   {
     field: "symbol",
-    title: "Asset Symbol",
+    title: "Symbol",
     sorting: false,
     render: row => <span className="asset-symbol">{row.symbol}</span>
   },

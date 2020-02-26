@@ -26,7 +26,7 @@ const columns = [
   },
   {
     field: "startTime",
-    title: "Locked At",
+    title: "Start At",
     sorting: false,
     render: row => (
       <span>
@@ -40,7 +40,7 @@ const columns = [
   },
   {
     field: "endTime",
-    title: "Will Unlock At",
+    title: "End At",
     sorting: false,
     render: row => (
       <span>

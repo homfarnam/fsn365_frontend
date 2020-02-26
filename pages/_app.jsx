@@ -12,7 +12,6 @@ export default class MyApp extends App {
   componentDidMount() {
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
-      console.log(1);
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }

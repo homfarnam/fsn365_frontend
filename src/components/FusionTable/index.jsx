@@ -17,7 +17,8 @@ export const defaultHeaderStyle = {
   paddingLeft: ".75rem",
   paddingTop: ".625rem",
   paddingBottom: ".625rem",
-  textAlign: "center"
+  textAlign: "center",
+  minWidth: "80px"
 };
 
 export const defaultCellStyle = {
