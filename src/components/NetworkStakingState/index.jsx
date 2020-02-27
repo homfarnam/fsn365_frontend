@@ -49,6 +49,8 @@ const columns = totalTickets => {
       title: "Tickets"
     },
     {
+      field: "tickes",
+      title: "Reward Possibility",
       render: row => (
         <span>{((row.tickets / totalTickets) * 100).toFixed(4) + "%"}</span>
       )
