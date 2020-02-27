@@ -1,11 +1,11 @@
 export default {
-  "0xd532370A091b19Cdd7Ef7EA9e09c9ADeCb193E3A": "Okex Exchange",
+  "0xd532370a091b19cdd7ef7ea9e09c9adecb193e3a": "Okex Exchange",
   "0xaeec0986B77Ef22de5BC15Db59544ce07945ea56": "Mxc Exchange",
   "0x88817ef0545ca562530f9347b20138edecfd8e30": "Hotbit Staking",
   "0x76c2ae4281fe1ee1a79ccbdda2516d4d7eb0eb37": "GoFSN 1",
   "0x6298d5d4094f7aea66a3ccb18ef4629d4d51e70a": "GoFSN 2",
   "0xBbD52cBC77C5345A70512051660f2F9d93A1668f": "Citex Exchange",
-  "0x986a2fca9eda0e06fbf7839b89bfc006ee2a23dd": "Bitmax Excahnge",
+  "0x986a2fca9eda0e06fbf7839b89bfc006ee2a23dd": "Bitmax Exchange",
   "0xb2a46485d73b47af2c7a62ed1868c48a557dddc0": "Fsnpool",
   "0x69f706e4d15a51c638365963b4ebfb7069473447": "Fusion Foundation 5",
   "0xa6abd573612d0945146dfcf69c8a31da94abae84": "Fusion Foundation 4",
