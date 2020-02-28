@@ -30,7 +30,9 @@ const fetchData = query =>
   new Promise(resolve => {
     const orderBy = query.orderBy;
     const sort =
-      orderBy && orderBy.field == "latestActiveTime" ? "time" : "fsnBalance";
+      orderBy && orderBy.field == "fsnBalanceIn"
+        ? "fsnBalanceIn"
+        : "fsnBalance";
     const { page = 1, pageSize = 10, orderDirection = "desc" } = query;
     const params = {
       page: page + 1,
@@ -65,7 +67,7 @@ const createColumns = () => {
       render: row => <FusionAddressLink address={row.address} />
     },
     {
-      filed: "fsnBalance",
+      field: "fsnBalance",
       title: "Fsn Balance",
       render: row => {
         let value = helpers.formatValue(row.fsnBalance);
@@ -73,15 +75,28 @@ const createColumns = () => {
       }
     },
     {
-      field: "latestActiveTime",
-      title: "Last Active At",
-      sorting: true,
+      field: "fsnBalanceIn",
+      title: "∞ TL FSN",
+      sortting: false,
       render: row => {
-        return (
-          <span>
-            {new Date(row.latestActiveTime * 1000).toLocaleDateString()}
-          </span>
-        );
+        let value = 0;
+        if (row.fsnBalanceIn) {
+          value = helpers.formatValue(row.fsnBalanceIn);
+        }
+        return <span>{value}</span>;
+      }
+    },
+    {
+      field: "fsnBalance",
+      title: "FSN Ownership",
+      sortting: false,
+      render: row => {
+        let value = row.fsnBalance;
+        if (row.fsnBalanceIn) {
+          value += row.fsnBalanceIn;
+        }
+        value = helpers.formatValue(value);
+        return <span>{value}</span>;
       }
     }
   ];

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "NODE_ENV=production next build",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "pm2 start npm --name next -- start"
   },
   "dependencies": {
     "@material-ui/core": "^4.8.1",
