@@ -13,8 +13,7 @@ const useStyles = makeStyles(({ breakpoints }) =>
       justifyContent: "space-between",
       break: "break-all",
       width: "100%",
-      alignItems: "center",
-      marginBottom: "1.75rem"
+      alignItems: "center"
     },
     field: {
       width: "100%",
@@ -26,7 +25,6 @@ const useStyles = makeStyles(({ breakpoints }) =>
 );
 
 export default function AddressOverview({ overview = {} }) {
-  console.log(overview);
   const classes = useStyles();
 
   const addressLabel = addressMap[overview.address];
@@ -59,13 +57,20 @@ export default function AddressOverview({ overview = {} }) {
           {overview.tlAssetHeld}
         </KeyValue>
       ) : null}
-      <KeyValue label="fsn balance" className={classes.field}>
+      <KeyValue label="FSN balance" className={classes.field}>
         {overview.fsnBalance === undefined
           ? null
           : `${overview.fsnBalance} FSN`}
       </KeyValue>
       {overview.fsnBalanceIn ? (
-        <KeyValue label={"∞ TL FSN"}>{overview.fsnBalanceIn}</KeyValue>
+        <KeyValue label={"∞ TL FSN"} className={classes.field}>
+          {overview.fsnBalanceIn} FSN
+        </KeyValue>
+      ) : null}
+      {overview.fsnBalanceIn + overview.fsnBalance ? (
+        <KeyValue label={"FSN ownership"} className={classes.field}>
+          {overview.fsnBalanceIn + overview.fsnBalance} FSN
+        </KeyValue>
       ) : null}
       {overview.latestActiveTime ? (
         <KeyValue label="Latest Active Time" className={classes.field}>
