@@ -26,6 +26,7 @@ const useStyles = makeStyles(({ breakpoints }) =>
 );
 
 export default function AddressOverview({ overview = {} }) {
+  console.log(overview);
   const classes = useStyles();
 
   const addressLabel = addressMap[overview.address];
@@ -63,6 +64,9 @@ export default function AddressOverview({ overview = {} }) {
           ? null
           : `${overview.fsnBalance} FSN`}
       </KeyValue>
+      {overview.fsnBalanceIn ? (
+        <KeyValue label={"∞ TL FSN"}>{overview.fsnBalanceIn}</KeyValue>
+      ) : null}
       {overview.latestActiveTime ? (
         <KeyValue label="Latest Active Time" className={classes.field}>
           <TimeAgo time={overview.latestActiveTime * 1000} />
