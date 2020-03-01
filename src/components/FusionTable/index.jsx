@@ -22,7 +22,7 @@ export const defaultHeaderStyle = {
 };
 
 export const defaultCellStyle = {
-  padding: ".625rem 0",
+  padding: ".625rem",
   verticalAlign: "top",
   borderTop: `1px solid #e7eaf3`,
   textAlign: "center"
