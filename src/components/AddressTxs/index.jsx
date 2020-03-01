@@ -42,14 +42,14 @@ export default function AddressTxs(props) {
         </p>
         <FormControl>
           <Select value={direction} onChange={handelChange}>
-            <MenuItem value={"from"}>
-              <small>
-                <TextStrong>Outgoing Txns</TextStrong>
-              </small>
-            </MenuItem>
             <MenuItem value={"to"}>
               <small>
                 <TextStrong>Incoming Txns</TextStrong>
+              </small>
+            </MenuItem>
+            <MenuItem value={"from"}>
+              <small>
+                <TextStrong>Outgoing Txns</TextStrong>
               </small>
             </MenuItem>
           </Select>
