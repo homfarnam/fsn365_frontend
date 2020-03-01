@@ -17,5 +17,6 @@ export default {
   "0xa9C66B3DbD01bb7d24928402cbD7CFb7Dd445dc3": "Wallet D",
   "0xffffffffffffffffffffffffffffffffffffffff": "Fusion Contract",
   "0xf01e34f541caa4a0a1fee65fa55bbf4c19869370": "Node Network",
-  "0xaF6f8bf8589B2ab3f14ce498D13025F85b09093e": "https://fusionmining.org/"
+  "0xaF6f8bf8589B2ab3f14ce498D13025F85b09093e": "https://fusionmining.org/",
+  "0x1c788e08d03d3182802ba29a40e9acb52fd2881f": "Hotbit Exchange"
 };
