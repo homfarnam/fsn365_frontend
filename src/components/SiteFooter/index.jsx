@@ -59,7 +59,7 @@ export default function SiteFooter() {
             <strong className={style.strong}>Fusion Network</strong>
           </OutLink>
           and
-          <OutLink href="https://github.com/fsn-dev" className={style.outlink}>
+          <OutLink href="https://fsn.dev/" className={style.outlink}>
             <strong className={style.strong}>FOSC</strong>
           </OutLink>
           .
