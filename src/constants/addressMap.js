@@ -18,5 +18,7 @@ export default {
   "0xffffffffffffffffffffffffffffffffffffffff": "Fusion Contract",
   "0xf01e34f541caa4a0a1fee65fa55bbf4c19869370": "Node Network",
   "0xaF6f8bf8589B2ab3f14ce498D13025F85b09093e": "https://fusionmining.org/",
-  "0x1c788e08d03d3182802ba29a40e9acb52fd2881f": "Hotbit Exchange"
+  "0x1c788e08d03d3182802ba29a40e9acb52fd2881f": "Hotbit Exchange",
+  "0x5e45f1f06ab3e58dd8fdfdcd81aefaab5bca2d60": "Mxc Staking",
+  "0x494a792d704e24309fd778641683502fd30f9913": "Rennassance Staking"
 };
