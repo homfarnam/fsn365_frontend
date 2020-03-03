@@ -90,7 +90,9 @@ export default function SearchBar(props) {
   const size = place === "home" ? "medium" : "small";
   const [searchType, setSearchType] = useState(options[0].type);
   const handelSearchType = e => {
-    setSearchType(e.target.value.trim());
+    const value = e.target.trim();
+    console.log(value);
+    setSearchType(value);
   };
   const [searchKeyword, setSearchKeyword] = useState("");
   const handelSearchkeyword = e => {
@@ -166,8 +168,9 @@ async function doSearch(type, keyword) {
   const searchType = resData.type;
   const searchResult = resData.result;
 
-  if (!searchResult) {
+  if (!searchResult || searchType == "all") {
     Router.push(`/search?keyword=${keyword}`);
+  } else {
+    window.location = `/${searchType}/${searchResult}`;
   }
-  window.location = `/${searchType}/${searchResult}`;
 }
