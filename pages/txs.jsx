@@ -64,6 +64,12 @@ export default function TxListPage({ params }) {
 }
 
 TxListPage.getInitialProps = async ({ query }) => {
+  if(query.from) {
+    query.from = query.from.toLowerCase();
+  }
+  if(query.to) {
+    query.to = query.to.toLowerCase();
+  }
   return {
     params: query
   };
