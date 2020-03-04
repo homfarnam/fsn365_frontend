@@ -12,7 +12,9 @@ export default function AssetListPage(props) {
   return (
     <>
       <PageHeading title="Assets" />
-      <Panel>
+      <Panel
+        style={{padding: '0'}}
+      >
         <FusionTable
           columns={columns}
           data={fetchAssets}
