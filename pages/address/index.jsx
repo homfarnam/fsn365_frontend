@@ -5,6 +5,7 @@ import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 import FusionAddressLink from "../../src/components/FusionAddressLink";
 import * as helpers from "../../src/libs/helpers";
+import TextStrong from '../../src/components/TextStrong';
 
 export default function AddressListPage() {
   const columns = createColumns();
@@ -14,7 +15,8 @@ export default function AddressListPage() {
       <Panel>
         <p>
           <strong>Notice:</strong>We only list address that holds more than one
-          FSN in wallet at this page.
+          <TextStrong>{" "}FSN ownership {" "}</TextStrong>
+           in wallet at this page.
         </p>
         <FusionTable
           data={fetchData}
