@@ -5,8 +5,8 @@ import TimeAgo from "../TimeAgo";
 
 const tableOptions = {
   toolbar: false,
-  pageSize: 5,
-  pageSizeOptions: [5, 10]
+  pageSizeOptions: [5, 10, 25],
+  pageSize: 5
 };
 
 export default function AddressHeldAssets({ assets = [] }) {
