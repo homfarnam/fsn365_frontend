@@ -2,13 +2,13 @@ import React from "react";
 import FusionTable from "../FusionTable";
 import fetch from "../../libs/fetch";
 import NavLink from "../NavLink";
-import TimeAgo from "../TimeAgo";
 import FusionAddressLink from "../FusionAddressLink";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import getConfig from "next/config";
 import TextStrong from "../TextStrong";
 import OutLink from "../OutLink";
 import * as helpser from "../../libs/helpers";
+import UTCTime from "../UTCTime";
 
 export default function Transactions(props) {
   const { tableOptions = {}, params = {} } = props;
@@ -57,10 +57,6 @@ const useStyles = makeStyles(({ palette }) =>
       display: "inline-block",
       maxWidth: "120px"
     },
-    timestamp: {
-      minWidth: "120px",
-      display: "inline-block"
-    },
     hint: {
       display: "flex",
       flexWrap: "wrap",
@@ -88,11 +84,7 @@ const createColumns = () => {
       field: "timestamp",
       title: "Time",
       sorting: false,
-      render: row => (
-        <span className={classes.timestamp}>
-          <TimeAgo time={row.timestamp * 1000} />
-        </span>
-      )
+      render: row => <UTCTime time={row.timestamp} />
     },
     {
       field: "block",
