@@ -19,6 +19,8 @@ export default {
   "0xf01e34f541caa4a0a1fee65fa55bbf4c19869370": "Node Network",
   "0xaF6f8bf8589B2ab3f14ce498D13025F85b09093e": "https://fusionmining.org/",
   "0x1c788e08d03d3182802ba29a40e9acb52fd2881f": "Hotbit Exchange",
-  "0x5e45f1f06ab3e58dd8fdfdcd81aefaab5bca2d60": "Mxc Staking",
-  "0x494a792d704e24309fd778641683502fd30f9913": "Rennassance Staking"
+  "0x5e45f1f06ab3e58dd8fdfdcd81aefaab5bca2d60": "MXC Staking",
+  "0x494a792d704e24309fd778641683502fd30f9913": "Rennassance Staking",
+  "0xac77a273b4df219912edac0a3e08c9d8e6452b8a": "Uppbit Exchange",
+  a0x9996c35cdb692de8a76397e83b9a30982f1b0692: "Bittrex Exchange"
 };
