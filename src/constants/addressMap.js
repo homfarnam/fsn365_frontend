@@ -1,6 +1,6 @@
 export default {
   "0xd532370a091b19cdd7ef7ea9e09c9adecb193e3a": "Okex Exchange",
-  "0xaeec0986B77Ef22de5BC15Db59544ce07945ea56": "Mxc Exchange",
+  "0xaeec0986B77Ef22de5BC15Db59544ce07945ea56": "MXC Exchange",
   "0x88817ef0545ca562530f9347b20138edecfd8e30": "Hotbit Staking",
   "0x76c2ae4281fe1ee1a79ccbdda2516d4d7eb0eb37": "GoFSN 1",
   "0x6298d5d4094f7aea66a3ccb18ef4629d4d51e70a": "GoFSN 2",
