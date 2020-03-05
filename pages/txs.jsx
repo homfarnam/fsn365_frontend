@@ -38,22 +38,22 @@ export default function TxListPage({ params }) {
         {hasAddressFilter ? (
           <p className={classes.hint}>
             <TextStrong className={classes.strong}>Notice: </TextStrong>We only provide
-            latest at most <prev className={classes.prev}></prev>
-            <TextStrong className={classes.strong}>10k non-ticket txs </TextStrong>{" "}
-            <prev className={classes.prev}></prev>for an address.
+            <prev className={classes.prev}></prev>
+            <TextStrong className={classes.strong}>10k non-ticket txns </TextStrong>{" "}
+            <prev className={classes.prev}></prev>for an address at most.
           </p>
         ) : null}
         {from ? (
           <p className={classes.hint}>
             <TextStrong className={classes.strong}>Outgoing </TextStrong>
-            <span className={classes.span}>txs for</span>{" "}
+            <span className={classes.span}>txns for</span>{" "}
             <FusionAddressLink address={from} />
           </p>
         ) : null}
         {to ? (
           <p className={classes.hint}>
             <TextStrong className={classes.strong}>Incoming </TextStrong>
-            <span className={classes.span}>txs for</span>{" "}
+            <span className={classes.span}>txns for</span>{" "}
             <FusionAddressLink address={to} />
           </p>
         ) : null}
