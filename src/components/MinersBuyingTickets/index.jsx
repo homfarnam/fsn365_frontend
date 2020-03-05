@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import FusionTable from "../FusionTable";
 import NavLink from "../NavLink";
-import TimeAgo from "../TimeAgo";
 import fetch from "../../libs/fetch";
 
 const useStyles = makeStyles(({ palette }) =>
@@ -17,6 +16,11 @@ const useStyles = makeStyles(({ palette }) =>
     hint: {
       textAlign: "right",
       marginTop: "0"
+    },
+    time: {
+      display: "inline-block",
+      minWidth: "240px",
+      textAlign: "center"
     }
   })
 );
@@ -91,22 +95,24 @@ const createColumns = () => {
       render: row => <NavLink href={`/block/${row.block}`}>{row.block}</NavLink>
     },
     {
-      field: "timestamp",
-      title: "Time",
-      sorting: false,
-      render: row => <TimeAgo time={row.timestamp * 1000} />
-    },
-    {
       field: "log",
       title: "StartTime",
       sorting: false,
-      render: row => <TimeAgo time={row.log && row.log.StartTime * 1000} />
+      render: row => (
+        <span className={classes.time}>
+          {new Date(row.timestamp * 1000).toUTCString()}
+        </span>
+      )
     },
     {
       field: "log",
       title: "ExpireTime",
       sorting: false,
-      render: row => <TimeAgo time={row.log && row.log.ExpireTime * 1000} />
+      render: row => (
+        <span className={classes.time}>
+          {new Date(row.timestamp * 1000).toUTCString()}
+        </span>
+      )
     }
   ];
 };
