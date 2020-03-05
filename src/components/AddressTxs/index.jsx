@@ -7,7 +7,7 @@ import Transactions from "../Transactions";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import TextStrong from "../TextStrong";
 
-const useStyles = makeStyles(({ palette }) =>
+const useStyles = makeStyles(() =>
   createStyles({
     hint: {
       display: "flex",
@@ -19,8 +19,8 @@ const useStyles = makeStyles(({ palette }) =>
 );
 
 export default function AddressTxs(props) {
-  const { address, txMade = 0 } = props;
-  const [direction] = useState("from");
+  const { address } = props;
+  const [direction] = useState("to");
   const handelChange = e => {
     const value = e.target.value;
     if (value == "from") {
