@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import FusionTable from "../FusionTable";
-import TimeAgo from "../TimeAgo";
 import fetch from "../../libs/fetch";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 export default function ActiveTickets({ miner }) {
   const [state, setState] = useState({ tickets: [] });
@@ -30,7 +30,7 @@ export default function ActiveTickets({ miner }) {
       cancel = true;
     };
   }, [miner]);
-
+  const columns = createColumns();
   return (
     <FusionTable
       data={state.tickets}
@@ -44,22 +44,47 @@ ActiveTickets.propTypes = {
   miner: PropTypes.string
 };
 
-const columns = [
-  {
-    field: "startTime",
-    title: "Start Time",
-    render: row => <TimeAgo time={row.startTime * 1000} />
-  },
-  {
-    field: "endTime",
-    title: "Expire Time",
-    sorting: false,
-    render: row => <TimeAgo time={row.expireTime * 1000} />
-  },
-  {
-    field: "value",
-    title: "Value",
-    sorting: false,
-    render: row => <span>{row.value}</span>
-  }
-];
+const useStyles = makeStyles(({ breakpoints }) =>
+  createStyles({
+    time: {
+      display: "inline-block",
+      minWidth: "240px",
+      textAlign: "center"
+    },
+    value: {
+      display: "inline-block",
+      minWidth: "80px",
+      textAlign: "center"
+    }
+  })
+);
+const createColumns = () => {
+  const style = useStyles();
+  return [
+    {
+      field: "startTime",
+      title: "Start Time",
+      render: row => (
+        <span className={style.time}>
+          {new Date(row.startTime * 1000).toUTCString()}
+        </span>
+      )
+    },
+    {
+      field: "expireTime",
+      title: "Expire Time",
+      sorting: false,
+      render: row => (
+        <span className={style.time}>
+          {new Date(row.expireTime * 1000).toUTCString()}
+        </span>
+      )
+    },
+    {
+      field: "value",
+      title: "Value",
+      sorting: false,
+      render: row => <span className={style.value}>{row.value} FSN</span>
+    }
+  ];
+};
