@@ -7,7 +7,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import getConfig from "next/config";
 import TextStrong from "../TextStrong";
 import OutLink from "../OutLink";
-import * as helpser from "../../libs/helpers";
+import * as helpers from "../../libs/helpers";
 import UTCTime from "../UTCTime";
 
 export default function Transactions(props) {
@@ -144,7 +144,6 @@ const createColumns = () => {
 
 const TxValue = props => {
   let { className = "", type } = props;
-  const style = useStyles();
   const { publicRuntimeConfig } = getConfig();
   const apiServer = publicRuntimeConfig.API_PATH;
 
@@ -158,11 +157,11 @@ const TxValue = props => {
     );
   }
 
-  let value = helpser.formatValue(props.value);
+  let value = helpers.formatValue(props.value);
 
   if (type == "GenAssetFunc") {
     return (
-      <span className={style.withElis}>
+      <span className={className}>
         <TextStrong>Issue </TextStrong>
         {value} <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
       </span>
@@ -171,7 +170,7 @@ const TxValue = props => {
 
   if (type == "AssetValueChangeFunc") {
     return (
-      <span className={style.withElis}>
+      <span className={className}>
         <TextStrong>{props.isInc ? "Issue " : "Destory "}</TextStrong>
         {value} <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
       </span>
@@ -180,7 +179,7 @@ const TxValue = props => {
 
   return (
     <>
-      <span className={style.withElis}>
+      <span className={className}>
         {value} <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
       </span>
     </>
