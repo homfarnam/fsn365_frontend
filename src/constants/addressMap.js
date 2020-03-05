@@ -22,5 +22,5 @@ export default {
   "0x5e45f1f06ab3e58dd8fdfdcd81aefaab5bca2d60": "MXC Staking",
   "0x494a792d704e24309fd778641683502fd30f9913": "Rennassance Staking",
   "0xac77a273b4df219912edac0a3e08c9d8e6452b8a": "Uppbit Exchange",
-  a0x9996c35cdb692de8a76397e83b9a30982f1b0692: "Bittrex Exchange"
+  "0x9996c35cdb692de8a76397e83b9a30982f1b0692": "Bittrex Exchange"
 };
