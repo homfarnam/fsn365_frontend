@@ -1,13 +1,10 @@
 import React from "react";
+import UTCTime from "../UTCTime";
 
 export default function Duration({ startTime, endTime }) {
-  const startTimeStr =
-    +startTime == 18446744073709552000
-      ? "Forever"
-      : new Date(startTime * 1000).toLocaleString();
-  const endTimeStr =
-    +endTime == 18446744073709552000
-      ? "Forever"
-      : new Date(endTime * 1000).toLocaleString();
-  return <i>{startTimeStr + " ~ " + endTimeStr}</i>;
+  return (
+    <>
+      <UTCTime time={startTime} />~ <UTCTime time={endTime} />
+    </>
+  );
 }
