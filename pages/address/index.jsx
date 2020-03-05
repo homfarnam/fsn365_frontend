@@ -6,6 +6,18 @@ import fetch from "../../src/libs/fetch";
 import FusionAddressLink from "../../src/components/FusionAddressLink";
 import * as helpers from "../../src/libs/helpers";
 import TextStrong from '../../src/components/TextStrong';
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() =>
+  createStyles({
+    label: {
+      display: "inline-block",
+      width: "98px",
+      textAlign: "center"
+    }
+  })
+);
+
 
 export default function AddressListPage() {
   const columns = createColumns();
@@ -61,6 +73,7 @@ const fetchData = query =>
   });
 
 const createColumns = () => {
+  const style = useStyles();
   return [
     {
       field: "address",
@@ -73,7 +86,7 @@ const createColumns = () => {
       title: "Fsn Balance",
       render: row => {
         let value = helpers.formatValue(row.fsnBalance);
-        return <span>{value}</span>;
+        return <span className={style.label}>{value}</span>;
       }
     },
     {
@@ -85,7 +98,7 @@ const createColumns = () => {
         if (row.fsnBalanceIn) {
           value = helpers.formatValue(row.fsnBalanceIn);
         }
-        return <span>{value}</span>;
+        return <span className={style.label}>{value}</span>;
       }
     },
     {
@@ -98,7 +111,7 @@ const createColumns = () => {
           value += row.fsnBalanceIn;
         }
         value = helpers.formatValue(value);
-        return <span>{value}</span>;
+        return <span className={style.label}>{value}</span>;
       }
     }
   ];
