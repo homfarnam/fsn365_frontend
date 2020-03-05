@@ -61,10 +61,10 @@ export default function AddressOverview({ overview = {} }) {
           <CopyToClipboard text={overview.address} onCopy={onCopy}>
             {copied ? (
               <span className={classes.okIcon}>
-                <CheckCircleIcon /> Copied
+                <CheckCircleIcon fontSize="small" /> Copied
               </span>
             ) : (
-              <FileCopyIcon className={classes.checkIcon} />
+              <FileCopyIcon className={classes.checkIcon} fontSize="small" />
             )}
           </CopyToClipboard>
         </span>
