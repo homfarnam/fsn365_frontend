@@ -1,7 +1,7 @@
 import React from "react";
 import FusionTable from "../FusionTable";
 import NavLink from "../NavLink";
-import TimeAgo from "../TimeAgo";
+import UTCTime from "../UTCTime";
 
 const tableOptions = {
   toolbar: false,
@@ -28,29 +28,13 @@ const columns = [
     field: "startTime",
     title: "Start At",
     sorting: false,
-    render: row => (
-      <span>
-        {row.startTime == 18446744073709552000 ? (
-          "Forever"
-        ) : (
-          <TimeAgo time={row.startTime * 1000} />
-        )}
-      </span>
-    )
+    render: row => <UTCTime time={row.startTime} />
   },
   {
     field: "endTime",
     title: "End At",
     sorting: false,
-    render: row => (
-      <span>
-        {row.endTime == 18446744073709552000 ? (
-          "Forever"
-        ) : (
-          <TimeAgo time={row.endTime * 1000} />
-        )}
-      </span>
-    )
+    render: row => <UTCTime time={row.endTime} />
   },
   {
     field: "value",

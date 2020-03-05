@@ -1,11 +1,11 @@
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/styles";
-import TimeAgo from "../TimeAgo";
 import NavLink from "../NavLink";
 import KeyValue from "../KeyValue";
 import getConfig from "next/config";
 import OutLink from "../OutLink";
+import UTCTime from "../UTCTime";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -43,10 +43,8 @@ export default function BlockOverview(props) {
           <NavLink href={`/block/${nextHeight}`}>Next</NavLink>
         </span>
       </KeyValue>
-      <KeyValue label="timestamp" className={classes.field}>
-        <span>
-          <TimeAgo time={block.timestamp * 1000} className={classes.field} />
-        </span>
+      <KeyValue label="age" className={classes.field}>
+        <UTCTime time={block.timestamp} />
       </KeyValue>
       <KeyValue label="Transactions" className={classes.field}>
         {block.txCount ? (

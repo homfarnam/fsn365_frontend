@@ -1,11 +1,11 @@
 import React from "react";
 import FusionTable from "../FusionTable";
 import NavLink from "../NavLink";
-import TimeAgo from "../TimeAgo";
 import fetch from "../../libs/fetch";
 import FusionAddressLink from "../FusionAddressLink";
 import getConfig from "next/config";
 import OutLink from "../OutLink";
+import UTCTime from "../UTCTime";
 
 export default function MinedBlocks(props) {
   const { tableOptions = {}, miner } = props;
@@ -57,17 +57,7 @@ const columns = [
     field: "timestamp",
     title: "Age",
     sorting: false,
-    render: row => {
-      const style = {
-        display: "inline-block",
-        minWidth: "120px"
-      };
-      return (
-        <span style={style}>
-          <TimeAgo time={row.timestamp * 1000} />
-        </span>
-      );
-    }
+    render: row => <UTCTime time={row.timestamp} />
   },
   {
     field: "miner",
