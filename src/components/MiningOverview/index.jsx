@@ -37,7 +37,7 @@ export default function MiningOverview({ miner }) {
         .then(res => res.json())
         .then(res => ({ overview: res.data, msg: "" }))
         .catch(e => ({
-          msg: "Something went wrong, please refresh page!",
+          msg: `Something went wrong. Either ${miner} is not a miner or the fsn.dev/api is down.`,
           overview: {}
         }))
         .then(data => {
