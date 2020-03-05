@@ -50,7 +50,7 @@ const createQuery = params => ({ page, pageSize }) => {
 
 const useStyles = makeStyles(({ palette }) =>
   createStyles({
-    isHash: {
+    withElis: {
       overflow: "hidden",
       textOverflow: "ellipsis",
       whiteSpace: "nowrap",
@@ -76,7 +76,7 @@ const createColumns = () => {
       sorting: false,
       render: row => (
         <NavLink href={`/tx/${row.hash}`} prefetch={false}>
-          <span className={classes.isHash}>{row.hash}</span>
+          <span className={classes.withElis}>{row.hash}</span>
         </NavLink>
       )
     },
@@ -91,7 +91,7 @@ const createColumns = () => {
       title: "Block",
       sorting: false,
       render: row => (
-        <NavLink href={`/block/${row.block}`} className={classes.isHash}>
+        <NavLink href={`/block/${row.block}`} className={classes.withElis}>
           {row.block}
         </NavLink>
       )
@@ -101,7 +101,7 @@ const createColumns = () => {
       title: "From",
       sorting: false,
       render: row => (
-        <FusionAddressLink address={row.from} className={classes.isHash} />
+        <FusionAddressLink address={row.from} className={classes.withElis} />
       )
     },
     {
@@ -109,7 +109,7 @@ const createColumns = () => {
       title: "To",
       sorting: false,
       render: row => (
-        <FusionAddressLink address={row.to} className={classes.isHash} />
+        <FusionAddressLink address={row.to} className={classes.withElis} />
       )
     },
     {
@@ -131,7 +131,11 @@ const createColumns = () => {
           return <span>{row.value}</span>;
         }
         return (
-          <TxValue {...row.value} type={row.type} className={classes.isHash} />
+          <TxValue
+            {...row.value}
+            type={row.type}
+            className={classes.withElis}
+          />
         );
       }
     }
@@ -140,7 +144,7 @@ const createColumns = () => {
 
 const TxValue = props => {
   let { className = "", type } = props;
-
+  const style = useStyles();
   const { publicRuntimeConfig } = getConfig();
   const apiServer = publicRuntimeConfig.API_PATH;
 
@@ -158,7 +162,7 @@ const TxValue = props => {
 
   if (type == "GenAssetFunc") {
     return (
-      <span>
+      <span className={style.withElis}>
         <TextStrong>Issue </TextStrong>
         {value} <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
       </span>
@@ -167,7 +171,7 @@ const TxValue = props => {
 
   if (type == "AssetValueChangeFunc") {
     return (
-      <span>
+      <span className={style.withElis}>
         <TextStrong>{props.isInc ? "Issue " : "Destory "}</TextStrong>
         {value} <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
       </span>
@@ -176,7 +180,7 @@ const TxValue = props => {
 
   return (
     <>
-      <span>
+      <span className={style.withElis}>
         {value} <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
       </span>
     </>
