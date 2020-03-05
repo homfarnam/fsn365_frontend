@@ -17,6 +17,7 @@
     "next": "latest",
     "prop-types": "latest",
     "react": "latest",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "latest",
     "react-timeago": "^4.4.0"
   },
