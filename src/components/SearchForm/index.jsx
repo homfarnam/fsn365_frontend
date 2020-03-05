@@ -90,8 +90,7 @@ export default function SearchBar(props) {
   const size = place === "home" ? "medium" : "small";
   const [searchType, setSearchType] = useState(options[0].type);
   const handelSearchType = e => {
-    const value = e.target.trim();
-    console.log(value);
+    const value = e.target.value.trim();
     setSearchType(value);
   };
   const [searchKeyword, setSearchKeyword] = useState("");
