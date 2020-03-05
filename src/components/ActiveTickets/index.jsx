@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import FusionTable from "../FusionTable";
 import fetch from "../../libs/fetch";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import UTCTime from "../UTCTime";
 
 export default function ActiveTickets({ miner }) {
   const [state, setState] = useState({ tickets: [] });
@@ -44,13 +45,8 @@ ActiveTickets.propTypes = {
   miner: PropTypes.string
 };
 
-const useStyles = makeStyles(({ breakpoints }) =>
+const useStyles = makeStyles(({}) =>
   createStyles({
-    time: {
-      display: "inline-block",
-      minWidth: "240px",
-      textAlign: "center"
-    },
     value: {
       display: "inline-block",
       minWidth: "80px",
@@ -64,21 +60,13 @@ const createColumns = () => {
     {
       field: "startTime",
       title: "Start Time",
-      render: row => (
-        <span className={style.time}>
-          {new Date(row.startTime * 1000).toUTCString()}
-        </span>
-      )
+      render: row => <UTCTime time={row.startTime} />
     },
     {
       field: "expireTime",
       title: "Expire Time",
       sorting: false,
-      render: row => (
-        <span className={style.time}>
-          {new Date(row.expireTime * 1000).toUTCString()}
-        </span>
-      )
+      render: row => <UTCTime time={row.expireTime} />
     },
     {
       field: "value",

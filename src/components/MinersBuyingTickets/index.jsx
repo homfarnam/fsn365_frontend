@@ -3,6 +3,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import FusionTable from "../FusionTable";
 import NavLink from "../NavLink";
 import fetch from "../../libs/fetch";
+import UTCTime from "../UTCTime";
 
 const useStyles = makeStyles(({ palette }) =>
   createStyles({
@@ -16,11 +17,6 @@ const useStyles = makeStyles(({ palette }) =>
     hint: {
       textAlign: "right",
       marginTop: "0"
-    },
-    time: {
-      display: "inline-block",
-      minWidth: "240px",
-      textAlign: "center"
     }
   })
 );
@@ -98,21 +94,13 @@ const createColumns = () => {
       field: "log",
       title: "StartTime",
       sorting: false,
-      render: row => (
-        <span className={classes.time}>
-          {new Date(row.timestamp * 1000).toUTCString()}
-        </span>
-      )
+      render: row => <UTCTime time={row.log.StartTime} />
     },
     {
       field: "log",
       title: "ExpireTime",
       sorting: false,
-      render: row => (
-        <span className={classes.time}>
-          {new Date(row.timestamp * 1000).toUTCString()}
-        </span>
-      )
+      render: row => <UTCTime time={row.log.ExpireTime} />
     }
   ];
 };
