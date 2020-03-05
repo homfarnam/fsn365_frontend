@@ -1,5 +1,4 @@
 import React from "react";
-import TimeAgo from "../TimeAgo";
 import NavLink from "../NavLink";
 import KeyValue from "../KeyValue";
 import FusionAddressLink from "../FusionAddressLink";
@@ -7,6 +6,7 @@ import Duration from "../Duration";
 import getConfig from "next/config";
 import OutLink from "../OutLink";
 import StatusText from "../StatusText";
+import UTCTime from "../UTCTime";
 
 export default function TxOverview(props) {
   const { tx } = props;
@@ -90,10 +90,7 @@ export default function TxOverview(props) {
         <FusionAddressLink address={tx.to} />
       </KeyValue>
       <KeyValue label="Time">
-        <span>
-          <TimeAgo time={tx.timestamp * 1000}></TimeAgo> (
-          {new Date(tx.timestamp * 1000).toUTCString()})
-        </span>
+        <UTCTime time={tx.timestamp} />
       </KeyValue>
     </div>
   );
