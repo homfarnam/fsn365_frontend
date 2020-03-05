@@ -56,19 +56,21 @@ const createQuery = miner => ({ page, pageSize }) =>
       .then(res => res.json())
       .then(res => res.data)
       .then(data => {
-        resolve({
-          data: data,
-          page: page,
-          totalCount: 1000
-        });
+        if (data) {
+          return {
+            data: data,
+            page: page,
+            totalCount: 1000
+          };
+        }
+        throw new Error();
       })
-      .catch(e => {
-        resolve({
-          data: [],
-          page: 1,
-          totalCount: 0
-        });
-      });
+      .catch(e => ({
+        data: [],
+        page: 0,
+        totalCount: 0
+      }))
+      .then(data => resolve(data));
   });
 
 const createColumns = () => {

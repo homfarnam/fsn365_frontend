@@ -3,10 +3,11 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import KeyValue from "../KeyValue";
 import Panel from "../Panel";
-import TimeAgo from "../TimeAgo";
 import fetch from "../../libs/fetch";
 import NavLink from "../NavLink";
 import StatusText from "../StatusText";
+import OutLink from "../OutLink";
+import UTCTime from "../UTCTime";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -26,8 +27,8 @@ const useStyles = makeStyles(({ breakpoints }) =>
 );
 
 export default function MiningOverview({ miner }) {
-  const [state, setState] = useState({
-    msg: "loading",
+  const [data, setState] = useState({
+    state: "loading",
     overview: {}
   });
   useEffect(() => {
@@ -35,10 +36,15 @@ export default function MiningOverview({ miner }) {
     const runEffect = () => {
       fetch(`/staking/${miner}`)
         .then(res => res.json())
-        .then(res => ({ overview: res.data, msg: "" }))
+        .then(res => {
+          if (res.data) {
+            return { overview: res.data, state: "success" };
+          }
+          throw new Error();
+        })
         .catch(e => ({
-          msg: `Something went wrong. Either ${miner} is not a miner or the fsn.dev/api is down.`,
-          overview: {}
+          overview: {},
+          state: "error"
         }))
         .then(data => {
           setState(data);
@@ -49,18 +55,27 @@ export default function MiningOverview({ miner }) {
       cancel = true;
     };
   }, [miner]);
-  const { msg, overview } = state;
+  const { state, overview } = data;
   const classes = useStyles();
   return (
     <Panel title="Overview">
-      {msg == "loading" ? (
-        <CircularProgress size={20} />
-      ) : (
-        <strong>
-          <StatusText isOk={msg == "loading"}>{msg}</StatusText>
-        </strong>
-      )}
-      {!msg && (
+      {state == "loading" && <CircularProgress size={20} />}
+      {state == "error" ? (
+        <>
+          <strong>
+            <StatusText isOk={state !== "error"}>
+              Something went wrong.
+            </StatusText>
+          </strong>
+          <br></br>
+          Either because <i>{miner}</i> is not a miner or{" "}
+          <OutLink href={"https://fsn.dev/api"}>
+            <i>https://fsn.dev/api</i>
+          </OutLink>{" "}
+          out of service.
+        </>
+      ) : null}
+      {state == "success" && (
         <div className={classes.overview}>
           <KeyValue label="Address" className={classes.field}>
             <NavLink href={`/address/${overview.address}`}>
@@ -96,7 +111,7 @@ export default function MiningOverview({ miner }) {
             className={classes.field}
           />
           <KeyValue label="Latest Mined Time" className={classes.field}>
-            <TimeAgo time={overview.latestMinedTime * 1000} />
+            <UTCTime time={overview.latestBlockTime} />
           </KeyValue>
         </div>
       )}
