@@ -28,8 +28,11 @@ const columns = [
     field: "value",
     title: "Quantity",
     sorting: false,
-    render: row => (
-      <span className="asset-quantity">{row.value.toFixed(2)}</span>
-    )
+    render: row => {
+      if (row.value) {
+        return <span className="asset-quantity">{row.value.toFixed(2)}</span>;
+      }
+      return null;
+    }
   }
 ];
