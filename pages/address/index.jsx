@@ -26,9 +26,9 @@ export default function AddressListPage() {
       <PageHeading title="Fusion Address" />
       <Panel>
         <p>
-          <strong>Notice:</strong>We only list address that holds more than one
+          <strong>Notice:</strong>We only list addresses that hold one or more
           <TextStrong>{" "}FSN ownership {" "}</TextStrong>
-           in wallet at this page.
+          at this page.
         </p>
         <FusionTable
           data={fetchData}
@@ -43,10 +43,12 @@ export default function AddressListPage() {
 const fetchData = query =>
   new Promise(resolve => {
     const orderBy = query.orderBy;
-    const sort =
-      orderBy && orderBy.field == "fsnBalanceIn"
-        ? "fsnBalanceIn"
-        : "fsnBalance";
+    let sort;
+    if(!orderBy) {
+      sort = 'fsn'
+    } else {
+      sort  = orderBy.field
+    }
     const { page = 1, pageSize = 10, orderDirection = "desc" } = query;
     const params = {
       page: page + 1,
@@ -76,40 +78,37 @@ const createColumns = () => {
   const style = useStyles();
   return [
     {
-      field: "address",
+      field: "id",
       title: "Address",
       sorting: false,
-      render: row => <FusionAddressLink address={row.address} />
+      render: row => <FusionAddressLink address={row.id} />
     },
     {
-      field: "fsnBalance",
-      title: "Fsn Balance",
+      field: "fsn",
+      title: "FSN Balance",
       render: row => {
-        let value = helpers.formatValue(row.fsnBalance);
+        let value = helpers.formatValue(row.fsn);
         return <span className={style.label}>{value}</span>;
       }
     },
     {
-      field: "fsnBalanceIn",
+      field: "fsnIn",
       title: "∞ TL FSN",
       sortting: false,
       render: row => {
         let value = 0;
-        if (row.fsnBalanceIn) {
-          value = helpers.formatValue(row.fsnBalanceIn);
+        if (row.fsnIn) {
+          value = helpers.formatValue(row.fsnIn);
         }
         return <span className={style.label}>{value}</span>;
       }
     },
     {
-      field: "fsnBalance",
+      field: "fsnOwn",
       title: "FSN Ownership",
       sortting: false,
       render: row => {
-        let value = row.fsnBalance;
-        if (row.fsnBalanceIn) {
-          value += row.fsnBalanceIn;
-        }
+        let value = row.fsnOwn || 0;
         value = helpers.formatValue(value);
         return <span className={style.label}>{value}</span>;
       }
