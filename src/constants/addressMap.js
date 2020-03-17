@@ -25,7 +25,7 @@ export default {
   "0x9996c35cdb692de8a76397e83b9a30982f1b0692": "BITTREX",
   "0x23cfd2a6c890d7904289ba28526f019607628f03": "FOUNDATION",
   "0x83a7c259e944a21dcad78d328c238b8147db87e0": "BIBOX",
-  "0x9c48c796cb0bed51a14291bc8cc56dab5aed7b5c": "Foundation",
+  "0x9c48c796cb0bed51a14291bc8cc56dab5aed7b5c": "FOUNDATION",
   "0x0Ac469cf34C4d65515E4eF27eAF0F71F15C5A2fd": "Foundation",
   "0xd2452651834e8f0c19c9d85e0bf09fe99283dabc": "Foundation Miner",
   "0x7da669ea4234473e224a8f5a5f6257729e6f03cd": "Foundation Miner",

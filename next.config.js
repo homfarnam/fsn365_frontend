@@ -14,4 +14,5 @@ module.exports ={
     autoPrerender: true,
   },
   compress: true,
+  exportTrailingSlash: true
 };
