@@ -6,7 +6,8 @@ import FusionAddressLink from "../../src/components/FusionAddressLink";
 import fetch from "../../src/libs/fetch";
 import NavLink from "../../src/components/NavLink";
 import OutLink from '../../src/components/OutLink';
-import StatusText from '../../src/components/StatusText'
+import StatusText from '../../src/components/StatusText';
+import UTCTime from '../../src/components/UTCTime';
 
 export default function AssetPage({ asset = {} }) {
   return (
@@ -29,14 +30,17 @@ export default function AssetPage({ asset = {} }) {
           <FusionAddressLink address={asset.issuer} />
         </KeyValue>
         <KeyValue label="Issue Height">
-          {asset.height ? (
-          <NavLink href={`/block/${asset.height}`}>{asset.height}</NavLink>
+          {asset.issueBk ? (
+          <NavLink href={`/block/${asset.issueBk}`}>{asset.issueBk}</NavLink>
           ) : (
             <OutLink href="https://en.bitcoin.it/wiki/Genesis_block">
               Genesis Block
             </OutLink>
           )}
         </KeyValue>
+          <KeyValue label={"Issue Time"}>
+            <UTCTime time={asset.issueTime} />
+          </KeyValue>
         <KeyValue label="Verified">
           {asset.verified ? (
             <StatusText>
