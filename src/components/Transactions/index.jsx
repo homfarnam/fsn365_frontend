@@ -163,7 +163,8 @@ const TxValue = props => {
     return (
       <span className={className}>
         <TextStrong>Issue </TextStrong>
-        {value} <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
+        {value}{" "}
+        <NavLink href={`/asset/${props.assetID}`}>{props.symbol}</NavLink>
       </span>
     );
   }
@@ -172,7 +173,8 @@ const TxValue = props => {
     return (
       <span className={className}>
         <TextStrong>{props.isInc ? "Issue " : "Destory "}</TextStrong>
-        {value} <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
+        {value}{" "}
+        <NavLink href={`/asset/${props.assetID}`}>{props.symbol}</NavLink>
       </span>
     );
   }
@@ -180,7 +182,8 @@ const TxValue = props => {
   return (
     <>
       <span className={className}>
-        {value} <NavLink href={`/asset/${props.assetID}`}>{props.coin}</NavLink>
+        {value}{" "}
+        <NavLink href={`/asset/${props.assetID}`}>{props.symbol}</NavLink>
       </span>
     </>
   );
