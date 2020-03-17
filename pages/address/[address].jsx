@@ -16,7 +16,7 @@ import AddressOverview from "../../src/components/AddressOverview";
 export default function AddressDetailPage(props) {
   const { address, tab, overview = {} } = props;
 
-  if (!overview.address) {
+  if (!overview.id) {
     return (
       <>
         <PageHeading title="Address Detail" />
@@ -51,9 +51,9 @@ export default function AddressDetailPage(props) {
       .catch(e => {});
   }, [address]);
 
-  const hasAssets = overview.assetHeld;
-  const hasTlAssets = overview.tlAssetHeld;
-  const publicAddress = overview.address;
+  const hasAssets = overview.assetsHeld;
+  const hasTlAssets = overview.tlAssetsHeld;
+  const publicAddress = overview.id;
   return (
     <>
       <PageHeading title="Address Detail" />
@@ -105,7 +105,7 @@ AddressDetailPage.getInitialProps = async ({ query }) => {
   }
   const overview = await fetch(`/address/${address}`)
     .then(res => res.json())
-    .then(res => res.data)
+    .then(res => res.data || {})
     .catch(e => ({}));
 
   return { address: query.address, overview };

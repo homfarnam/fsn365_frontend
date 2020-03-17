@@ -19,9 +19,7 @@ const columns = [
     title: "Asset",
     sorting: false,
     render: row => (
-      <NavLink href={`/asset/${row.assetID}`}>
-        {row.symbol}({row.name})
-      </NavLink>
+      <NavLink href={`/asset/${row.assetID}`}>{row.symbol}</NavLink>
     )
   },
   {

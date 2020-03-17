@@ -7,6 +7,7 @@ import TextStrong from "../TextStrong";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import NavLink from "../NavLink";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -51,14 +52,19 @@ export default function AddressOverview({ overview = {} }) {
       t1 = null;
     }, duration);
   };
-  const addressLabel = addressMap[overview.address];
+  const addressLabel = addressMap[overview.id];
 
   return (
     <div className={classes.root}>
       <KeyValue label="address" className={classes.field}>
         <span className={classes.withIcon}>
-          {overview.address}
-          <CopyToClipboard text={overview.address} onCopy={onCopy}>
+          {overview.id}
+          {addressLabel ? (
+            <>
+              (<TextStrong>{addressLabel}</TextStrong>)
+            </>
+          ) : null}
+          <CopyToClipboard text={overview.id} onCopy={onCopy}>
             {copied ? (
               <span className={classes.okIcon}>
                 <CheckCircleIcon fontSize="small" /> Copied
@@ -69,46 +75,44 @@ export default function AddressOverview({ overview = {} }) {
           </CopyToClipboard>
         </span>
       </KeyValue>
-      {addressLabel ? (
-        <KeyValue label="Label" className={classes.field}>
-          <TextStrong>{addressLabel}</TextStrong>
-        </KeyValue>
-      ) : null}
       {overview.san ? (
         <KeyValue
-          label="Short Address"
+          label={"Short Address"}
           value={overview.san}
           className={classes.field}
-        />
+        ></KeyValue>
       ) : null}
-      {overview.assetHeld ? (
-        <KeyValue label="Assets Held" className={classes.field}>
-          {overview.assetHeld}
+      {overview.bks ? (
+        <KeyValue label={"Mined Blocks"} className={classes.field}>
+          <NavLink href={`/staking/${overview.id}`}>{overview.bks}</NavLink>
         </KeyValue>
       ) : null}
-      {overview.tlAssetHeld ? (
+      {overview.assetsHeld ? (
+        <KeyValue label="Assets Held" className={classes.field}>
+          {overview.assetsHeld}
+        </KeyValue>
+      ) : null}
+      {overview.tlAssetsHeld ? (
         <KeyValue label="TimeLocked Assets Held" className={classes.field}>
-          {overview.tlAssetHeld}
+          {overview.tlAssetsHeld}
         </KeyValue>
       ) : null}
       <KeyValue label="FSN balance" className={classes.field}>
-        {overview.fsnBalance === undefined
-          ? null
-          : `${overview.fsnBalance} FSN`}
+        {overview.fsn === undefined ? null : `${overview.fsn} FSN`}
       </KeyValue>
-      {overview.fsnBalanceIn ? (
+      {overview.fsnIn ? (
         <KeyValue label={"∞ TL FSN"} className={classes.field}>
-          {overview.fsnBalanceIn} FSN
+          {overview.fsnIn} FSN
         </KeyValue>
       ) : null}
-      {overview.fsnBalanceIn + overview.fsnBalance ? (
+      {overview.fsnOwn ? (
         <KeyValue label={"FSN ownership"} className={classes.field}>
-          {overview.fsnBalanceIn + overview.fsnBalance} FSN
+          {overview.fsnOwn} FSN
         </KeyValue>
       ) : null}
-      {overview.latestActiveTime ? (
+      {overview.lActTime ? (
         <KeyValue label="Latest Active Time" className={classes.field}>
-          <TimeAgo time={overview.latestActiveTime * 1000} />
+          <TimeAgo time={overview.lActTime * 1000} />
         </KeyValue>
       ) : null}
     </div>
