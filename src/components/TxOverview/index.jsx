@@ -43,11 +43,11 @@ export default function TxOverview(props) {
       {valueData.ticket ? (
         <KeyValue label={"Ticket ID"}>{valueData.ticket}</KeyValue>
       ) : null}
-      {valueData.startTime ? (
+      {valueData.endTime || valueData.expireTime ? (
         <KeyValue label="Duration">
           <Duration
             startTime={valueData.startTime}
-            endTime={valueData.endTime}
+            endTime={valueData.endTime || valueData.expireTime}
           />
         </KeyValue>
       ) : null}
