@@ -29,14 +29,12 @@ export default function BlockItem({ bk = {} }) {
             <b className={style.prefix}>Miner</b>
             <FusionAddressLink address={bk.miner} className={style.isHash} />
           </span>
-          {bk.txCount ? (
-            <OutLink
-              href={`${API_PATH}tx?block=${bk.height}&size=${bk.txCount}`}
-            >
-              {bk.txCount}txn{bk.txCount > 1 ? "s" : ""}
+          {bk.txns ? (
+            <OutLink href={`${API_PATH}tx?block=${bk.height}&size=${bk.txns}`}>
+              {bk.txns}txn{bk.txns > 1 ? "s" : ""}
             </OutLink>
           ) : (
-            bk.txCount + " txn"
+            bk.txns + " txn"
           )}{" "}
           in block.
         </div>
