@@ -66,17 +66,15 @@ const columns = [
     render: row => <FusionAddressLink address={row.miner} miner={true} />
   },
   {
-    dataField: "txCount",
+    dataField: "txns",
     title: "Txn",
     sorting: false,
     render: row => {
       const { publicRuntimeConfig } = getConfig();
       const apiServer = publicRuntimeConfig.API_PATH;
-      const renderEle = row.txCount ? (
-        <OutLink
-          href={`${apiServer}tx?block=${row.height}&size=${row.txCount}`}
-        >
-          {row.txCount}
+      const renderEle = row.txns ? (
+        <OutLink href={`${apiServer}tx?block=${row.height}&size=${row.txns}`}>
+          {row.txns}
         </OutLink>
       ) : (
         <>0</>
