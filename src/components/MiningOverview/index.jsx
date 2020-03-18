@@ -102,16 +102,16 @@ export default function MiningOverview({ miner }) {
           ) : null}
           <KeyValue
             label="Rewards To Date"
-            value={overview.totalRewards.toFixed(2) + " FSN"}
+            value={overview.rewards.toFixed(2) + " FSN"}
             className={classes.field}
           />
           <KeyValue
             label="Mined Blocks"
-            value={overview.totalBlocks}
+            value={overview.bks}
             className={classes.field}
           />
-          <KeyValue label="Latest Mined Time" className={classes.field}>
-            <UTCTime time={overview.latestBlockTime} />
+          <KeyValue label="Latest Mining Time" className={classes.field}>
+            <UTCTime time={overview.lBkTime} />
           </KeyValue>
         </div>
       )}

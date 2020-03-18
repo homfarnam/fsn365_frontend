@@ -53,7 +53,7 @@ export default function StakingPage() {
   }, []);
     
 
-  const { summary, stakeInfo, error, historicalMiners } = state;
+  const { summary, stakeInfo, error, allMiners } = state;
   return (
     <>
       <PageHeading title={"Fusion Staking"} />
@@ -69,8 +69,8 @@ export default function StakingPage() {
           ) : null}
         </KeyValue>
         <KeyValue label="Historical Miners ">
-          {historicalMiners ? (
-            <span>{historicalMiners}</span>
+          {allMiners ? (
+            <span>{allMiners}</span>
           ) : null}
         </KeyValue>
       </Panel>
