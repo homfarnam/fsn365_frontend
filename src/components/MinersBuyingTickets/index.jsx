@@ -52,7 +52,7 @@ const createQuery = miner => ({ page, pageSize }) =>
       size: pageSize,
       miner
     };
-    fetch(`/staking/${miner}/ticket_txs`, params)
+    fetch(`/staking/${miner}/txns`, params)
       .then(res => res.json())
       .then(res => res.data)
       .then(data => {
