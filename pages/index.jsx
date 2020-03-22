@@ -19,7 +19,7 @@ export default class HomePage extends React.Component {
         .then(data => {
           this.setState(data);
         })
-    }, 13 * 1000);
+    }, 3.5 * 1000);
   }
 
   render() {
@@ -41,7 +41,7 @@ HomePage.getInitialProps = async ({}) => {
   };
 };
 
-function fetchRealTimeData() {
+async function fetchRealTimeData() {
   return fetch("/latest")
     .then(res => res.json())
     .then(res => res.data)
