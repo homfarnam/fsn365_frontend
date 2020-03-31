@@ -26,13 +26,13 @@ const columns = [
     field: "startTime",
     title: "Start At",
     sorting: false,
-    render: row => <UTCTime time={row.startTime} />
+    render: row => <UTCTime time={row.startTime} timeago={false} />
   },
   {
     field: "endTime",
     title: "End At",
     sorting: false,
-    render: row => <UTCTime time={row.endTime} />
+    render: row => <UTCTime time={row.endTime} timeago={false} />
   },
   {
     field: "value",
