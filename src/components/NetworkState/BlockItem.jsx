@@ -30,7 +30,7 @@ export default function BlockItem({ bk = {} }) {
             <FusionAddressLink address={bk.miner} className={style.isHash} />
           </span>
           {bk.txns ? (
-            <OutLink href={`${API_PATH}tx?block=${bk.height}&size=${bk.txns}`}>
+            <OutLink href={`${API_PATH}txn?bk=${bk.height}&size=${bk.txns}`}>
               {bk.txns}txn{bk.txns > 1 ? "s" : ""}
             </OutLink>
           ) : (
