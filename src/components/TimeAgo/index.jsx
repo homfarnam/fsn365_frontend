@@ -25,6 +25,12 @@ function formatter() {
     case "hour":
       desc = "hr";
       break;
+    case "week":
+      desc = "wk";
+      break;
+    case "month":
+      desc = "mo";
+      break;
     default:
       break;
   }
