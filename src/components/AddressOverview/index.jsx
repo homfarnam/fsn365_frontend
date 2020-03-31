@@ -73,6 +73,11 @@ export default function AddressOverview({ overview = {} }) {
           </CopyToClipboard>
         </span>
       </KeyValue>
+      {overview.contract ? (
+        <KeyValue label={"Contract Address"} className={classes.field}>
+          Yes
+        </KeyValue>
+      ) : null}
       {overview.san ? (
         <KeyValue
           label={"Short Address"}
