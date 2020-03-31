@@ -149,9 +149,9 @@ const createColumns = address => {
       render: row => {
         if (!address) return <ArrowRightAltIcon className={classes.arraw} />;
         return row.from == address ? (
-          <span className={`${classes.type} ${classes.in}`}>Out</span>
+          <span className={`${classes.type} ${classes.out}`}>Out</span>
         ) : (
-          <span className={`${classes.type} ${classes.out}`}>In</span>
+          <span className={`${classes.type} ${classes.in}`}>In</span>
         );
       }
     },
