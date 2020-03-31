@@ -33,14 +33,14 @@ AssetListPage.getInitialProps = async ({ query }) => {
 
 const createQuery = query => ({ page, pageSize }) =>
   new Promise(resolve => {
-    const pageQuery = `?page=${page + 1}&size=${pageSize}`;
     const params = {
       ...query,
       page: page + 1,
       size: pageSize
     };
-    fetch(`/asset`, params)
+    fetch(`assets`, params)
       .then(res => res.json())
+      .then(res => res.data)
       .then(data => {
         resolve({
           data: data.data,
