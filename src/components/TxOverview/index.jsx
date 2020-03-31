@@ -10,13 +10,13 @@ import UTCTime from "../UTCTime";
 
 export default function TxOverview(props) {
   const { tx } = props;
-  const valueData = tx.value;
+  const valueData = tx.info;
   const { publicRuntimeConfig } = getConfig();
   const apiServer = publicRuntimeConfig.API_PATH;
   return (
     <div className="tx-overview">
       <KeyValue label="hash">
-        <OutLink href={`${apiServer}tx/${tx.hash}/detail`}>{tx.hash}</OutLink>
+        <OutLink href={`${apiServer}txn/${tx.hash}/detail`}>{tx.hash}</OutLink>
       </KeyValue>
       {valueData.lockType ? (
         <KeyValue label={"Lock Type"}>{valueData.lockType}</KeyValue>
@@ -26,10 +26,10 @@ export default function TxOverview(props) {
           {valueData.value ? +valueData.value : ""}{" "}
           {valueData.assetID ? (
             <NavLink href={`/asset/${valueData.assetID}`}>
-              {valueData.coin}
+              {valueData.symbol}
             </NavLink>
           ) : (
-            <span>{valudData.coin}</span>
+            <span>{valudData.symbol}</span>
           )}
         </KeyValue>
       ) : null}
@@ -54,7 +54,7 @@ export default function TxOverview(props) {
       {tx.type == "GenAssetFunc" ? (
         <KeyValue label="Generated Asset">
           <NavLink href={`/asset/${valueData.assetID}`}>
-            {valueData.coin}
+            {valueData.symbol}
           </NavLink>
         </KeyValue>
       ) : null}
@@ -79,7 +79,7 @@ export default function TxOverview(props) {
         </strong>
       </KeyValue>
       <KeyValue label="Block">
-        <NavLink href={`/block/${tx.block}`}>{tx.block}</NavLink>
+        <NavLink href={`/block/${tx.bk}`}>{tx.bk}</NavLink>
       </KeyValue>
       {!valueData.miner ? (
         <KeyValue label="from">
