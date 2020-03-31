@@ -4,7 +4,7 @@ import getConfig from "next/config";
 export default function getFetch(path, params = {}) {
   const { publicRuntimeConfig } = getConfig();
   const apiUrl = publicRuntimeConfig.API_PATH + path;
-  const url = apiUrl.replace("api//", "api/") + toQueryString(params);
+  const url = apiUrl + toQueryString(params);
   return fetch(url);
 }
 

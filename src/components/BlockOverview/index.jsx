@@ -47,17 +47,17 @@ export default function BlockOverview(props) {
         <UTCTime time={block.timestamp} />
       </KeyValue>
       <KeyValue label="Transactions" className={classes.field}>
-        {block.txCount ? (
+        {block.txns ? (
           <OutLink
-            href={`${apiServer}tx?block=${block.height}&size=${block.txCount}`}
+            href={`${apiServer}txn?bk=${block.height}&size=${block.txns}`}
             target={"_blank"}
           >
-            {block.txCount}
+            {block.txns}
           </OutLink>
         ) : (
-          block.txCount
+          block.txns
         )}{" "}
-        txn{block.txCount > 1 ? "s" : ""} in block
+        txn{block.txns > 1 ? "s" : ""} in block
       </KeyValue>
       <KeyValue label="Block Miner" className={classes.field}>
         <NavLink href={`/staking/${block.miner}`}>{block.miner}</NavLink>

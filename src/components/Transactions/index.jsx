@@ -9,6 +9,7 @@ import TextStrong from "../TextStrong";
 import OutLink from "../OutLink";
 import * as helpers from "../../libs/helpers";
 import UTCTime from "../UTCTime";
+import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 
 export default function Transactions(props) {
   const { tableOptions = {}, params = {} } = props;
@@ -18,7 +19,8 @@ export default function Transactions(props) {
     ...tableOptions
   };
   const queryDataFunc = createQuery(params);
-  const columns = createColumns();
+  const address = params.from || params.to || params.address;
+  const columns = createColumns(address);
   return (
     <FusionTable data={queryDataFunc} columns={columns} options={options} />
   );
@@ -28,10 +30,11 @@ const createQuery = params => ({ page, pageSize }) => {
   return new Promise(resolve => {
     params.page = page + 1;
     params.size = pageSize;
-    fetch(`/tx`, params)
+    fetch(`txns`, params)
       .then(res => res.json())
-      .then(resData => {
-        const { data = [], total = 0 } = resData;
+      .then(res => res.data)
+      .then(res => {
+        const { data = [], total = 0 } = res;
         resolve({
           data: data,
           page: page,
@@ -54,7 +57,7 @@ const useStyles = makeStyles(({ palette }) =>
       overflow: "hidden",
       textOverflow: "ellipsis",
       whiteSpace: "nowrap",
-      display: "inline-block",
+      display: "block",
       maxWidth: "120px"
     },
     hint: {
@@ -63,11 +66,35 @@ const useStyles = makeStyles(({ palette }) =>
       alignItems: "center",
       justifyContent: "flex-end",
       paddingRight: "1rem"
+    },
+    type: {
+      display: "inline-block",
+      padding: ".05rem .25rem",
+      borderRadius: "4px",
+      fontSize: "12px",
+      fontWeight: 600
+    },
+    in: {
+      color: "#00c9a7",
+      backgroundColor: "rgba(0,201,167,.1)"
+    },
+
+    capital: {
+      color: "rgb(102, 60, 0)",
+      backgroundColor: "rgb(255, 244, 229)",
+      fontSize: "14px"
+    },
+    out: {
+      color: "#b47d00",
+      backgroundColor: "rgba(219,154,4,.2)"
+    },
+    arraw: {
+      color: "#4a4f55"
     }
   })
 );
 
-const createColumns = () => {
+const createColumns = address => {
   const classes = useStyles();
   return [
     {
@@ -87,12 +114,12 @@ const createColumns = () => {
       render: row => <UTCTime time={row.timestamp} />
     },
     {
-      field: "block",
+      field: "bk",
       title: "Block",
       sorting: false,
       render: row => (
-        <NavLink href={`/block/${row.block}`} className={classes.withElis}>
-          {row.block}
+        <NavLink href={`/block/${row.bk}`} className={classes.withElis}>
+          {row.bk}
         </NavLink>
       )
     },
@@ -100,17 +127,53 @@ const createColumns = () => {
       field: "from",
       title: "From",
       sorting: false,
-      render: row => (
-        <FusionAddressLink address={row.from} className={classes.withElis} />
-      )
+      render: row => {
+        if (address == row.from) {
+          return (
+            <strong>
+              <FusionAddressLink
+                address={row.from}
+                className={classes.withElis}
+              />
+            </strong>
+          );
+        }
+        return (
+          <FusionAddressLink address={row.from} className={classes.withElis} />
+        );
+      }
+    },
+    {
+      field: "from",
+      sorting: false,
+      render: row => {
+        if (!address) return <ArrowRightAltIcon className={classes.arraw} />;
+        return row.from == address ? (
+          <span className={`${classes.type} ${classes.in}`}>Out</span>
+        ) : (
+          <span className={`${classes.type} ${classes.out}`}>In</span>
+        );
+      }
     },
     {
       field: "to",
       title: "To",
       sorting: false,
-      render: row => (
-        <FusionAddressLink address={row.to} className={classes.withElis} />
-      )
+      render: row => {
+        if (address == row.to) {
+          return (
+            <strong>
+              <FusionAddressLink
+                address={row.to}
+                className={classes.withElis}
+              />
+            </strong>
+          );
+        }
+        return (
+          <FusionAddressLink address={row.to} className={classes.withElis} />
+        );
+      }
     },
     {
       field: "type",
@@ -128,24 +191,20 @@ const createColumns = () => {
       sorting: false,
       render: row => {
         if (row.type == "GenNotationFunc") {
-          return <span>{row.value}</span>;
+          return <span>{row.info}</span>;
         }
-        return (
-          <TxValue
-            {...row.value}
-            type={row.type}
-            className={classes.withElis}
-          />
-        );
+        return <TxValue {...row.info} type={row.type} />;
       }
     }
   ];
 };
 
 const TxValue = props => {
-  let { className = "", type } = props;
+  let { type } = props;
   const { publicRuntimeConfig } = getConfig();
   const apiServer = publicRuntimeConfig.API_PATH;
+  const style = useStyles();
+  let className = style.withElis;
 
   if (props.swapID) {
     return (
@@ -179,6 +238,9 @@ const TxValue = props => {
     );
   }
 
+  if (value.indexOf("M") > -1 || value.indexOf("k") > -1) {
+    className = `${style.type} ${style.capital}`;
+  }
   return (
     <>
       <span className={className}>

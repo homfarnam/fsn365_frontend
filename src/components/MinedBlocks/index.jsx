@@ -27,9 +27,9 @@ const createQuery = miner => ({ page, pageSize }) =>
       miner
     };
 
-    fetch("/block", params)
+    fetch("blocks", params)
       .then(res => res.json())
-      .then(res => res)
+      .then(res => res.data)
       .then(data => {
         resolve({
           data: data.data,

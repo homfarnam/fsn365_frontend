@@ -58,6 +58,7 @@ const fetchData = query =>
     };
     fetch(`/address`, params)
       .then(res => res.json())
+      .then(res => res.data)
       .then(data => {
         resolve({
           data: data.data,

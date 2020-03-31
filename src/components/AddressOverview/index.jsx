@@ -52,16 +52,14 @@ export default function AddressOverview({ overview = {} }) {
       t1 = null;
     }, duration);
   };
-  const addressLabel = addressMap[overview.id];
-
   return (
     <div className={classes.root}>
       <KeyValue label="address" className={classes.field}>
         <span className={classes.withIcon}>
           {overview.id}
-          {addressLabel ? (
+          {overview.label ? (
             <>
-              (<TextStrong>{addressLabel}</TextStrong>)
+              (<TextStrong>{overview.label}</TextStrong>)
             </>
           ) : null}
           <CopyToClipboard text={overview.id} onCopy={onCopy}>

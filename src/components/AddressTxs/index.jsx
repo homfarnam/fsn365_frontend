@@ -20,7 +20,7 @@ const useStyles = makeStyles(() =>
 
 export default function AddressTxs(props) {
   const { address } = props;
-  const [direction] = useState("to");
+  const [direction] = useState("address");
   const handelChange = e => {
     const value = e.target.value;
     if (value == "from") {
@@ -28,6 +28,9 @@ export default function AddressTxs(props) {
     }
     if (value == "to") {
       Router.push(`/txs?to=${address}`);
+    }
+    if (value == "address") {
+      Router.push(`/txs?address=${address}`);
     }
   };
   const cssClasses = useStyles();
@@ -42,6 +45,11 @@ export default function AddressTxs(props) {
         </p>
         <FormControl>
           <Select value={direction} onChange={handelChange}>
+            <MenuItem value={"address"}>
+              <small>
+                <TextStrong>Txns</TextStrong>
+              </small>
+            </MenuItem>
             <MenuItem value={"to"}>
               <small>
                 <TextStrong>Incoming Txns</TextStrong>
