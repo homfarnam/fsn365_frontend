@@ -73,7 +73,7 @@ const columns = [
       const { publicRuntimeConfig } = getConfig();
       const apiServer = publicRuntimeConfig.API_PATH;
       const renderEle = row.txns ? (
-        <OutLink href={`${apiServer}tx?block=${row.height}&size=${row.txns}`}>
+        <OutLink href={`${apiServer}txn?bk=${row.height}&size=${row.txns}`}>
           {row.txns}
         </OutLink>
       ) : (
