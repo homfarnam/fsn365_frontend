@@ -85,9 +85,9 @@ export default function AddressOverview({ overview = {} }) {
           className={classes.field}
         ></KeyValue>
       ) : null}
-      {overview.bks ? (
-        <KeyValue label={"Mined Blocks"} className={classes.field}>
-          <NavLink href={`/staking/${overview.id}`}>{overview.bks}</NavLink>
+      {overview.miner ? (
+        <KeyValue label={"Mining Address"} className={classes.field}>
+          <NavLink href={`/staking/${overview.id}`}>View mining</NavLink>
         </KeyValue>
       ) : null}
       {overview.assetsHeld ? (

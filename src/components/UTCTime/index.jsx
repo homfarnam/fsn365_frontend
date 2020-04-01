@@ -6,7 +6,7 @@ const useStyles = makeStyles(() =>
   createStyles({
     time: {
       display: "inline-block",
-      width: "168px",
+      minWidth: "168px",
       textAlign: "center"
     }
   })

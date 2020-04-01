@@ -87,22 +87,22 @@ const createColumns = () => {
       )
     },
     {
-      field: "block",
+      field: "bk",
       title: "Block",
       sorting: false,
-      render: row => <NavLink href={`/block/${row.block}`}>{row.block}</NavLink>
+      render: row => <NavLink href={`/block/${row.bk}`}>{row.bk}</NavLink>
     },
     {
       field: "log",
       title: "StartTime",
       sorting: false,
-      render: row => <UTCTime time={row.log.StartTime} />
+      render: row => <UTCTime time={row.startTime} />
     },
     {
       field: "log",
       title: "ExpireTime",
       sorting: false,
-      render: row => <UTCTime time={row.log.ExpireTime} />
+      render: row => <UTCTime time={row.expireTime} />
     }
   ];
 };

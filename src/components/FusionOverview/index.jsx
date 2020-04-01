@@ -24,6 +24,9 @@ const useStyles = makeStyles(({ breakpoints }) =>
     },
     panel: {
       marginTop: "0"
+    },
+    cat: {
+      fontSize: "1.05rem"
     }
   })
 );
@@ -36,22 +39,11 @@ export default function FusionOverview() {
     },
     stats: {}
   });
+
+  const [network = {}, setNetworkData] = useState({});
   useEffect(() => {
     fetchNetworkOverview().then(data => {
-      setOverview(data);
-    });
-  }, []);
-
-  const [txSummary = {}, setTxSummary] = useState({});
-  useEffect(() => {
-    fetchTxsSummary().then(data => {
-      setTxSummary(data);
-    });
-  }, []);
-  const [mining, setMining] = useState({});
-  useEffect(() => {
-    fetchMiningSummary().then(data => {
-      setMining(data);
+      setNetworkData(data);
     });
   }, []);
 
@@ -63,7 +55,7 @@ export default function FusionOverview() {
       <ul className={style.ul}>
         <li>
           <span>
-            <TextStrong>Price($)</TextStrong>
+            <TextStrong className={style.cat}>Price($)</TextStrong>
             <br></br>
             {overview.priceData.price ? (
               <>
@@ -81,7 +73,7 @@ export default function FusionOverview() {
           </span>
           <HrSpace />
           <span>
-            <TextStrong>MarketCap</TextStrong>
+            <TextStrong className={style.cat}>MarketCap</TextStrong>
             <br></br>
             {overview.priceData.mcap ? (
               <>${overview.priceData.mcap}</>
@@ -93,42 +85,20 @@ export default function FusionOverview() {
         </li>
         <li>
           <span>
-            <TextStrong>Total Txns</TextStrong>
+            <TextStrong className={style.cat}>Total Txns</TextStrong>
             <br></br>
-            {overview.stats.txs ? (
-              <>{overview.stats.txs}</>
+            {network.txns ? (
+              <>{network.txns}</>
             ) : (
               <CircularProgress size={10} />
             )}
           </span>
           <HrSpace />
           <span>
-            <TextStrong>Block Height</TextStrong>
+            <TextStrong className={style.cat}>Block Height</TextStrong>
             <br></br>
-            {overview.stats.height ? (
-              <>{overview.stats.height}</>
-            ) : (
-              <CircularProgress size={10} />
-            )}
-          </span>
-          <HrSpace />
-        </li>
-        <li>
-          <span>
-            <TextStrong>Swaps Made</TextStrong>
-            <br></br>
-            {txSummary.swaps ? (
-              <>{txSummary.swaps}</>
-            ) : (
-              <CircularProgress size={10} />
-            )}
-          </span>
-          <HrSpace />
-          <span>
-            <TextStrong>Assets Issued</TextStrong>
-            <br></br>
-            {overview.stats.assets ? (
-              <>{overview.stats.assets}</>
+            {network.height ? (
+              <>{network.height}</>
             ) : (
               <CircularProgress size={10} />
             )}
@@ -137,20 +107,42 @@ export default function FusionOverview() {
         </li>
         <li>
           <span>
-            <TextStrong>Active Miners</TextStrong>
+            <TextStrong className={style.cat}>Swaps Made</TextStrong>
             <br></br>
-            {mining.totalMiners ? (
-              <>{mining.totalMiners}</>
+            {network.swaps ? (
+              <>{network.swaps}</>
             ) : (
               <CircularProgress size={10} />
             )}
           </span>
           <HrSpace />
           <span>
-            <TextStrong>Active Tickets</TextStrong>
+            <TextStrong className={style.cat}>Assets Issued</TextStrong>
             <br></br>
-            {mining.totalTickets ? (
-              <>{mining.totalTickets}</>
+            {network.assets ? (
+              <>{network.assets}</>
+            ) : (
+              <CircularProgress size={10} />
+            )}
+          </span>
+          <HrSpace />
+        </li>
+        <li>
+          <span>
+            <TextStrong className={style.cat}>Active Miners</TextStrong>
+            <br></br>
+            {network.miners ? (
+              <>{network.miners}</>
+            ) : (
+              <CircularProgress size={10} />
+            )}
+          </span>
+          <HrSpace />
+          <span>
+            <TextStrong className={style.cat}>Active Tickets</TextStrong>
+            <br></br>
+            {network.tickets ? (
+              <>{network.tickets}</>
             ) : (
               <CircularProgress size={10} />
             )}
@@ -162,7 +154,7 @@ export default function FusionOverview() {
   );
 }
 
-async function fetchNetworkOverview() {
+async function fetchNetworkPrice() {
   return fetch(`https://api.fusionnetwork.io/fsnprice`)
     .then(res => res.json())
     .then(data => {
@@ -184,41 +176,8 @@ async function fetchNetworkOverview() {
     .catch(e => ({}));
 }
 
-async function fetchTxsSummary() {
-  return siteFetch("/tx/summary")
+async function fetchNetworkOverview() {
+  return siteFetch(`stats/network`)
     .then(res => res.json())
-    .then(res => res.data)
-    .then(data => {
-      const reg = /(?=(\d{3})+$)/g;
-      return {
-        swaps: (data.swaps + "").replace(reg, ",")
-      };
-    })
-    .catch(e => ({
-      swaps: "3,202",
-      total: "40,1432"
-    }));
-}
-
-async function fetchMiningSummary() {
-  return fetch(`https://fsn.dev/api`, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    method: "POST",
-    body: JSON.stringify({
-      jsonrpc: "2.0",
-      id: 1,
-      method: "fsn_getStakeInfo",
-      params: ["latest"]
-    })
-  })
-    .then(res => res.json())
-    .then(res => res.result)
-    .then(data => data.summary)
-    .catch(e => ({
-      totalMiners: -1,
-      totalTickets: -1
-    }));
+    .then(res => res.data);
 }
