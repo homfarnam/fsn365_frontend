@@ -4,7 +4,7 @@ import { useTheme } from "@material-ui/core/styles";
 import useStyles from "./useStyles";
 import SiteNavItems from "./SiteNavbar";
 import Link from "next/link";
-import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
+import ThreeDRotationIcon from "@material-ui/icons/ThreeDRotation";
 
 export default function SiteNavigation(props) {
   const { route } = props;
@@ -16,7 +16,7 @@ export default function SiteNavigation(props) {
       <Link href="/">
         <a className={classes.brand}>
           <Typography component="h4" variant="h4">
-            <AllInclusiveIcon />
+            <ThreeDRotationIcon />
             FSN365
           </Typography>
         </a>
