@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Router from "next/router";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -8,77 +8,64 @@ import Panel from "../../src/components/Panel";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 import KeyValue from "../../src/components/KeyValue";
-import TextStrong from '../../src/components/TextStrong';
+import TextStrong from "../../src/components/TextStrong";
 
-const useStyles = makeStyles(({ palette }) =>
+const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
     circle: {
       display: "inline-block",
       verticalAlign: "center",
       marginLeft: "10px",
-      verticalAlign: "middle"
+      verticalAlign: "middle",
     },
     margin: {
-      marginBottom: ".5rem"
+      marginBottom: ".5rem",
     },
     title: {
-      marginBottom: "1rem"
-    }
+      marginBottom: "1rem",
+    },
+    flexBox: {
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "space-between",
+      break: "break-all",
+    },
+    field: {
+      width: "100%",
+      [breakpoints.up("lg")]: {
+        width: "49%",
+      },
+    },
   })
 );
 
-export default function StakingPage() {
-  const [state, setState] = useState({
-    summary: {},
-    stakeInfo: {},
-    error: ""
-  });
-  const cssClasses = useStyles();
-
-  useEffect(() => {
-    fetch("/staking")
-    .then(res => res.json())
-    .then(res => res.data)
-    .then(data => {
-      setState({
-        ...data,
-        error: ""
-      });
-    })
-    .catch(e => {
-      setState({
-        error: "Something went wrong, please refresh page and have a try!"
-      });
-    });
-  }, []);
-    
-
-  const { summary, stakeInfo, error, allMiners } = state;
+export default function StakingPage(props) {
+  const { summary, stakeInfo, error = "" } = props;
+  const style = useStyles();
   return (
     <>
       <PageHeading title={"Fusion Staking"} />
       <Panel title="Summary">
-        <KeyValue label="Active Miners ">
-          {summary.totalMiners ? (
-            <span>{summary.totalMiners}</span>
-          ) :null }
-        </KeyValue>
-        <KeyValue label="Active Tickets ">
-          {summary.totalTickets ? (
-            <span>{summary.totalTickets}</span>
-          ) : null}
-        </KeyValue>
-        <KeyValue label="Historical Miners ">
-          {allMiners ? (
-            <span>{allMiners}</span>
-          ) : null}
-        </KeyValue>
+        <div className={style.flexBox}>
+          <KeyValue label="Active Miners" className={style.field}>
+            <span>{summary.activeMiners}</span>
+          </KeyValue>
+          <KeyValue label="Active Tickets" className={style.field}>
+            <span>{summary.activeTickets}</span>
+          </KeyValue>
+          <KeyValue label="Historical Miners" className={style.field}>
+            <span>{summary.allMiners}</span>
+          </KeyValue>
+          <KeyValue label="Overall Rewards/Mined Blocks" className={style.field}>
+            <span>{summary.allRewards} FSN / {summary.minedBks} blocks</span>
+          </KeyValue>
+        </div>
       </Panel>
-      {summary.totalTickets ? (
+      {summary.activeTickets ? (
         <Panel>
           <NetworkStakingState
             data={stakeInfo}
-            totalTickets={summary.totalTickets}
+            totalTickets={summary.activeTickets}
           />
         </Panel>
       ) : (
@@ -88,7 +75,7 @@ export default function StakingPage() {
             {error ? (
               <span>{error}</span>
             ) : (
-              <CircularProgress size={20} className={cssClasses.circle} />
+              <CircularProgress size={20} className={style.circle} />
             )}
           </Typography>
         </Panel>
@@ -102,14 +89,18 @@ StakingPage.getInitialProps = async ({ query, res }) => {
   if (miner) {
     if (res) {
       res.writeHead(302, {
-        Location: `/staking/${miner}`
+        Location: `/staking/${miner}`,
       });
     } else {
       Router.push(`/staking/${miner}`);
     }
   } else {
+    const overview = await fetch("staking")
+      .then((res) => res.json())
+      .then((res) => res.data)
+      .catch((e) => ({ summary: {}, stakeInfo: [], error:'Unexpected errro happened.' }));
     return {
-      isServer: !!res
+      ...overview,
     };
   }
 };
