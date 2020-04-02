@@ -6,7 +6,7 @@ import TextStrong from "../TextStrong";
 export default function FusionAdressLink(props) {
   const { address, children, miner = false, ...others } = props;
   const text = addressMap[address];
-  if (addressMap[address] === "Fusion Contract") {
+  if (addressMap[address] === "FUSION CONTRACT") {
     return <TextStrong {...others}>{text}</TextStrong>;
   } else {
     const href = miner ? `/staking/${address}` : `/address/${address}`;
