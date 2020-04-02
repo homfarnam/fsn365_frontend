@@ -32,7 +32,7 @@ const createQuery = params => ({ page, pageSize }) => {
     params.size = pageSize;
     fetch(`txns`, params)
       .then(res => res.json())
-      .then(res => res.data)
+      .then(res => res.data || {})
       .then(res => {
         const { data = [], total = 0 } = res;
         resolve({

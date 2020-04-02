@@ -29,12 +29,13 @@ const createQuery = miner => ({ page, pageSize }) =>
 
     fetch("blocks", params)
       .then(res => res.json())
-      .then(res => res.data)
-      .then(data => {
+      .then(res => res.data || {})
+      .then(res => {
+        const { data = [], total = 0 } = res;
         resolve({
-          data: data.data,
+          data: data,
           page: page,
-          totalCount: data.total
+          totalCount: total
         });
       })
       .catch(e => {
@@ -83,22 +84,9 @@ const columns = [
     }
   },
   {
-    field: "gasUsed",
-    title: "Gas Used/GasLimit",
-    sorting: false,
-    headerStyle: {
-      minWidth: "160px"
-    },
-    render: row => (
-      <span>
-        {row.gasUsed}({((row.gasUsed / row.gasLimit) * 100).toFixed(2)}%)
-      </span>
-    )
-  },
-  {
     field: "reward",
     title: "Reward",
     sorting: false,
-    render: row => <span>{row.reward.toFixed(2)}</span>
+    render: row => <span>{row.reward}</span>
   }
 ];

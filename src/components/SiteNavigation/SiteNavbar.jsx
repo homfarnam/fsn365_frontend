@@ -9,6 +9,7 @@ import { Hidden } from "@material-ui/core";
 import SearchForm from "../SearchForm";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
+import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
 
 export default function SiteNavItems(props) {
   const { container, route = "/" } = props;
@@ -48,7 +49,8 @@ export default function SiteNavItems(props) {
             variant="h4"
             className={classes.drawerTitle}
           >
-            Explorer
+            <AllInclusiveIcon />
+            FSN365
             <Button onClick={handleDrawerToggle}>
               <CloseIcon color={"primary"}></CloseIcon>
             </Button>
