@@ -11,6 +11,7 @@ export default {
   "0xa6abd573612d0945146dfcf69c8a31da94abae84": "FOUNDATION",
   "0x4000c03e0d4f1bf7e4bb17836be23b26d5ad7af6": "FOUNDATION",
   "0x5277edca59b46f3428bcc3cf3de6c88b6ceacef2": "FOUNDATION",
+  "0x16852feddf7d63363cc63e48aa5282a8d2176ecc": "FOUNDATION",
   // "0x9318d42e1c6b0c8d0831cafa94c79157e48ed783": "Fusion Foundation 1",
   "0x104fd96cce3fd0cd104a6fc5b1b86cd411a04c1a": "FOSC Timelock Bounty",
   "0x2222222222222222222222222222222222222222": "BURN",
