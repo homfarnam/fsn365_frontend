@@ -16,8 +16,8 @@ const useStyles = makeStyles(({ breakpoints }) =>
 
 export default function NetworkStakingState({ data, totalTickets }) {
   const tableOptions = {
-    pageSizeOptions: [5, 10],
-    pageSize: 5
+    pageSizeOptions: [10, 20, 50],
+    pageSize: 10
   };
   const style = useStyles();
   const tableColumns = columns(totalTickets);
