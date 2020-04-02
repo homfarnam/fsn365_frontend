@@ -8,46 +8,71 @@ export default class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bks: props.bks,
-      txs: props.txs
+      overview: props.overview,
+      realTime: props.realTime,
     };
   }
 
   componentDidMount() {
     setInterval(() => {
-      fetchRealTimeData()
-        .then(data => {
-          this.setState(data);
-        })
-    }, 3.5 * 1000);
+      fetchHomeData().then((data) => {
+        this.setState(data);
+      });
+    }, 6.5 * 1000);
   }
 
   render() {
-    const { bks, txs } = this.state;
+    const { overview, realTime } = this.state;
     return (
       <>
         <DoSearch />
-        <FusionOverview />
-        <NetworkState bks={bks} txs={txs} />
+        <FusionOverview overview={overview} />
+        <NetworkState bks={realTime.bks} txs={realTime.txs} />
       </>
     );
   }
 }
 
 HomePage.getInitialProps = async ({}) => {
-  const data = await fetchRealTimeData();
+  const data = await fetchHomeData();
   return {
-    ...data
+    ...data,
   };
 };
 
+async function fetchHomeData() {
+  return Promise.all([fetchRealTimeData(), fetchNetworkOverview()])
+    .then((result) => {
+      return {
+        overview: result[1],
+        realTime: result[0],
+      };
+    })
+    .catch((e) => ({
+      realTime: {
+        bks: [],
+        txs: [],
+      },
+      overview: {
+        priceData: {},
+      },
+    }));
+}
+
 async function fetchRealTimeData() {
-  return fetch("/latest")
-    .then(res => res.json())
-    .then(res => res.data)
-    .catch(e => ({
+  return fetch("latest")
+    .then((res) => res.json())
+    .then((res) => res.data)
+    .catch((e) => ({
       bks: [],
       txs: [],
-      lBk: 0
+      lBk: 0,
     }));
+}
+
+async function fetchNetworkOverview() {
+  return fetch(`stats`)
+    .then((res) => res.json())
+    .then((res) => res.data)
+    .catch((e) => ({ priceData: {} }));
 }
