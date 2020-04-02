@@ -39,17 +39,17 @@ export default function NetworkStakingState({ data, totalTickets }) {
 const columns = totalTickets => {
   return [
     {
-      field: "owner",
+      field: "address",
       title: "Miner",
       sorting: false,
-      render: row => <FusionAddressLink address={row.owner} miner={true} />
+      render: row => <FusionAddressLink address={row.address} miner={true} />
     },
     {
       field: "tickets",
       title: "Tickets"
     },
     {
-      field: "tickes",
+      field: "tickets",
       title: "Reward Possibility",
       render: row => (
         <span>{((row.tickets / totalTickets) * 100).toFixed(4) + "%"}</span>
