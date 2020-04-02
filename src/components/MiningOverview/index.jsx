@@ -34,7 +34,7 @@ export default function MiningOverview({ miner }) {
   useEffect(() => {
     let cancel = false;
     const runEffect = () => {
-      fetch(`staking/${miner}`)
+      fetch(`address/${miner}/mining`)
         .then(res => res.json())
         .then(res => {
           if (res.data) {
