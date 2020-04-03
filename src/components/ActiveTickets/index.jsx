@@ -19,12 +19,16 @@ export default function ActiveTickets({ miner }) {
       fetch(`/staking/${miner}/tickets`)
         .then(res => res.json())
         .then(res => res.data || [])
-        .catch(e => [])
         .then(tickets => {
           setState({
             tickets
           });
-        });
+        })
+        .catch(e =>
+          setState({
+            tickets: []
+          })
+        );
     };
     runEffect();
     return () => {
