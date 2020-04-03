@@ -78,10 +78,7 @@ export default makeStyles(({ palette, breakpoints }) =>
       flexWrap: "wrap",
       justifyContent: "space-between",
       alignItems: "center",
-      paddingTop: ".5rem",
-      [breakpoints.up("md")]: {
-        paddingBottom: ".5rem"
-      }
+      paddingTop: ".5rem"
     },
     navBar: {
       flexGrow: 2,
