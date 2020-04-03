@@ -164,12 +164,9 @@ async function doSearch(type, keyword) {
       };
     });
 
-  const searchType = resData.type;
-  const searchResult = resData.result;
-
-  if (!searchResult || searchType == "all") {
-    Router.push(`/search?keyword=${keyword}`);
-  } else {
-    window.location = `/${searchType}/${searchResult}`;
+  if (!resData || resData.length == 0) {
+    return Router.push(`/search?keyword=${keyword}`);
   }
+  const option = resData[0];
+  window.location = `/${option.type}/${option.id}`;
 }
