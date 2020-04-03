@@ -59,7 +59,7 @@ export default function TxOverview(props) {
         </KeyValue>
       ) : null}
       {tx.type == "GenNotationFunc" ? (
-        <KeyValue label="Notation">{tx.value}</KeyValue>
+        <KeyValue label="Notation">{tx.info}</KeyValue>
       ) : null}
       {valueData.swapID ? (
         <KeyValue label={"Swap ID"}>
