@@ -10,7 +10,7 @@ import UTCTime from "../UTCTime";
 
 export default function TxOverview(props) {
   const { tx } = props;
-  const valueData = tx.info;
+  const valueData = tx.info || tx.log;
   const { publicRuntimeConfig } = getConfig();
   const apiServer = publicRuntimeConfig.API_PATH;
   return (
@@ -43,12 +43,9 @@ export default function TxOverview(props) {
       {valueData.ticket ? (
         <KeyValue label={"Ticket ID"}>{valueData.ticket}</KeyValue>
       ) : null}
-      {valueData.endTime || valueData.expireTime ? (
+      {valueData.duration ? (
         <KeyValue label="Duration">
-          <Duration
-            startTime={valueData.startTime}
-            endTime={valueData.endTime || valueData.expireTime}
-          />
+          <Duration {...valueData.duration} />
         </KeyValue>
       ) : null}
       {tx.type == "GenAssetFunc" ? (
@@ -79,7 +76,7 @@ export default function TxOverview(props) {
         </strong>
       </KeyValue>
       <KeyValue label="Block">
-        <NavLink href={`/block/${tx.bk}`}>{tx.bk}</NavLink>
+        <NavLink href={`/block/${tx.bk}`}>{tx.bk || tx.blockNumber}</NavLink>
       </KeyValue>
       {!valueData.miner ? (
         <KeyValue label="from">

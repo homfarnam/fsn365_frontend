@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Panel from "../../src/components/Panel";
 import {
   FusionTab,
@@ -28,13 +28,9 @@ export default function TransactionPage(props) {
       </>
     );
   }
-  const suffix =
-    tx.type === "Buy Ticket"
-      ? `#${tx.type}`
-      : `#${tx.type.replace("Func", "").replace("Ext", "")}`;
   return (
     <>
-      <PageHeading title="Tx" suffix={suffix} />
+      <PageHeading title="Tx" suffix={'# '+tx.type} />
       <Panel>
         <FusionTabs value={0}>
           <FusionTab label="Tx Overview" />
