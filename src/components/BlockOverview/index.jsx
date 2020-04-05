@@ -49,7 +49,7 @@ export default function BlockOverview(props) {
       <KeyValue label="Transactions" className={classes.field}>
         {block.txns ? (
           <OutLink
-            href={`${apiServer}txn?bk=${block.height}&size=${block.txns}`}
+            href={`${apiServer}txn?bk=${block.height}`}
             target={"_blank"}
           >
             {block.txns}

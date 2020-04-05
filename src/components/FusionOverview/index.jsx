@@ -81,7 +81,7 @@ export default function FusionOverview(props) {
         </li>
         <li>
           <span>
-            <TextStrong className={style.cat}>Swaps Made</TextStrong>
+            <TextStrong className={style.cat}>Swaps</TextStrong>
             <br></br>
             {overview.swaps ? (
               <>{overview.swaps}</>
@@ -91,7 +91,7 @@ export default function FusionOverview(props) {
           </span>
           <HrSpace />
           <span>
-            <TextStrong className={style.cat}>Assets Issued</TextStrong>
+            <TextStrong className={style.cat}>Tokens</TextStrong>
             <br></br>
             {overview.assets ? (
               <>{overview.assets}</>
@@ -103,7 +103,7 @@ export default function FusionOverview(props) {
         </li>
         <li>
           <span>
-            <TextStrong className={style.cat}>Active Miners</TextStrong>
+            <TextStrong className={style.cat}>Online Miners</TextStrong>
             <br></br>
             {overview.miners ? (
               <>{overview.miners}</>
@@ -113,7 +113,7 @@ export default function FusionOverview(props) {
           </span>
           <HrSpace />
           <span>
-            <TextStrong className={style.cat}>Active Tickets</TextStrong>
+            <TextStrong className={style.cat}>Tickets</TextStrong>
             <br></br>
             {overview.tickets ? (
               <>{overview.tickets}</>
