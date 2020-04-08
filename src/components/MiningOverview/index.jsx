@@ -4,10 +4,10 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import KeyValue from "../KeyValue";
 import Panel from "../Panel";
 import fetch from "../../libs/fetch";
-import NavLink from "../NavLink";
 import StatusText from "../StatusText";
 import OutLink from "../OutLink";
 import UTCTime from "../UTCTime";
+import FusionAddress from "../FusionAddressLink";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -78,9 +78,9 @@ export default function MiningOverview({ miner }) {
       {state == "success" && (
         <div className={classes.overview}>
           <KeyValue label="Address" className={classes.field}>
-            <NavLink href={`/address/${overview.address}`}>
+            <FusionAddress address={overview.address}>
               {overview.address}
-            </NavLink>
+            </FusionAddress>
           </KeyValue>
           <KeyValue label="Node Status" className={classes.field}>
             {overview.tickets ? (

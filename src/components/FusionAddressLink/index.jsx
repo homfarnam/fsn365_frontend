@@ -14,10 +14,10 @@ export default function FusionAdressLink(props) {
       <span {...others}>
         <NavLink href={href}>{address}</NavLink>
         {text ? (
-          <>
+          <TextStrong>
             {"   "}
             {`(${text})`}
-          </>
+          </TextStrong>
         ) : null}
       </span>
     );

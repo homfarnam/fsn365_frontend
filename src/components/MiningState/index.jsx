@@ -31,15 +31,15 @@ export default function MiningState(props) {
         onChange={handleTabChange}
         style={{ marginBottom: "0" }}
       >
-        <FusionTab label="Ticket Buying"></FusionTab>
-        <FusionTab label="Tickets Status"></FusionTab>
+        <FusionTab label="Ticket Status"></FusionTab>
+        <FusionTab label="Tickets Buying"></FusionTab>
       </FusionTabs>
       <FusionTabPanels>
         <FusionTabPanel value={state.tab} index={0}>
-          <MinersBuyingTickets miner={miner} />
+          <ActiveTickets miner={miner} />
         </FusionTabPanel>
         <FusionTabPanel value={state.tab} index={1}>
-          <ActiveTickets miner={miner} />
+          <MinersBuyingTickets miner={miner} />
         </FusionTabPanel>
       </FusionTabPanels>
     </Panel>
