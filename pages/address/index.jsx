@@ -56,7 +56,7 @@ const fetchData = query =>
       order: orderDirection || "desc",
       sort
     };
-    fetch(`/address`, params)
+    fetch(`address`, params)
       .then(res => res.json())
       .then(res => res.data)
       .then(data => {

@@ -64,7 +64,7 @@ BlockPage.getInitialProps = async ({ query, res }) => {
       Router.push("/blocks");
     }
   } else {
-    const block = await fetch(`/block/${height}`)
+    const block = await fetch(`block/${height}`)
       .then(res => res.json())
       .then(res => res.data)
       .catch(e => {

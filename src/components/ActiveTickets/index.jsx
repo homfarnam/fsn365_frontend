@@ -16,7 +16,7 @@ export default function ActiveTickets({ miner }) {
   useEffect(() => {
     let cancel = false;
     const runEffect = () => {
-      fetch(`/staking/${miner}/tickets`)
+      fetch(`address/${miner}/tickets`)
         .then(res => res.json())
         .then(res => res.data || [])
         .then(tickets => {

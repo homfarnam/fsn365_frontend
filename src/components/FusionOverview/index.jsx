@@ -94,7 +94,7 @@ export default function FusionOverview(props) {
             <TextStrong className={style.cat}>Tokens</TextStrong>
             <br></br>
             {overview.assets ? (
-              <>{overview.assets}</>
+              <>{overview.assets - 1}</>
             ) : (
               <CircularProgress size={10} />
             )}
@@ -115,8 +115,8 @@ export default function FusionOverview(props) {
           <span>
             <TextStrong className={style.cat}>Tickets</TextStrong>
             <br></br>
-            {overview.tickets ? (
-              <>{overview.tickets}</>
+            {overview.activeTickets ? (
+              <>{overview.activeTickets}</>
             ) : (
               <CircularProgress size={10} />
             )}

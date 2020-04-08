@@ -103,7 +103,7 @@ AddressDetailPage.getInitialProps = async ({ query }) => {
   if (!pubReg.test(query.address) && !sanReg.test(query.address)) {
     return {};
   }
-  const overview = await fetch(`/address/${address}`)
+  const overview = await fetch(`address/${address}`)
     .then(res => res.json())
     .then(res => res.data || {})
     .catch(e => ({}));
@@ -118,14 +118,14 @@ const tabMap = {
 };
 
 async function fetchAdressAssets(address) {
-  return fetch(`/address/${address}/assets`)
+  return fetch(`address/${address}/assets`)
     .then(res => res.json())
     .then(res => res.data)
     .catch(e => []);
 }
 
 async function fetchAddressLockedAssets(address) {
-  return fetch(`/address/${address}/tlassets`)
+  return fetch(`address/${address}/tlassets`)
     .then(res => res.json())
     .then(res => res.data)
     .catch(e => []);

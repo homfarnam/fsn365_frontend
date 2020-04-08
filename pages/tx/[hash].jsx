@@ -47,7 +47,7 @@ export default function TransactionPage(props) {
 
 TransactionPage.getInitialProps = async ({ query }) => {
   const { hash } = query;
-  const tx = await fetch(`/txn/${hash}`)
+  const tx = await fetch(`txn/${hash}`)
     .then(res => res.json())
     .then(res => res.data)
     .catch(e => {});

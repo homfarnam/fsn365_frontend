@@ -154,7 +154,7 @@ async function doSearch(type, keyword) {
     keyword
   };
 
-  const resData = await fetch("/search", params)
+  const resData = await fetch("search", params)
     .then(res => res.json())
     .then(res => res.data)
     .catch(e => {
