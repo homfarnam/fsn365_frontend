@@ -50,26 +50,29 @@ export default function StakingPage(props) {
           <KeyValue label="Active Miners" className={style.field}>
             <span>{summary.activeMiners}</span>
           </KeyValue>
-          <KeyValue label="Active Tickets" className={style.field}>
+          <KeyValue label="Tickets" className={style.field}>
             <span>{summary.activeTickets}</span>
           </KeyValue>
           <KeyValue label="Historical Miners" className={style.field}>
             <span>{summary.allMiners}</span>
           </KeyValue>
-          <KeyValue label="Overall Rewards/Mined Blocks" className={style.field}>
-            <span>{summary.allRewards} FSN / {summary.minedBks} blocks</span>
+          <KeyValue
+            label="Overall Rewards/Mined Blocks"
+            className={style.field}
+          >
+            <span>
+              {summary.allRewards} FSN / {summary.minedBks} blocks
+            </span>
           </KeyValue>
         </div>
       </Panel>
-      {summary.activeTickets ? (
-        <Panel>
+      <Panel>
+        {summary.activeTickets ? (
           <NetworkStakingState
             data={stakeInfo}
             totalTickets={summary.activeTickets}
           />
-        </Panel>
-      ) : (
-        <Panel>
+        ) : (
           <Typography component="h6" variant="h6">
             <TextStrong>Active Miners</TextStrong>{" "}
             {error ? (
@@ -78,8 +81,8 @@ export default function StakingPage(props) {
               <CircularProgress size={20} className={style.circle} />
             )}
           </Typography>
-        </Panel>
-      )}
+        )}
+      </Panel>
     </>
   );
 }
@@ -98,7 +101,11 @@ StakingPage.getInitialProps = async ({ query, res }) => {
     const overview = await fetch("staking")
       .then((res) => res.json())
       .then((res) => res.data)
-      .catch((e) => ({ summary: {}, stakeInfo: [], error:'Unexpected errro happened.' }));
+      .catch((e) => ({
+        summary: {},
+        stakeInfo: [],
+        error: "Unexpected errro happened.",
+      }));
     return {
       ...overview,
     };

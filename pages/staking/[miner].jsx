@@ -14,7 +14,5 @@ export default function MinerStakingPage({ miner, tab = "block" }) {
 }
 
 MinerStakingPage.getInitialProps = async ({ query }) => {
-  return {
-    ...query
-  };
+  return query;
 };

@@ -1,16 +1,16 @@
-import Router from 'next/router';
+import Router from "next/router";
 
-export default function TxIndex (props){
+export default function TxIndex() {
   return null;
 }
 
-TxIndex.getInitialProps = ({res}) => {
-  if(res) {
+TxIndex.getInitialProps = ({ res }) => {
+  if (res) {
     res.writeHead(302, {
-      Location: '/txs'
+      Location: "/txs",
     });
     res.end();
   } else {
-    Router.push('/txs');
+    Router.push("/txs");
   }
-}
+};

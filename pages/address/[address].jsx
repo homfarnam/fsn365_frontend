@@ -57,11 +57,9 @@ export default function AddressDetailPage(props) {
   return (
     <>
       <PageHeading title="Address Detail" />
-
       <Panel title="Overview" style={{ marginBottom: "1.75rem" }}>
         <AddressOverview overview={overview} />
       </Panel>
-
       <Panel>
         <FusionTabs value={state.tab} onChange={handleTabChange}  style={{marginBottom: 0}}>
           <FusionTab label="Transactions" />

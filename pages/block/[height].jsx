@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Router from "next/router";
 import Panel from "../../src/components/Panel";
 import {
@@ -12,15 +12,8 @@ import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 
 export default function BlockPage(props) {
-  const { block = {}, tab = "overview", height } = props;
+  const { block = {}, height } = props;
 
-  const handleTabChange = (e, newValue) => {
-    setState({
-      ...state,
-      tab: newValue
-    });
-  };
-  
   if (block.height == undefined) {
     return (
       <>
