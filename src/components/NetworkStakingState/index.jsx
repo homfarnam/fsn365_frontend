@@ -4,7 +4,7 @@ import FusionTable from "../FusionTable";
 import FusionAddressLink from "../../components/FusionAddressLink";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(({ breakpoints }) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       paddingLeft: 0,
@@ -17,7 +17,8 @@ const useStyles = makeStyles(({ breakpoints }) =>
 export default function NetworkStakingState({ data, totalTickets }) {
   const tableOptions = {
     pageSizeOptions: [10, 20, 50],
-    pageSize: 10
+    pageSize: 10,
+    toolbar: true
   };
   const style = useStyles();
   const tableColumns = columns(totalTickets);
