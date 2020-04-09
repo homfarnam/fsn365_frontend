@@ -18,7 +18,6 @@ export default function AssetListPage(props) {
         <FusionTable
           columns={columns}
           data={fetchAssets}
-          options={{ toolbar: false }}
         />
       </Panel>
     </>
@@ -27,7 +26,7 @@ export default function AssetListPage(props) {
 
 AssetListPage.getInitialProps = async ({ query }) => {
   return {
-    query: query
+    query
   };
 };
 
