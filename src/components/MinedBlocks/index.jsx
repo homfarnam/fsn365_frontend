@@ -8,12 +8,9 @@ import OutLink from "../OutLink";
 import UTCTime from "../UTCTime";
 
 export default function MinedBlocks(props) {
-  const { tableOptions = {}, miner } = props;
+  const { miner } = props;
   const options = {
-    toolbar: false,
-    pageSize: 5,
-    pageSizeOptions: [5, 10, 20],
-    ...tableOptions
+    pageSize: 10
   };
   const fetchData = createQuery(miner);
   return <FusionTable data={fetchData} columns={columns} options={options} />;

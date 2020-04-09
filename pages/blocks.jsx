@@ -18,38 +18,34 @@ const useStyles = makeStyles(() =>
       margin: "0 4px",
       display: "inline-block",
     },
+    panel: {
+      padding: "0",
+    },
   })
 );
 
-export default function BlockListPage({ params }) {
-  const classes = useStyles();
+export default function BlockListPage({ miner }) {
+  const style = useStyles();
   return (
     <>
       <PageHeading title={"Blocks"} />
-      <Panel style={{ paddingTop: 0, paddingLeft: 0, paddingRight: 0 }}>
-        {params.miner ? (
-          <p p className={classes.address}>
+      <Panel className={style.panel}>
+        {miner ? (
+          <p p className={style.address}>
             <TextStrong>Notice:</TextStrong>We only provide latest 1k blocks
             mined by miner.
           </p>
         ) : null}
-        {params.miner ? (
-          <p className={classes.address}>
-            <span className={classes.span}>Blocks mined by</span>{" "}
-            <FusionAddressLink address={params.miner} />
+        {miner ? (
+          <p className={style.address}>
+            <span className={style.span}>Blocks mined by</span>{" "}
+            <FusionAddressLink address={miner} />
           </p>
         ) : null}
-        <MinedBlocks
-          miner={params.miner}
-          tableOptions={{ pageSize: 10, pageSizeOptions: [10, 20, 50] }}
-        />
+        <MinedBlocks miner={miner} />
       </Panel>
     </>
   );
 }
 
-BlockListPage.getInitialProps = async ({ query }) => {
-  return {
-    params: query,
-  };
-};
+BlockListPage.getInitialProps = async ({ query }) => query;
