@@ -8,9 +8,7 @@ import UTCTime from "../UTCTime";
 export default function ActiveTickets({ miner }) {
   const [state, setState] = useState({ tickets: [] });
   const tableOptions = {
-    search: false,
     pageSize: 5,
-    toolbar: false,
     pageSizeOptions: [5, 10, 20]
   };
   useEffect(() => {
@@ -24,11 +22,7 @@ export default function ActiveTickets({ miner }) {
             tickets
           });
         })
-        .catch(e =>
-          setState({
-            tickets: []
-          })
-        );
+        .catch(e => {});
     };
     runEffect();
     return () => {

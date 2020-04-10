@@ -15,7 +15,6 @@ export default function Transactions(props) {
   const { tableOptions = {}, params = {} } = props;
   const options = {
     toolbar: false,
-    pageSize: 10,
     ...tableOptions
   };
   const queryDataFunc = createQuery(params);

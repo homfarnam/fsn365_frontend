@@ -17,34 +17,38 @@ const useStyles = makeStyles(() =>
     },
     heading: {
       color: "#3498db",
-      marginBottom: '1rem'
+      marginBottom: "1rem",
     },
     keyword: {
-      wordBreak: 'break-all'
+      wordBreak: "break-all",
     },
     hint: {
-      marginBottom: '2rem'
-    }
+      marginBottom: "2rem",
+    },
   })
 );
 
-export default function SearchPage({ query }) {
-  const classes = useStyles();
+export default function SearchPage({ keyword }) {
+  const style = useStyles();
   return (
     <>
       <PageHeading title={"Explorer Search"} />
       <Panel>
-        <div className={classes.container}>
-          <div className={classes.hint}>
-            <Typography variant="h4" component="h4" className={classes.heading}>
+        <div className={style.container}>
+          <div className={style.hint}>
+            <Typography variant="h4" component="h4" className={style.heading}>
               Search Not Found
             </Typography>
             <Typography variant="p" component="p">
               Oops! The search string was:{" "}
-              <strong className={classes.keyword}>{query.keyword}</strong>.
-            </Typography >
-            <Typography  variant="p" component="p">Sorry! This is an invalid search string.</Typography>
-            <Typography  variant="p" component="p">If you have any suggestion, please tell us.</Typography>
+              <strong className={style.keyword}>{keyword}</strong>.
+            </Typography>
+            <Typography variant="p" component="p">
+              Sorry! This is an invalid search string.
+            </Typography>
+            <Typography variant="p" component="p">
+              If you have any suggestion, please tell us.
+            </Typography>
           </div>
           <NotFound />
         </div>
@@ -54,7 +58,5 @@ export default function SearchPage({ query }) {
 }
 
 SearchPage.getInitialProps = async ({ query }) => {
-  return {
-    query: query
-  };
+  return query;
 };
