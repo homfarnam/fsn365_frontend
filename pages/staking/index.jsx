@@ -44,7 +44,10 @@ export default function StakingPage(props) {
   const style = useStyles();
   return (
     <>
-      <PageHeading title={"Fusion Staking"} />
+      <PageHeading
+        title={"Fusion Staking"}
+        canonical={`staking`}
+      />
       <Panel title="Summary">
         <div className={style.flexBox}>
           <KeyValue label="Active Miners" className={style.field}>

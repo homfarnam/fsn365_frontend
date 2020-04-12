@@ -13,11 +13,17 @@ import fetch from "../../src/libs/fetch";
 
 export default function BlockPage(props) {
   const { block = {}, height } = props;
-
+  const suffix = `#${height}`;
+  const canonical = `block/${height}`;
+  
   if (block.height == undefined) {
     return (
       <>
-        <PageHeading title={"Block"} suffix={`#${height}`} />
+        <PageHeading
+          title={"Block"}
+          suffix={suffix}
+          canonical={canonical}
+        />
         <Panel title="Bad Request">
           <p>
             This block does not exist! 
@@ -30,7 +36,11 @@ export default function BlockPage(props) {
   }
   return (
     <>
-      <PageHeading title={"Block"} suffix={`#${block.height}`} />
+      <PageHeading
+        title={"Block"}
+        suffix={suffix}
+        canonical={canonical}
+      />
       <Panel>
         <FusionTabs value={0}>
           <FusionTab label="overview" />

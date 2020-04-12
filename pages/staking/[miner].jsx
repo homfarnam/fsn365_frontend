@@ -6,7 +6,10 @@ import PageHeading from "../../src/components/PageHeading";
 export default function MinerStakingPage({ miner, tab = "block" }) {
   return (
     <>
-      <PageHeading title={"Node Monitor"} />
+      <PageHeading
+        title={"Node Monitor"}
+        canonical={`staking/${miner}`}
+      />
       <MiningOverview miner={miner} />
       <MiningState miner={miner} view={tab} />
     </>

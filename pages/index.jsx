@@ -3,6 +3,7 @@ import DoSearch from "../src/components/HomeSearchForm";
 import FusionOverview from "../src/components/FusionOverview";
 import NetworkState from "../src/components/NetworkState";
 import fetch from "../src/libs/fetch";
+import PageHeading from '../src/components/PageHeading';
 
 export default class HomePage extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ export default class HomePage extends React.Component {
     const { overview, realTime } = this.state;
     return (
       <>
+        <PageHeading />
         <DoSearch />
         <FusionOverview overview={overview} />
         <NetworkState bks={realTime.bks} txs={realTime.txs} />

@@ -30,7 +30,11 @@ export default function TransactionPage(props) {
   }
   return (
     <>
-      <PageHeading title="Tx" suffix={'# '+tx.type} />
+      <PageHeading
+       title="Tx"
+       suffix={'# '+tx.type}
+       canonical={`tx/${tx.hash}`}
+      />
       <Panel>
         <FusionTabs value={0}>
           <FusionTab label="Tx Overview" />

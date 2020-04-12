@@ -28,7 +28,10 @@ export default function BlockListPage({ miner }) {
   const style = useStyles();
   return (
     <>
-      <PageHeading title={"Blocks"} />
+      <PageHeading
+        title={"Blocks"}
+        canonical={'blocks'}
+      />
       <Panel className={style.panel}>
         {miner ? (
           <p p className={style.address}>

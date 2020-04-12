@@ -11,7 +11,11 @@ export default function TxListPage({ params }) {
 
   return (
     <>
-      <PageHeading title="Transactions" suffix={type} />
+      <PageHeading
+        title="Transactions"
+        suffix={type}
+        canonical={`txs`}
+      />
       <Panel style={{ paddingTop: 0, paddingLeft: 0, paddingRight: 0 }}>
         <TxnsHints {...params} type={type} />
         <Transactions params={params} />

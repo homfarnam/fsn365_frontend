@@ -12,16 +12,18 @@ export default function SiteNavigation(props) {
   const classes = useStyles(theme);
 
   return (
-    <nav className={classes.topBar}>
-      <Link href="/">
-        <a className={classes.brand}>
-          <Typography component="h4" variant="h4">
-            <ThreeDRotationIcon />
-            FSN365
-          </Typography>
-        </a>
-      </Link>
-      <SiteNavItems route={route} />
-    </nav>
+    <>
+      <nav className={classes.topBar}>
+        <Link href="/">
+          <a className={classes.brand}>
+            <Typography component="h1" variant="h4">
+              <ThreeDRotationIcon />
+              FSN365
+            </Typography>
+          </a>
+        </Link>
+        <SiteNavItems route={route} />
+      </nav>
+    </>
   );
 }

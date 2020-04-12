@@ -19,7 +19,10 @@ export default function AddressDetailPage(props) {
   if (!overview.id) {
     return (
       <>
-        <PageHeading title="Address Detail" />
+        <PageHeading
+          title="Address Detail"
+          canonical={`address/${address}`}
+        />
         <Panel style={{ textAlign: "center", padding: "10vh 0" }}>
           <NotFound />
         </Panel>
@@ -56,7 +59,10 @@ export default function AddressDetailPage(props) {
   const publicAddress = overview.id;
   return (
     <>
-      <PageHeading title="Address Detail" />
+      <PageHeading 
+        title="Address Detail"
+        canonical={`address/${address}`}
+      />
       <Panel title="Overview" style={{ marginBottom: "1.75rem" }}>
         <AddressOverview overview={overview} />
       </Panel>

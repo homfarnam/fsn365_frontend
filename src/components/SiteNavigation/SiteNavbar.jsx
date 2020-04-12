@@ -45,7 +45,7 @@ export default function SiteNavItems(props) {
         >
           <Divider />
           <Typography
-            component="h4"
+            component="h2"
             variant="h4"
             className={classes.drawerTitle}
           >
