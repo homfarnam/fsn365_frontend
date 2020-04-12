@@ -1,6 +1,5 @@
 import React from "react";
 import App from "next/app";
-import Head from "next/head";
 import Container from "@material-ui/core/Container";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -21,9 +20,6 @@ export default class MyApp extends App {
     const { route } = this.props.router;
     return (
       <React.Fragment>
-        <Head>
-          <title>FSN365 Fusion Blockchain Explorer</title>
-        </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}> 
