@@ -11,7 +11,10 @@ export default function AssetListPage(props) {
   const fetchAssets = createQuery(query);
   return (
     <>
-      <PageHeading title="Assets" />
+      <PageHeading
+        title="Assets"
+        canonical={`assets`}
+      />
       <Panel
         style={{padding: '0'}}
       >

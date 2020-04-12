@@ -12,7 +12,11 @@ import UTCTime from '../../src/components/UTCTime';
 export default function AssetPage({ asset = {} }) {
   return (
     <>
-      <PageHeading title={"Asset"} suffix={`#${asset.symbol}`} />
+      <PageHeading
+        title={"Asset"}
+        suffix={`#${asset.symbol}`}
+        canonical={`asset/${asset.id}`}
+      />
       <Panel>
         <KeyValue label="Asset Name" value={asset.name} />
         <KeyValue label="Asset symbol" value={asset.symbol} />
