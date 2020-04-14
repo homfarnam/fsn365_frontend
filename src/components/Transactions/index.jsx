@@ -237,7 +237,7 @@ const TxValue = props => {
     );
   }
 
-  if (value.indexOf("M") > -1 || value.indexOf("k") > -1) {
+  if (value && (value.indexOf("M") > -1 || value.indexOf("k") > -1)) {
     className = `${style.type} ${style.capital}`;
   }
   return (
