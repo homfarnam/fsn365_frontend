@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import KeyValue from "../KeyValue";
 import Panel from "../Panel";
-import fetch from "../../libs/fetch";
 import StatusText from "../StatusText";
 import OutLink from "../OutLink";
 import UTCTime from "../UTCTime";
@@ -26,40 +24,11 @@ const useStyles = makeStyles(({ breakpoints }) =>
   })
 );
 
-export default function MiningOverview({ miner }) {
-  const [data, setState] = useState({
-    state: "loading",
-    overview: {}
-  });
-  useEffect(() => {
-    let cancel = false;
-    const runEffect = () => {
-      fetch(`address/${miner}/mining`)
-        .then(res => res.json())
-        .then(res => {
-          if (res.data) {
-            return { overview: res.data, state: "success" };
-          }
-          throw new Error();
-        })
-        .catch(e => ({
-          overview: {},
-          state: "error"
-        }))
-        .then(data => {
-          setState(data);
-        });
-    };
-    runEffect();
-    return () => {
-      cancel = true;
-    };
-  }, [miner]);
-  const { state, overview } = data;
+export default function MiningOverview(props) {
+  const { miner, overview, state } = props;
   const classes = useStyles();
   return (
     <Panel title="Overview">
-      {state == "loading" && <CircularProgress size={20} />}
       {state == "error" ? (
         <>
           <strong>
