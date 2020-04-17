@@ -84,6 +84,6 @@ const columns = [
     field: "reward",
     title: "Reward",
     sorting: false,
-    render: row => <span>{row.reward}</span>
+    render: row => <span>{row.reward} FSN</span>
   }
 ];
