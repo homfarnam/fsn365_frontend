@@ -4,11 +4,11 @@ import MiningOverview from "../../src/components/MiningOverview";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 
-export default function MinerStakingPage({ miner, overview, state }) {
+export default function MinerStakingPage({ miner, msg, overview }) {
   return (
     <>
       <PageHeading title={"Node Monitor"} canonical={`staking/${miner}`} />
-      <MiningOverview miner={miner} state={state} overview={overview} />
+      <MiningOverview msg={msg} overview={overview} />
       <MiningState miner={miner} />
     </>
   );
@@ -16,17 +16,27 @@ export default function MinerStakingPage({ miner, overview, state }) {
 
 MinerStakingPage.getInitialProps = async ({ query }) => {
   const { miner } = query;
-  let state = "success";
-  const overview = await fetch(`address/${miner}/mining`)
+  const result = await fetch(`address/${miner}/mining`)
     .then((res) => res.json())
-    .then((res) => res.data)
+    .then((res) => {
+      if (res.data) {
+        return {
+          overview: res.data,
+        };
+      }
+      return {
+        msg: res.msg,
+      };
+    })
     .catch((e) => {
-      state = "error";
-      return {};
+      return {
+        msg: "Something went wrong",
+      };
     });
+  const { msg, overview } = result;
   return {
     miner,
     overview,
-    state,
+    msg,
   };
 };
