@@ -34,7 +34,7 @@ export default function MiningOverview(props) {
   return (
     <Panel title="Overview">
       <div className={classes.overview}>
-        <KeyValue label="Address" className={classes.field}>
+        <KeyValue label="Miner" className={classes.field}>
           <FusionAddress address={overview.address}>
             {overview.address}
           </FusionAddress>
@@ -46,7 +46,7 @@ export default function MiningOverview(props) {
             </StatusText>
           ) : (
             <StatusText isOk={false}>
-              <strong>Offline</strong>
+              <strong>No Ticket</strong>
             </StatusText>
           )}
         </KeyValue>

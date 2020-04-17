@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import KeyValue from "../KeyValue";
-import addressMap from "../../constants/addressMap";
 import TimeAgo from "../TimeAgo";
 import TextStrong from "../TextStrong";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -54,18 +53,18 @@ export default function AddressOverview({ overview = {} }) {
   };
   return (
     <div className={classes.root}>
-      <KeyValue label="address" className={classes.field}>
+      {overview.label ? (
+        <KeyValue label={"Label"} className={classes.field}>
+          <TextStrong>{overview.label}</TextStrong>
+        </KeyValue>
+      ) : null}
+      <KeyValue label="Address" className={classes.field}>
         <span className={classes.withIcon}>
           {overview.id}
-          {overview.label ? (
-            <>
-              (<TextStrong>{overview.label}</TextStrong>)
-            </>
-          ) : null}
           <CopyToClipboard text={overview.id} onCopy={onCopy}>
             {copied ? (
               <span className={classes.okIcon}>
-                <CheckCircleIcon fontSize="small" /> Copied
+                <CheckCircleIcon fontSize="small" />
               </span>
             ) : (
               <FileCopyIcon className={classes.checkIcon} fontSize="small" />
@@ -86,7 +85,7 @@ export default function AddressOverview({ overview = {} }) {
         ></KeyValue>
       ) : null}
       {overview.miner ? (
-        <KeyValue label={"Mining Address"} className={classes.field}>
+        <KeyValue label={"Is Miner"} className={classes.field}>
           <NavLink href={`/staking/${overview.id}`}>To mining monitor</NavLink>
         </KeyValue>
       ) : null}

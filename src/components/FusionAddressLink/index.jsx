@@ -5,21 +5,21 @@ import TextStrong from "../TextStrong";
 
 export default function FusionAdressLink(props) {
   const { address, children, miner = false, ...others } = props;
-  const text = addressMap[address];
-  if (addressMap[address] === "FUSION CONTRACT") {
-    return <TextStrong {...others}>{text}</TextStrong>;
-  } else {
-    const href = miner ? `/staking/${address}` : `/address/${address}`;
+  const label = addressMap[address];
+  if (label === "FUSION CONTRACT") {
+    return <TextStrong {...others}>{label}</TextStrong>;
+  }
+  const href = miner ? `/staking/${address}` : `/address/${address}`;
+  if (label) {
     return (
-      <span {...others}>
-        <NavLink href={href}>{address}</NavLink>
-        {text ? (
-          <TextStrong>
-            {"   "}
-            {`(${text})`}
-          </TextStrong>
-        ) : null}
-      </span>
+      <TextStrong {...others}>
+        <NavLink href={href}>{label}</NavLink>
+      </TextStrong>
     );
   }
+  return (
+    <span {...others}>
+      <NavLink href={href}>{address}</NavLink>
+    </span>
+  );
 }

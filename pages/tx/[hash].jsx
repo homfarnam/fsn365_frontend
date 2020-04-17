@@ -28,11 +28,13 @@ export default function TransactionPage(props) {
       </>
     );
   }
+
+  const typeText = tx.type.replace('Ext', '').replace('Func', '');
   return (
     <>
       <PageHeading
        title="Tx"
-       suffix={'# '+tx.type}
+       suffix={'# '+ typeText}
        canonical={`tx/${tx.hash}`}
       />
       <Panel>

@@ -97,6 +97,16 @@ const createColumns = address => {
   const classes = useStyles();
   return [
     {
+      field: "type",
+      title: "Tx Type",
+      sorting: false,
+      render: row => (
+        <TextStrong>
+          {row.type.replace("Func", "").replace("Ext", "")}
+        </TextStrong>
+      )
+    },
+    {
       field: "hash",
       title: "Tx Hash",
       sorting: false,
@@ -144,6 +154,7 @@ const createColumns = address => {
     },
     {
       field: "from",
+      title: "Direction",
       sorting: false,
       render: row => {
         if (!address) return <ArrowRightAltIcon className={classes.arraw} />;
@@ -173,16 +184,6 @@ const createColumns = address => {
           <FusionAddressLink address={row.to} className={classes.withElis} />
         );
       }
-    },
-    {
-      field: "type",
-      title: "Tx Type",
-      sorting: false,
-      render: row => (
-        <TextStrong>
-          {row.type.replace("Func", "").replace("Ext", "")}
-        </TextStrong>
-      )
     },
     {
       field: "hash",
