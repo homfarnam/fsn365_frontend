@@ -15,7 +15,7 @@ export default function RealTimeBlocks(props) {
           <TextStrong>Latest Blocks</TextStrong>
         </Typography>
         <TextStrong>
-          <NavLink href={`/blocks`}>View all blocks</NavLink>
+          <NavLink href={`/blocks`}>View All</NavLink>
         </TextStrong>
       </header>
       {bks.map(bk => {

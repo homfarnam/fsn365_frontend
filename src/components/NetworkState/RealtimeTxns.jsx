@@ -15,7 +15,7 @@ export default function RealTimeTxns(props) {
           <TextStrong>Latest Txns</TextStrong>
         </Typography>
         <TextStrong>
-          <NavLink href={`/txs`}>View all non-ticket txns</NavLink>
+          <NavLink href={`/txs`}>View All</NavLink>
         </TextStrong>
       </header>
       {txs.map((tx, index) => {

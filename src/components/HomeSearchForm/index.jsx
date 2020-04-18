@@ -9,7 +9,7 @@ const useStyles = makeStyles(() =>
       backgroundImage: "linear-gradient(150deg,#19a0ff,#2d1582)",
       backgroundRepeat: "repeat-x",
       padding: "1rem",
-      marginTop: "1.75rem",
+      marginBottom: "1.75rem",
       borderRadius: "4px",
       boxShadow: "0 0.5rem 1.2rem rgba(189,197,209,.2)"
     },
