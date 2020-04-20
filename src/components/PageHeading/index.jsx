@@ -58,6 +58,12 @@ const SeoHead = props => {
         description={"fsn365, the fusionnetwork browser&&explorer."}
       ></meta>
       <link rel="canonical" href={canonicalText} />
+      <script
+        async
+        defer
+        data-domain="fsn365.com"
+        src="https://plausible.io/js/plausible.js"
+      ></script>
     </Head>
   );
 };
