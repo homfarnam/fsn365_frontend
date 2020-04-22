@@ -97,16 +97,6 @@ const createColumns = address => {
   const classes = useStyles();
   return [
     {
-      field: "type",
-      title: "Tx Type",
-      sorting: false,
-      render: row => (
-        <TextStrong>
-          {row.type.replace("Func", "").replace("Ext", "")}
-        </TextStrong>
-      )
-    },
-    {
       field: "hash",
       title: "Tx Hash",
       sorting: false,
@@ -182,6 +172,21 @@ const createColumns = address => {
         }
         return (
           <FusionAddressLink address={row.to} className={classes.withElis} />
+        );
+      }
+    },
+    {
+      field: "type",
+      title: "Tx Type",
+      sorting: false,
+      render(row) {
+        if (row.type == "GenNotationFunc") {
+          return <TextStrong>Generate USAN</TextStrong>;
+        }
+        return (
+          <TextStrong>
+            {row.type.replace("Func", "").replace("Ext", "")}
+          </TextStrong>
         );
       }
     },
