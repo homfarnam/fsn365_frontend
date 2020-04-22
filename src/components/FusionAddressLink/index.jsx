@@ -12,14 +12,18 @@ export default function FusionAdressLink(props) {
   const href = miner ? `/staking/${address}` : `/address/${address}`;
   if (label) {
     return (
-      <TextStrong {...others}>
-        <NavLink href={href}>{label}</NavLink>
+      <TextStrong>
+        <NavLink {...others} href={href}>
+          {label}
+        </NavLink>
       </TextStrong>
     );
   }
   return (
-    <span {...others}>
-      <NavLink href={href}>{address}</NavLink>
+    <span>
+      <NavLink {...others} href={href} prefetch>
+        {address}
+      </NavLink>
     </span>
   );
 }
