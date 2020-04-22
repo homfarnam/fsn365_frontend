@@ -94,7 +94,7 @@ export default function FusionOverview(props) {
             <TextStrong className={style.cat}>Tokens</TextStrong>
             <br></br>
             {overview.assets ? (
-              <>{overview.assets - 1}</>
+              <>{overview.assets}</>
             ) : (
               <CircularProgress size={10} />
             )}
