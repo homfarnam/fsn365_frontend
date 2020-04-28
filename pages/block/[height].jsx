@@ -1,12 +1,6 @@
 import React from "react";
 import Router from "next/router";
 import Panel from "../../src/components/Panel";
-import {
-  FusionTab,
-  FusionTabs,
-  FusionTabPanel
-} from "../../src/components/FusionTabs";
-import FusionTabPanels from "../../src/components/FusionTabs/FusionTabPanels";
 import BlockOverview from "../../src/components/BlockOverview";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
@@ -42,14 +36,7 @@ export default function BlockPage(props) {
         canonical={canonical}
       />
       <Panel>
-        <FusionTabs value={0}>
-          <FusionTab label="overview" />
-        </FusionTabs>
-        <FusionTabPanels>
-          <FusionTabPanel value={0} index={0}>
-            <BlockOverview block={block} />
-          </FusionTabPanel>
-        </FusionTabPanels>
+        <BlockOverview block={block} />
       </Panel>
     </>
   );
