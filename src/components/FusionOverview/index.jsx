@@ -59,10 +59,10 @@ export default function FusionOverview(props) {
         </li>
         <li>
           <span>
-            <TextStrong className={style.cat}>Total Txns</TextStrong>
+            <TextStrong className={style.cat}>Addresses</TextStrong>
             <br></br>
-            {overview.txns ? (
-              <>{overview.txns}</>
+            {overview.address ? (
+              <>{overview.address}</>
             ) : (
               <CircularProgress size={10} />
             )}
