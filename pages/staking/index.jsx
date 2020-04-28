@@ -33,7 +33,7 @@ const useStyles = makeStyles(({ breakpoints }) =>
     field: {
       width: "100%",
       [breakpoints.up("lg")]: {
-        width: "49%",
+        width: "48.5%",
       },
     },
   })
@@ -50,21 +50,21 @@ export default function StakingPage(props) {
       />
       <Panel title="Summary">
         <div className={style.flexBox}>
-          <KeyValue label="Active Miners" className={style.field}>
-            <span>{summary.activeMiners}</span>
-          </KeyValue>
           <KeyValue label="Tickets" className={style.field}>
             <span>{summary.activeTickets}</span>
+          </KeyValue>
+          <KeyValue label="Online Miners" className={style.field}>
+            <span>{summary.activeMiners}</span>
           </KeyValue>
           <KeyValue label="Historical Miners" className={style.field}>
             <span>{summary.allMiners}</span>
           </KeyValue>
           <KeyValue
-            label="Overall Rewards/Mined Blocks"
+            label="Block Rewards"
             className={style.field}
           >
             <span>
-              {summary.allRewards} FSN / {summary.minedBks} blocks
+              {summary.allRewards} FSN
             </span>
           </KeyValue>
         </div>
