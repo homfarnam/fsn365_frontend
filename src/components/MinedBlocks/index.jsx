@@ -49,7 +49,9 @@ const columns = [
     field: "height",
     title: "Block",
     sorting: false,
-    render: row => <NavLink href={`/block/${row.height}`}>{row.height}</NavLink>
+    render: row => (
+      <NavLink href={`/block/${row.height}`}>{row.height + ""}</NavLink>
+    )
   },
   {
     field: "timestamp",
