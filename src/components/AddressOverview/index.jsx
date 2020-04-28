@@ -85,7 +85,7 @@ export default function AddressOverview({ overview = {} }) {
         ></KeyValue>
       ) : null}
       {overview.miner ? (
-        <KeyValue label={"Is Miner"} className={classes.field}>
+        <KeyValue label={"Miner Info"} className={classes.field}>
           <NavLink href={`/staking/${overview.id}`}>To mining monitor</NavLink>
         </KeyValue>
       ) : null}
