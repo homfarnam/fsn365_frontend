@@ -14,9 +14,5 @@ export default [
   {
     label: "Transaction",
     type: "tx"
-  },
-  {
-    label: "Block",
-    type: "block"
   }
 ];
