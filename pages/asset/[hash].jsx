@@ -23,7 +23,7 @@ export default function AssetPage({ asset = {} }) {
         <KeyValue label="Asset ID" value={asset.id} />
         <KeyValue label="Decimals" value={asset.decimals} />
         <KeyValue
-          label="Total Supply"
+          label="Supply"
           value={+asset.total / Math.pow(10, asset.decimals)}
         />
         <KeyValue
@@ -33,6 +33,7 @@ export default function AssetPage({ asset = {} }) {
         <KeyValue label="Issuer">
           <FusionAddressLink address={asset.issuer} />
         </KeyValue>
+        <KeyValue label={"Description"}>{JSON.stringify(asset.description)}</KeyValue>
         <KeyValue label="Issue Height">
           {asset.issueBk ? (
           <NavLink href={`/block/${asset.issueBk}`}>{asset.issueBk}</NavLink>
