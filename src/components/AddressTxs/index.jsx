@@ -65,7 +65,7 @@ export default function AddressTxs(props) {
       </div>
       <Transactions
         tableOptions={{
-          pageSizeOptions: [5, 10, 25],
+          pageSizeOptions: [5, 10, 25, 50, 100],
           pageSize: 5
         }}
         params={{ [direction]: address }}

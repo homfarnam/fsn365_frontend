@@ -136,7 +136,7 @@ export default function SearchBar(props) {
           className={
             place == "home" ? cssClasses.searchBox : cssClasses.searchBoxAtBar
           }
-          placeholder="Search by Address/Tx Hash/Block/Asset"
+          placeholder="Search by Address/Tx Hash/Asset"
           size={size}
           onChange={handelSearchkeyword}
         ></TextField>
