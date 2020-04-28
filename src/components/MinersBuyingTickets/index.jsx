@@ -24,9 +24,7 @@ const useStyles = makeStyles(({ palette }) =>
 export default function MinersBuyingTickets(props) {
   const { tableOptions = {}, miner } = props;
   const options = {
-    toolbar: false,
-    pageSize: 10,
-    pageSizeOptions: [5, 10, 20],
+    pageSize: 5,
     ...tableOptions
   };
   const fetchData = createQuery(miner);
