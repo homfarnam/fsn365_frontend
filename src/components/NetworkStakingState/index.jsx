@@ -16,7 +16,6 @@ const useStyles = makeStyles(() =>
 
 export default function NetworkStakingState({ data, totalTickets }) {
   const tableOptions = {
-    pageSizeOptions: [10, 20, 50],
     pageSize: 10,
     toolbar: true
   };
@@ -26,7 +25,7 @@ export default function NetworkStakingState({ data, totalTickets }) {
     <FusionTable
       columns={tableColumns}
       data={data}
-      title={"Active Miners"}
+      title={"Online Miners"}
       options={tableOptions}
       components={{
         Toolbar: props => (
