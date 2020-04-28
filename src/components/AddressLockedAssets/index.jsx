@@ -5,7 +5,7 @@ import UTCTime from "../UTCTime";
 
 const tableOptions = {
   toolbar: false,
-  pageSizeOptions: [5, 10, 25],
+  pageSizeOptions: [5, 10, 25, 50, 100],
   pageSize: 5
 };
 
