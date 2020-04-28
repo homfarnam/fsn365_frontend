@@ -19,7 +19,7 @@ export default function FusionAdressLink(props) {
   }
   return (
     <span>
-      <NavLink {...others} href={href} prefetch>
+      <NavLink {...others} href={href}>
         {address}
       </NavLink>
     </span>
