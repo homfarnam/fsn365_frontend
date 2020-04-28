@@ -1,11 +1,11 @@
 import React from "react";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import KeyValue from "../KeyValue";
 import Panel from "../Panel";
 import StatusText from "../StatusText";
-import OutLink from "../OutLink";
-import UTCTime from "../UTCTime";
 import FusionAddress from "../FusionAddressLink";
+import UTCTime from "../UTCTime";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -20,6 +20,9 @@ const useStyles = makeStyles(({ breakpoints }) =>
       [breakpoints.up("lg")]: {
         width: "48.5%"
       }
+    },
+    error: {
+      color: "red"
     }
   })
 );
@@ -28,7 +31,13 @@ export default function MiningOverview(props) {
   const { msg, overview } = props;
   const classes = useStyles();
   if (msg) {
-    return <Panel title="Overview">{msg}</Panel>;
+    return (
+      <Panel title="Overview">
+        <Typography component="h4" variable={"h4"} className={classes.error}>
+          Error:{msg}
+        </Typography>
+      </Panel>
+    );
   }
 
   return (
@@ -67,7 +76,7 @@ export default function MiningOverview(props) {
           value={overview.bks}
           className={classes.field}
         />
-        <KeyValue label="Latest Mining Time" className={classes.field}>
+        <KeyValue label="Latest Block Time" className={classes.field}>
           <UTCTime time={overview.lBkTime} />
         </KeyValue>
       </div>
