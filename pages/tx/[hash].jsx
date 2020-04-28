@@ -1,10 +1,5 @@
 import React from "react";
 import Panel from "../../src/components/Panel";
-import {
-  FusionTab,
-  FusionTabs,
-  FusionTabPanel
-} from "../../src/components/FusionTabs";
 import FusionTabPanels from "../../src/components/FusionTabs/FusionTabPanels";
 import TxOverview from "../../src/components/TxOverview";
 import PageHeading from "../../src/components/PageHeading";
@@ -38,14 +33,7 @@ export default function TransactionPage(props) {
        canonical={`tx/${tx.hash}`}
       />
       <Panel>
-        <FusionTabs value={0}>
-          <FusionTab label="Tx Overview" />
-        </FusionTabs>
-        <FusionTabPanels>
-          <FusionTabPanel value={0} index={0}>
-            <TxOverview tx={tx} />
-          </FusionTabPanel>
-        </FusionTabPanels>
+        <TxOverview tx={tx} />
       </Panel>
     </>
   );

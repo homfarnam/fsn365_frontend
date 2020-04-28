@@ -15,10 +15,14 @@ const useStyles = makeStyles(({ palette }) =>
 );
 
 export default function Panel(props) {
-  const { title, children, className = "" } = props;
+  const { title, children, className = "", style = {} } = props;
   const classes = useStyles();
   return (
-    <Paper variant="outlined" className={classes.root + ` ${className}`}>
+    <Paper
+      variant="outlined"
+      className={classes.root + ` ${className}`}
+      style={style}
+    >
       {title ? (
         <PanelHeading component="h6" title={title}></PanelHeading>
       ) : null}
