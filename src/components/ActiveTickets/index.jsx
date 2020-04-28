@@ -8,8 +8,7 @@ import UTCTime from "../UTCTime";
 export default function ActiveTickets({ miner }) {
   const [state, setState] = useState({ tickets: [] });
   const tableOptions = {
-    pageSize: 5,
-    pageSizeOptions: [5, 10, 20]
+    pageSize: 5
   };
   useEffect(() => {
     let cancel = false;
