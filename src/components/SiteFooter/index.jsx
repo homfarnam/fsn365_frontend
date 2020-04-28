@@ -81,7 +81,7 @@ export default function SiteFooter() {
         </Typography>
         <small>
           Suggestions and contributions are welcomed. Please click{" "}
-          <OutLink href="https://t.me/yocnkc" className={style.outlink}>
+          <OutLink href="https://t.me/fusionfrontier" className={style.outlink}>
             <strong className={style.strong}>here</strong>.
           </OutLink>
         </small>
