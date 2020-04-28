@@ -39,7 +39,9 @@ export default function BlockOverview(props) {
           <strong>{block.height}</strong>
         </OutLink>
         <span style={{ marginLeft: "10px" }}>
-          <NavLink href={`/block/${prevHeight}`}>Prev</NavLink>{" "}
+          {prevHeight > 0 ? (
+            <NavLink href={`/block/${prevHeight}`}>Prev </NavLink>
+          ) : null}
           <NavLink href={`/block/${nextHeight}`}>Next</NavLink>
         </span>
       </KeyValue>
