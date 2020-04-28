@@ -3,8 +3,6 @@ import FusionTable from "../FusionTable";
 import NavLink from "../NavLink";
 
 const tableOptions = {
-  toolbar: false,
-  pageSizeOptions: [5, 10, 25],
   pageSize: 5
 };
 export default function AddressHeldAssets({ assets }) {
