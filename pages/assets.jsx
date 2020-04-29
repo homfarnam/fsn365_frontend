@@ -4,7 +4,6 @@ import FusionTable from "../src/components/FusionTable";
 import NavLink from "../src/components/NavLink";
 import PageHeading from "../src/components/PageHeading";
 import fetch from "../src/libs/fetch";
-import StatusText from "../src/components/StatusText";
 
 export default function AssetListPage(props) {
   const { query = {} } = props;
@@ -13,7 +12,7 @@ export default function AssetListPage(props) {
     <>
       <PageHeading
         title="Assets"
-        canonical={`assets`}
+        canonical={'assets'}
       />
       <Panel
         style={{padding: '0'}}
@@ -71,16 +70,6 @@ const columns = [
     )
   },
   {
-    field: "verified",
-    title: "Asset Type",
-    sorting: false,
-    render: row => (
-      <StatusText isOk={row.verified}>
-        <strong>{row.verified ? "Verfied" : "Unverfied"} Asset</strong>
-      </StatusText>
-    )
-  },
-  {
     field: "id",
     title: "Asset ID",
     sorting: false,
@@ -90,6 +79,6 @@ const columns = [
     field: "quantity",
     title: "Quantity",
     sorting: false,
-    render: row => <span className="asset-quantity">{row.quantity}</span>
+  render: row => <span className="asset-quantity">{row.quantity}{' '}{row.symbol}</span>
   }
 ];
