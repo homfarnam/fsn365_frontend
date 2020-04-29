@@ -19,7 +19,7 @@ export default class HomePage extends React.Component {
       fetchHomeData().then((data) => {
         this.setState(data);
       });
-    }, 6.5 * 1000);
+    }, 3.5 * 1000);
   }
 
   render() {
