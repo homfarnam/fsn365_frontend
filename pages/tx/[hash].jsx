@@ -1,6 +1,5 @@
 import React from "react";
 import Panel from "../../src/components/Panel";
-import FusionTabPanels from "../../src/components/FusionTabs/FusionTabPanels";
 import TxOverview from "../../src/components/TxOverview";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
