@@ -21,7 +21,7 @@ export default function AssetPage({ asset = {} }) {
         <KeyValue label="Asset Name" value={asset.name} />
         <KeyValue label="Asset symbol" value={asset.symbol} />
         <KeyValue label="Asset ID" value={asset.id} />
-        <KeyValue label="Decimals" value={asset.decimals} />
+        <KeyValue label="Decimals">{`${asset.decimals}`}</KeyValue>
         <KeyValue
           label="Supply"
           value={+asset.total / Math.pow(10, asset.decimals)}
