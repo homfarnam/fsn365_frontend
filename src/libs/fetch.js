@@ -1,7 +1,8 @@
 import axios from "axios";
 
 axios.defaults.baseURL = "https://api.fsn365.com/";
-axios.interceptors.request.use(config => {
+axios.defaults.timeout = 5000;
+axios.interceptors.request.use((config = {}) => {
   config.headers["Content-Type"] = "application/json";
   return config;
 });
