@@ -29,9 +29,8 @@ const createQuery = params => ({ page, pageSize }) => {
   return new Promise(resolve => {
     params.page = page + 1;
     params.size = pageSize;
-    fetch(`txns`, params)
-      .then(res => res.json())
-      .then(res => res.data || {})
+    fetch(`txns`, { params })
+      .then(res => res || {})
       .then(res => {
         const { data = [], total = 0 } = res;
         resolve({
