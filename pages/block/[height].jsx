@@ -9,7 +9,6 @@ export default function BlockPage(props) {
   const { block = {}, height } = props;
   const suffix = `#${height}`;
   const canonical = `block/${height}`;
-  
   if (block.height == undefined) {
     return (
       <>
@@ -55,14 +54,12 @@ BlockPage.getInitialProps = async ({ query, res }) => {
     }
   } else {
     const block = await fetch(`block/${height}`)
-      .then(res => res.json())
-      .then(res => res.data)
       .catch(e => {
         return {}
       });
     return {
-      block: block || {},
-      ...query
+      block: block,
+      height
     };
   }
 };
