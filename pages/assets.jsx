@@ -40,8 +40,6 @@ const createQuery = query => ({ page, pageSize }) =>
       size: pageSize
     };
     fetch(`assets`, params)
-      .then(res => res.json())
-      .then(res => res.data)
       .then(data => {
         resolve({
           data: data.data,
