@@ -53,7 +53,7 @@ export default function AssetPage({ asset = {} }) {
             </StatusText>
           ) : (
             <StatusText isOk={false}>
-              No
+              <strong>No</strong>
             </StatusText>
           )}
         </KeyValue>
@@ -65,8 +65,6 @@ export default function AssetPage({ asset = {} }) {
 AssetPage.getInitialProps = async ({ query }) => {
   const { hash } = query;
   const asset = await fetch(`asset/${hash}`)
-    .then(res => res.json())
-    .then(res => res.data)
     .catch(e => ({ hash }));
   return {
     asset
