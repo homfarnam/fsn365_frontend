@@ -122,14 +122,10 @@ const tabMap = {
 
 async function fetchAdressAssets(address) {
   return fetch(`address/${address}/assets`)
-    .then((res) => res.json())
-    .then((res) => res.data)
     .catch((e) => []);
 }
 
 async function fetchAddressLockedAssets(address) {
   return fetch(`address/${address}/tlassets`)
-    .then((res) => res.json())
-    .then((res) => res.data)
     .catch((e) => []);
 }
