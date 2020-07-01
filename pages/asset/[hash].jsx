@@ -8,6 +8,7 @@ import NavLink from "../../src/components/NavLink";
 import OutLink from '../../src/components/OutLink';
 import StatusText from '../../src/components/StatusText';
 import UTCTime from '../../src/components/UTCTime';
+import axios from "../../src/libs/fetch";
 
 export default function AssetPage({ asset = {} }) {
   return (
@@ -64,7 +65,7 @@ export default function AssetPage({ asset = {} }) {
 
 AssetPage.getInitialProps = async ({ query }) => {
   const { hash } = query;
-  const asset = await fetch(`asset/${hash}`)
+  const asset = await axios.get(`asset/${hash}`)
     .catch(e => ({ hash }));
   return {
     asset

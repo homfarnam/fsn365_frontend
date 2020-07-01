@@ -4,6 +4,7 @@ import Panel from "../../src/components/Panel";
 import BlockOverview from "../../src/components/BlockOverview";
 import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
+import axios from "../../src/libs/fetch";
 
 export default function BlockPage(props) {
   const { block = {}, height } = props;
@@ -53,7 +54,7 @@ BlockPage.getInitialProps = async ({ query, res }) => {
       Router.push("/blocks");
     }
   } else {
-    const block = await fetch(`block/${height}`)
+    const block = await axios.get(`block/${height}`)
       .catch(e => {
         return {}
       });

@@ -4,6 +4,7 @@ import FusionTable from "../src/components/FusionTable";
 import NavLink from "../src/components/NavLink";
 import PageHeading from "../src/components/PageHeading";
 import fetch from "../src/libs/fetch";
+import axios from "../src/libs/fetch";
 
 export default function AssetListPage(props) {
   const { query = {} } = props;
@@ -39,7 +40,7 @@ const createQuery = query => ({ page, pageSize }) =>
       page: page + 1,
       size: pageSize
     };
-    fetch(`assets`, params)
+    axios.get(`assets`, params)
       .then(data => {
         resolve({
           data: data.data,

@@ -6,6 +6,7 @@ import FusionAddressLink from "../FusionAddressLink";
 import getConfig from "next/config";
 import OutLink from "../OutLink";
 import UTCTime from "../UTCTime";
+import axios from "../../libs/fetch";
 
 export default function MinedBlocks(props) {
   const { miner } = props;
@@ -24,7 +25,7 @@ const createQuery = miner => ({ page, pageSize }) =>
       miner
     };
 
-    fetch("blocks", {
+    axios.get("blocks", {
       params
     })
       .then(res => {

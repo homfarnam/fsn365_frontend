@@ -4,6 +4,7 @@ import FusionOverview from "../src/components/FusionOverview";
 import NetworkState from "../src/components/NetworkState";
 import fetch from "../src/libs/fetch";
 import PageHeading from '../src/components/PageHeading';
+import axios from 'axios'
 
 export default class HomePage extends React.Component {
   constructor(props) {
@@ -62,7 +63,7 @@ async function fetchHomeData() {
 }
 
 async function fetchRealTimeData() {
-  return fetch("latest")
+  return axios.get("latest")
     .then((res) => res.json())
     .then((res) => res.data)
     .catch((e) => ({
@@ -73,7 +74,7 @@ async function fetchRealTimeData() {
 }
 
 async function fetchNetworkOverview() {
-  return fetch(`stats`)
+  return axios.get(`stats`)
     .then((res) => res.json())
     .then((res) => res.data)
     .catch((e) => ({ priceData: {} }));

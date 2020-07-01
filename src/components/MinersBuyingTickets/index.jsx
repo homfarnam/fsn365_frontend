@@ -4,6 +4,7 @@ import FusionTable from "../FusionTable";
 import NavLink from "../NavLink";
 import fetch from "../../libs/fetch";
 import UTCTime from "../UTCTime";
+import axios from "../../libs/fetch";
 
 const useStyles = makeStyles(({ palette }) =>
   createStyles({
@@ -50,7 +51,7 @@ const createQuery = miner => ({ page, pageSize }) =>
       size: pageSize,
       miner
     };
-    fetch(`staking/${miner}/txns`, params)
+    axios.get(`staking/${miner}/txns`, params)
       .then(res => res.json())
       .then(res => res.data)
       .then(data => {

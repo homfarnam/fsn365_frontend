@@ -15,9 +15,11 @@ export default function ActiveTickets({ miner }) {
         let cancel = false;
         const runEffect = () => {
             axios.get(`address/${miner}/tickets`)
+
                 .then(res => res.json())
                 .then(res => res.data || [])
                 .then(tickets => {
+                    
                     setState({
                         tickets
                     });

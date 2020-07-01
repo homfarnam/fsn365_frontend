@@ -7,6 +7,7 @@ import FusionAddressLink from "../../src/components/FusionAddressLink";
 import * as helpers from "../../src/libs/helpers";
 import TextStrong from '../../src/components/TextStrong';
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import axios from "../../src/libs/fetch";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -56,7 +57,7 @@ const fetchData = query =>
       order: orderDirection || "desc",
       sort
     };
-    fetch(`address`, params)
+    axios.get(`address`, params)
       .then(res => res.json())
       .then(res => res.data)
       .then(data => {

@@ -9,6 +9,7 @@ import PageHeading from "../../src/components/PageHeading";
 import fetch from "../../src/libs/fetch";
 import KeyValue from "../../src/components/KeyValue";
 import TextStrong from "../../src/components/TextStrong";
+import axios from "../../src/libs/fetch";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -101,7 +102,7 @@ StakingPage.getInitialProps = async ({ query, res }) => {
       Router.push(`/staking/${miner}`);
     }
   } else {
-    const overview = await fetch("staking")
+    const overview = await axios.get("staking")
       .then((res) => res.json())
       .then((res) => res.data)
       .catch((e) => ({

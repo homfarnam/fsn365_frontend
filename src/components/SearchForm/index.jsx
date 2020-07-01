@@ -9,6 +9,7 @@ import { Button } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import fetch from "../../libs/fetch";
 import Router from "next/router";
+import axios from "../../libs/fetch";
 
 const useStyles = makeStyles(({ breakpoints }) =>
   createStyles({
@@ -154,7 +155,7 @@ async function doSearch(type, keyword) {
     keyword
   };
 
-  const resData = await fetch("search", params)
+  const resData = await axios.get("search", params)
     .then(res => res.json())
     .then(res => res.data)
     .catch(e => {
